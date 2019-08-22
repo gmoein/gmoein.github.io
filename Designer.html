@@ -303,28 +303,33 @@
 									</div>
 									<div class="modal-body"  style="font-family:'B Yekan'">
 											<div class="form-group"  style="font-family:'B Yekan'">
-													<label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">فاصله ابتدای کار</label>
-													<input type="text" class="form-control" id="chinWidthInput" value="">
-													<input type="range" width="100%" min="1" max="100" value="50" class="slider" id="chinWidthInputRange" oninput="chinWidthInputchange()">
+												
+												<label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">فعال کردن</label>
+												<input type="text" class="form-control" id="chinenableInput" value="3">
+												<input type="range" width="100%" min="1" max="100" value="50" class="slider" id="chinenableInputRange" oninput="chinenableInputchange()">
+												
+												<label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">فاصله ابتدای کار</label>
+												<input type="text" class="form-control" id="chinbiasInput" value="3">
+												<input type="range" width="100%" min="1" max="100" value="50" class="slider" id="chinbiasInputRange" oninput="chinbiasInputchange()">
+												
 													<label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">عرض چین</label>
-													<input type="text" class="form-control" id="chinHeightInput" value="">
-													<input type="range" width="100%" min="1" max="100" value="50" class="slider" id="chinHeightInputRange" oninput="chinHeightInputchange()">
+													<input type="text" class="form-control" id="chinWidthInput" value=".5">
+													<input type="range" width="100%" min="1" max="100" value="50" class="slider" id="chinWidthInputRange" oninput="chinWidthInputchange()">
 													<label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">ارتفاع چین</label>
-													<input type="text" class="form-control" id="chinNInput" value="">
-													<input type="range" width="100%" min="1" max="100" value="50" class="slider" id="chinNInputRange" oninput="chinInputchange()">
+													<input type="text" class="form-control" id="chinHeightInput" value=".5">
+													<input type="range" width="100%" min="1" max="100" value="50" class="slider" id="chinHeightInputRange" oninput="chinHeightInputchange()">
 													<label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">فاصله میان چین ها</label>
-													<input type="text" class="form-control" id="chinNInput" value="">
-													<input type="range" width="100%" min="1" max="100" value="50" class="slider" id="chinNInputRange" oninput="chinNInputchange()">
+													<input type="text" class="form-control" id="chinLInput" value="1">
+													<input type="range" width="100%" min="1" max="100" value="50" class="slider" id="chinLInputRange" oninput="chinLInputchange()">
 													<label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">حداکثر تعداد چین ها</label>
-													<input type="text" class="form-control" id="chinNInput" value="">
-													<input type="range" width="100%" min="1" max="100" value="50" class="slider" id="chinNInputRange" oninput="chinNInputchange()">
+													<input type="text" class="form-control" id="chinMaxInput" value="1000">
+													<input type="range" width="100%" min="1" max="100" value="50" class="slider" id="chinMaxInputRange" oninput="chinMaxInputchange()">
 													<label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">جهت چین</label>
-													<input type="text" class="form-control" id="chinNInput" value="">
-													<input type="range" width="100%" min="1" max="100" value="50" class="slider" id="chinNInputRange" oninput="chinNInputchange()">
+													<input type="text" class="form-control" id="chindirInput" value="1">
+													<input type="range" width="100%" min="1" max="100" value="50" class="slider" id="chindirInputRange" oninput="chindirInputchange()">
 											</div>
 									</div>
 									<div class="modal-footer">
-											<button type="button" class="btn btn-secondary" onclick="newchinbtn()" style="font-family:'B Yekan'">موج جدید</button>
 											<button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-family:'B Yekan'">بستن</button>
 											<button type="button" class="btn btn-primary" style="font-family:'B Yekan'" onclick="chinok()">تایید</button>
 									</div>
@@ -384,10 +389,75 @@ function lineWidthInputchange(){
 function newlinebtn(){
 	currentIndex = snr.shapes.length
 	var pp = getStartPoint(currentIndex)
-	snr.shapes.push([1,pp[0]+parseFloat(document.getElementById('lineWidthInput').value),pp[1]+parseFloat(document.getElementById('lineHeightInput').value),0,0,0,0,0,0,0,1])
+	snr.shapes.push([1,pp[0]+parseFloat(document.getElementById('lineWidthInput').value),pp[1]+parseFloat(document.getElementById('lineHeightInput').value),0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0])
 	currentIndex = snr.shapes.length-1
 	repaint()
 }
+
+function chinok(){
+if(currentIndex<0)return
+if(currentIndex>=snr.shapes.length)return
+	snr.shapes[currentIndex][11]=parseInt(document.getElementById('chinenableInput').value)
+	snr.shapes[currentIndex][12]=parseFloat(document.getElementById('chinbiasInput').value)
+	snr.shapes[currentIndex][13]=parseFloat(document.getElementById('chinWidthInput').value)
+	snr.shapes[currentIndex][14]=parseFloat(document.getElementById('chinHeightInput').value)
+	snr.shapes[currentIndex][15]=parseFloat(document.getElementById('chinLInput').value)
+	snr.shapes[currentIndex][16]=parseFloat(document.getElementById('chinMaxInput').value)
+	snr.shapes[currentIndex][17]=parseFloat(document.getElementById('chindirInput').value)
+	
+		repaint()
+	}
+
+	function chinenableInputchange(){
+		document.getElementById('chinenableInput').value = 0
+		if((document.getElementById('chinenableInputRange').value)>50)document.getElementById('chinenableInput').value = 1
+		chinok()													
+}	
+function chinbiasInputchange(){
+		document.getElementById('chinbiasInput').value = (document.getElementById('chinbiasInputRange').value)/5*sliderOptionScaler
+		chinok()													
+}
+function chinWidthInputchange(){
+		document.getElementById('chinWidthInput').value = (document.getElementById('chinWidthInputRange').value)/5*sliderOptionScaler
+		chinok()													
+}
+function chinHeightInputchange(){
+		document.getElementById('chinHeightInput').value = (document.getElementById('chinHeightInputRange').value)/5*sliderOptionScaler
+		chinok()													
+}
+function chinLInputchange(){
+		document.getElementById('chinLInput').value = (document.getElementById('chinLInputRange').value)/5*sliderOptionScaler
+		chinok()													
+}
+function chinMaxInputchange(){
+		document.getElementById('chinMaxInput').value = (document.getElementById('chinMaxInputRange').value)/5*sliderOptionScaler
+		chinok()													
+}
+function chindirInputchange(){
+		document.getElementById('chindirInput').value = (document.getElementById('chindirInputRange').value)/5*sliderOptionScaler
+		chinok()													
+}
+
+
+function sinok(){
+		repaint()
+	}
+
+	function sinNInputchange(){
+		document.getElementById('sinNInput').value = (document.getElementById('sinNInputRange').value)/5*sliderOptionScaler
+		sinok()													
+}
+function sinWidthInputchange(){
+		document.getElementById('sinWidthInput').value = (document.getElementById('sinWidthInputRange').value)/5*sliderOptionScaler
+		sinok()													
+}
+function sinHeightInputchange(){
+		document.getElementById('sinHeightInput').value = (document.getElementById('sinHeightInputRange').value)/5*sliderOptionScaler
+		sinok()													
+}
+
+
+
 
 	function bzok(){
 		var pp = getStartPoint(currentIndex)
@@ -396,6 +466,7 @@ function newlinebtn(){
 		snr.shapes[currentIndex][2+2*bzp] = pp[1]+parseFloat(document.getElementById('bzHeightInput').value)
 		repaint()
 	}
+
 	function bzHeightInputchange(){
 		document.getElementById('bzHeightInput').value = (document.getElementById('bzHeightInputRange').value-50)*sliderOptionScaler
 		bzok()
@@ -407,7 +478,7 @@ function bzWidthInputchange(){
 function newbzbtn(){
 	currentIndex = snr.shapes.length
 	var pp = getStartPoint(currentIndex)
-	snr.shapes.push([4,pp[0]+parseFloat(document.getElementById('bzWidthInput').value),pp[1]+parseFloat(document.getElementById('bzHeightInput').value),0,0,0,0,0,0,0,1])
+	snr.shapes.push([4,pp[0]+parseFloat(document.getElementById('bzWidthInput').value),pp[1]+parseFloat(document.getElementById('bzHeightInput').value),0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0])
 	currentIndex = snr.shapes.length-1
 	repaint()
 }
@@ -518,12 +589,15 @@ function linecheck(N){
 				var ang0=Math.atan2(startPointxy[1]-startPointxy_[1],startPointxy[0]-startPointxy_[0])
 				startAngs.push(ang0)
 				endAngs.push(ang0)
-				var bias_Q = 2
-				var W_Q = .5
-				var WF_Q = 2
-				var H_Q = .5
-				var N_Q = 10
-				var d_Q = 1
+
+if(onepath[11]){
+
+				var bias_Q = onepath[12]
+				var W_Q = onepath[13]
+				var WF_Q = onepath[15]
+				var H_Q = onepath[14]
+				var N_Q = onepath[16]
+				var d_Q = onepath[17]
 				var N_Qi=0
 				var checkd=norm(startPointxy_,startPointxy)
 				if(checkd>bias_Q+W_Q){
@@ -549,6 +623,7 @@ function linecheck(N){
 						if(checkd<W_Q)break
 					}
 				}
+}
 				ctx.lineTo(startPoint[0],startPoint[1])
 			}
 			if(onepath[0]==4){
@@ -660,7 +735,7 @@ function getStartPoint(i){
 			if(currentIndex>=snr.shapes.length){
 				currentIndex = snr.shapes.length
 				var pp = getStartPoint(currentIndex)
-				snr.shapes.push([1,pp[0]+10,pp[1]+10,0,0,0,0,0,0,0,1])
+				snr.shapes.push([1,pp[0]+10,pp[1]+10,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0])
 				currentIndex = snr.shapes.length-1
 				repaint()
 				return
@@ -668,7 +743,7 @@ function getStartPoint(i){
 			if(currentIndex<0){
 				currentIndex = snr.shapes.length
 				var pp = getStartPoint(currentIndex)
-				snr.shapes.push([1,pp[0]+10,pp[1]+10,0,0,0,0,0,0,0,1])
+				snr.shapes.push([1,pp[0]+10,pp[1]+10,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0])
 				currentIndex = snr.shapes.length-1
 				repaint()
 				return
@@ -676,7 +751,7 @@ function getStartPoint(i){
 			if(snr.shapes[currentIndex][0]!=1){
 				currentIndex = snr.shapes.length
 				var pp = getStartPoint(currentIndex)
-				snr.shapes.push([1,pp[0]+10,pp[1]+10,0,0,0,0,0,0,0,1])
+				snr.shapes.push([1,pp[0]+10,pp[1]+10,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0])
 				currentIndex = snr.shapes.length-1
 				repaint()
 				return
@@ -694,7 +769,7 @@ if(0){
 			if(currentIndex>=snr.shapes.length){
 				currentIndex = snr.shapes.length
 				var pp = getStartPoint(currentIndex)
-				snr.shapes.push([4,pp[0]+10,pp[1]+10,0,0,0,0,0,0,0,1])
+				snr.shapes.push([4,pp[0]+10,pp[1]+10,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0])
 				currentIndex = snr.shapes.length-1
 				repaint()
 				return
@@ -702,7 +777,7 @@ if(0){
 			if(currentIndex<0){
 				currentIndex = snr.shapes.length
 				var pp = getStartPoint(currentIndex)
-				snr.shapes.push([4,pp[0]+10,pp[1]+10,0,0,0,0,0,0,0,1])
+				snr.shapes.push([4,pp[0]+10,pp[1]+10,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0])
 				currentIndex = snr.shapes.length-1
 				repaint()
 				return
@@ -710,7 +785,7 @@ if(0){
 			if(snr.shapes[currentIndex][0]!=1){
 				currentIndex = snr.shapes.length
 				var pp = getStartPoint(currentIndex)
-				snr.shapes.push([4,pp[0]+10,pp[1]+10,0,0,0,0,0,0,0,1])
+				snr.shapes.push([4,pp[0]+10,pp[1]+10,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0])
 				currentIndex = snr.shapes.length-1
 				repaint()
 				return
@@ -781,11 +856,11 @@ if(0){
 		if(mouseOption==1)return
 		Pos = dsp.pixel2xy(Pos)
 		if(toolButton_Shape_N==1){
-			snr.shapes.push([toolButton_Shape_N,Pos[0],Pos[1],0,0,0,0,0,0,0,1])
+			snr.shapes.push([toolButton_Shape_N,Pos[0],Pos[1],0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0])
 			currentIndex = snr.shapes.length-1
 		}
 		if(toolButton_Shape_N==4){
-			snr.shapes.push([toolButton_Shape_N,Pos[0],Pos[1],Pos[0],Pos[1],Pos[0],Pos[1],0,0,0,1])
+			snr.shapes.push([toolButton_Shape_N,Pos[0],Pos[1],Pos[0],Pos[1],Pos[0],Pos[1],0,0,0,1,0,0,0,0,0,0,0,0,0,0])
 			currentIndex = snr.shapes.length-1
 		}
 		repaint()
