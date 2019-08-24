@@ -1131,6 +1131,7 @@
                             xy[0] += pp[0]
                             xy[1] += pp[1]
                             wh = dsp.xy2pixel(xy)
+                            allpoints.push(xy)
                             ctx.lineTo(wh[0], wh[1])
                             dx += res
                         }
