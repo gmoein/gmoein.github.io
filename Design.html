@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>رستافوم دیزاینر</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="jquery.min.js"></script>
+    <script src="popper.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <style>
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 25px;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+        
+        .slider:hover {
+            opacity: 1;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container pt-1">
+        <div class="btn-group">
+            <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'" onclick="btnshapetool(1)">خط
+            </button>
+
+            <!--button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'" onclick="btnshapetool(2)">دایره</button-->
+            <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'" onclick="btnshapetool(3)">کمان</button>
+            <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'" onclick="btnshapetool(4)">بازیر</button>
+            <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'" onclick="btnshapetool(5)">موج</button>
+            <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'" onclick="btnshapetool(6)">چین</button>
+            <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'"  data-toggle="modal" data-target="#exampleModal">تنظیمات</button>
+            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+            <ul class="dropdown-menu p-2" role="menu">
+                <li>
+                    <p style="font-family:'B Yekan'" id="paramoption">ایجاد</p>
+                </li>
+                <li>
+                    <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan';width: 100%;" onclick="linecheck(1)"> ایجاد </label>
+                </li>
+                <li>
+                    <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan';width: 100%" onclick="linecheck(2)"> تغییر پارامتر اول </label>
+                </li>
+                <li>
+                    <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan';width: 100%" onclick="linecheck(3)"> تغییر پارامتر دوم </label>
+                </li>
+                <li>
+                    <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan';width: 100%" onclick="linecheck(4)"> تغییر پارامتر سوم </label>
+                </li>
+                <li>
+                    <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan';width: 100%" onclick="linecheck(5)"> تغییر پارامتر چهارم </label>
+                </li>
+                <li>
+                    <input type="text" class="form-control">
+                </li>
+                <li>
+                    <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan';width: 100%;" onclick="linecheck(10)"> اعمال </label>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+    <div class="container pt-1">
+        <div class="btn-group">
+            <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'"onclick="btnselback()">عقب</i></button>
+            <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btnselfw()">جلو</i></button>
+            <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="document.getElementById('fileopenx').click()">فایل</i></button>
+            <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btndeltool()">حذف</i></button>
+            <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="document.getElementById('avatar').click()">عکس</i></button>
+            <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="filedownload()">خروجی</i></button>
+            <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btnzintool()">زوم</i></button>
+            <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btnzouttool()">کوچک کردن</i></button>
+
+        </div>
+    </div>
+    <div class="container pt-1">
+        <div class="btn-group">
+            <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btnpantool(1)">چپ
+            </button>
+            <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btnpantool(2)">راست
+            </button>
+            <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btnpantool(3)">پایین
+            </button>
+            <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btnpantool(4)">بالا
+            </button>
+            <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btnpantool(5)">ریست
+            </button>
+            <select class="form-control"  style="font-family:'B Yekan'" id="sel2">
+                <option style="font-family:'B Yekan'">جابجایی</option>
+                <option style="font-family:'B Yekan'">تغییر پارامتر 1</option>
+                <option style="font-family:'B Yekan'">تغییر پارامتر 2</option>
+                <option style="font-family:'B Yekan'">تغییر پارامتر 3</option>
+                <option style="font-family:'B Yekan'">تغییر پارامتر 4</option>
+                <option style="font-family:'B Yekan'">تغییر پارامتر 5</option>
+                <option style="font-family:'B Yekan'">تغییر پارامتر 6</option>
+            </select>
+        </div>
+    </div>
+    <div class="container pt-1">
+        <div class="row">
+            <div class="col-11">
+                <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="myRange" oninput="rangechange()">
+            </div>
+            <div class="col-1">
+                <button type="button" class="btn btn-outline-secondary"  style="font-family:'B Yekan'" data-toggle="modal" data-target="#myModal">تنظیمات</button>
+            </div>
+        </div>
+
+    </div>
+    <div class="container pt-1" id="canvcont">
+        <canvas id="myCanvas"></canvas>
+    </div>
+    <div class="container pt-2">
+        <div class="row">
+            <div class="col-sm-4">
+
+            </div>
+            <div class="col-sm-4">
+                <textarea class="form-control" rows="5" id="comment" style="font-family:'B Yekan'"></textarea>
+            </div>
+            <div class="col-sm-4">
+                <textarea class="form-control" rows="5" id="command"></textarea>
+            </div>
+        </div>
+    </div>
+    <input type="file" id="avatar" name="avatar" style="display:none" accept="image/png, image/jpeg">
+    <input type="file" id="fileopenx" name="fileopenx" style="display:none" accept=".aig">
+    <button type="button" class="btn btn-outline-secondary" id="LineClickedHidden" data-toggle="modal" data-target="#myModalLine" style="display:none"></button>
+    <button type="button" class="btn btn-outline-secondary" id="bzClickedHidden" data-toggle="modal" data-target="#myModalBZ" style="display:none"></button>
+    <button type="button" class="btn btn-outline-secondary" id="sinClickedHidden" data-toggle="modal" data-target="#myModalSin" style="display:none"></button>
+    <button type="button" class="btn btn-outline-secondary" id="chinClickedHidden" data-toggle="modal" data-target="#myModalchin" style="display:none"></button>
+    <button type="button" class="btn btn-outline-secondary" id="arcClickedHidden" data-toggle="modal" data-target="#myModalarc" style="display:none"></button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-family:'B Yekan'">تنظیمات</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">میزان حرکت صفحه با پن</label>
+                        <input type="text" class="form-control" id="panvalue" value="10">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">مستطیل شکل انتخاب شده</label>
+                        <input type="text" class="form-control" id="drawboundingrect" value="1">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">اعداد خط کش</label>
+                        <input type="text" class="form-control" id="drawgridtext" value="1">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">نمایش خط راهنما</label>
+                        <input type="text" class="form-control" id="drawgrid" value="1">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">نام فایل ذخیره</label>
+                        <input type="text" class="form-control" id="saveasfilenameInput" value="File">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" style="font-family:'B Yekan'" onclick="closepathok()">بستن مسیر</button>
+                    <button type="button" class="btn btn-primary" style="font-family:'B Yekan'" onclick="closepathiok()"> iبستن مسیر</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-family:'B Yekan'">بستن</button>
+                    <button type="button" class="btn btn-primary" style="font-family:'B Yekan'" onclick="settingsok()">تایید</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-family:'B Yekan'">عملکرد اسلایدر</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="font-family:'B Yekan'">
+                    <div class="form-group" style="font-family:'B Yekan'">
+                        <select class="form-control" id="sel1">
+                            <option style="font-family:'B Yekan'">ارتفاع بوم</option>
+                            <option style="font-family:'B Yekan'">بزرگ کردن عکس</option>
+                            <option style="font-family:'B Yekan'">محو عکس</option>
+                            <option style="font-family:'B Yekan'">جابجایی افقی عکس</option>
+                            <option style="font-family:'B Yekan'">جابجایی عمودی عکس</option>
+                        </select>
+
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">ضریب</label>
+                        <input type="text" class="form-control" id="sliderscale" value="1">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-family:'B Yekan'">بستن</button>
+                    <button type="button" class="btn btn-primary" style="font-family:'B Yekan'" onclick="slidersettingsok()">تایید</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModalLine" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="background-color: rgba(255, 255, 255, .1)">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-family:'B Yekan'">خط</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="font-family:'B Yekan'">
+                    <div class="form-group" style="font-family:'B Yekan'">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">عرض</label>
+                        <input type="text" class="form-control" id="lineWidthInput" value="">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="lineWidthInputRange" oninput="lineWidthInputchange()">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">ارتفاع</label>
+                        <input type="text" class="form-control" id="lineHeightInput" value="">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="lineHeightInputRange" oninput="lineHeightInputchange()">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="newlinebtn()" style="font-family:'B Yekan'">خط جدید</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-family:'B Yekan'">بستن</button>
+                    <button type="button" class="btn btn-primary" style="font-family:'B Yekan'" onclick="lineok()">تایید</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModalBZ" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="background-color: rgba(255, 255, 255, .1)">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-family:'B Yekan'">بازیر</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="font-family:'B Yekan'">
+                    <div class="form-group" style="font-family:'B Yekan'">
+                        <select class="form-control" id="selbz">
+                            <option style="font-family:'B Yekan'">نقطه پایانی</option>
+                            <option style="font-family:'B Yekan'">نقطه کنترل 1</option>
+                            <option style="font-family:'B Yekan'">نقطه کنترل 2</option>
+                        </select>
+
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">عرض</label>
+                        <input type="text" class="form-control" id="bzWidthInput" value="">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="bzWidthInputRange" oninput="bzWidthInputchange()">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">ارتفاع</label>
+                        <input type="text" class="form-control" id="bzHeightInput" value="">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="bzHeightInputRange" oninput="bzHeightInputchange()">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="newbzbtn()" style="font-family:'B Yekan'">منحنی جدید</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-family:'B Yekan'">بستن</button>
+                    <button type="button" class="btn btn-primary" style="font-family:'B Yekan'" onclick="bzok()">تایید</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModalSin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="background-color: rgba(255, 255, 255, .1)">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-family:'B Yekan'">موج</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="font-family:'B Yekan'">
+                    <div class="form-group" style="font-family:'B Yekan'">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">طول قله تا قله</label>
+                        <input type="text" class="form-control" id="sinWidthInput" value="">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="sinWidthInputRange" oninput="sinWidthInputchange()">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">ارتفاع</label>
+                        <input type="text" class="form-control" id="sinHeightInput" value="">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="sinHeightInputRange" oninput="sinHeightInputchange()">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">تعداد قله ها</label>
+                        <input type="text" class="form-control" id="sinNInput" value="">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="sinNInputRange" oninput="sinNInputchange()">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">زاویه</label>
+                        <input type="text" class="form-control" id="sinAngleInput" value="">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="sinAngleInputRange" oninput="sinAngleInputchange()">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">زاویه شروع</label>
+                        <input type="text" class="form-control" id="sinstartAngleInput" value="">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="sinstartAngleInputRange" oninput="sinstartAngleInputchange()">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="newsinbtn()" style="font-family:'B Yekan'">موج جدید</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-family:'B Yekan'">بستن</button>
+                    <button type="button" class="btn btn-primary" style="font-family:'B Yekan'" onclick="sinok()">تایید</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModalchin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="background-color: rgba(255, 255, 255, .1)">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-family:'B Yekan'">چین</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="font-family:'B Yekan'">
+                    <div class="form-group" style="font-family:'B Yekan'">
+
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">فعال کردن</label>
+                        <input type="text" class="form-control" id="chinenableInput" value="3">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="chinenableInputRange" oninput="chinenableInputchange()">
+
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">فاصله ابتدای کار</label>
+                        <input type="text" class="form-control" id="chinbiasInput" value="3">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="chinbiasInputRange" oninput="chinbiasInputchange()">
+
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">عرض چین</label>
+                        <input type="text" class="form-control" id="chinWidthInput" value=".5">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="chinWidthInputRange" oninput="chinWidthInputchange()">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">ارتفاع چین</label>
+                        <input type="text" class="form-control" id="chinHeightInput" value=".5">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="chinHeightInputRange" oninput="chinHeightInputchange()">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">فاصله میان چین ها</label>
+                        <input type="text" class="form-control" id="chinLInput" value="1">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="chinLInputRange" oninput="chinLInputchange()">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">حداکثر تعداد چین ها</label>
+                        <input type="text" class="form-control" id="chinMaxInput" value="1000">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="chinMaxInputRange" oninput="chinMaxInputchange()">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">جهت چین</label>
+                        <input type="text" class="form-control" id="chindirInput" value="1">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="chindirInputRange" oninput="chindirInputchange()">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-family:'B Yekan'">بستن</button>
+                    <button type="button" class="btn btn-primary" style="font-family:'B Yekan'" onclick="chinok()">تایید</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    
+    <div class="modal fade" id="myModalarc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="background-color: rgba(255, 255, 255, .1)">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-family:'B Yekan'">کمان</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="font-family:'B Yekan'">
+                    <div class="form-group" style="font-family:'B Yekan'">
+
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">زاویه شروع</label>
+                        <input type="text" class="form-control" id="arcstartangle" value="0">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="arcstartangleRange" oninput="arcstartanglechange()">
+
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">مقدار کمان</label>
+                        <input type="text" class="form-control" id="arcLengthInput" value="270">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="arcLengthInputRange" oninput="arcLengthInputchange()">
+
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">قطر کمان</label>
+                        <input type="text" class="form-control" id="arcDiameterInput" value="30">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="arcDiameterInputRange" oninput="arcDiameterInputchange()">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">جهت</label>
+                        <input type="text" class="form-control" id="arcDirectionInput" value="1">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="arcDirectionInputRange" oninput="arcDirectionInputchange()">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">کاهش قطر بر دور</label>
+                        <input type="text" class="form-control" id="arcDecayInput" value="0">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="arcDecayInputRange" oninput="arcDecayInputchange()">
+                        
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="newarcbtn()" style="font-family:'B Yekan'">کمان جدید</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-family:'B Yekan'">بستن</button>
+                    <button type="button" class="btn btn-primary" style="font-family:'B Yekan'" onclick="arcok()">تایید</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function norm(p0, p1) {
+            return Math.sqrt((p1[0] - p0[0]) * (p1[0] - p0[0]) + (p1[1] - p0[1]) * (p1[1] - p0[1]))
+        }
+        function normxy(p0, p1) {
+            return Math.sqrt((p1.x - p0.x) * (p1.x - p0.x) + (p1.y - p0.y) * (p1.y - p0.y))
+        }
+        function moveDistanceDirection(Point, d, a) {
+            return [Point[0] + d * Math.cos(a), Point[1] + d * Math.sin(a)]
+        }
+        class Scenario {
+            constructor(Num) {
+                this.Number = Num
+                this.shapes = []
+            }
+        }
+        class Dispay {
+            constructor() {
+                this.bias = [-50, 50]
+                this.scale = 5
+                this.bias_image = [0, 0]
+                this.scale_image = .1
+                this.opavity_image = .2
+                this.mousePressed = 0
+                this.loaded_image = 0
+                this.grid_xy = [10, 10]
+            }
+            xy2pixel(xy) {
+                return [(xy[0] - this.bias[0]) * this.scale, -(xy[1] - this.bias[1]) * this.scale]
+            }
+            pixel2xy(pixel) {
+                return [pixel[0] / this.scale + this.bias[0], -pixel[1] / this.scale + this.bias[1]]
+            }
+            pixel2xyLen(pixel) {
+                return [pixel[0] / this.scale, pixel[1] / this.scale]
+            }
+        }
+        snr = new Scenario(1)
+        dsp = new Dispay()
+        function lineok() {
+            var pp = getStartPoint(currentIndex)
+            snr.shapes[currentIndex][1] = pp[0] + parseFloat(document.getElementById('lineWidthInput').value)
+            snr.shapes[currentIndex][2] = pp[1] + parseFloat(document.getElementById('lineHeightInput').value)
+            repaint()
+        }
+        function lineHeightInputchange() {
+            document.getElementById('lineHeightInput').value = (document.getElementById('lineHeightInputRange').value - 50) * sliderOptionScaler
+            lineok()
+        }
+        function lineWidthInputchange() {
+            document.getElementById('lineWidthInput').value = (document.getElementById('lineWidthInputRange').value - 50) * sliderOptionScaler
+            lineok()
+        }
+        function newlinebtn() {
+            currentIndex = snr.shapes.length
+            var pp = getStartPoint(currentIndex)
+            snr.shapes.push([1, pp[0] + parseFloat(document.getElementById('lineWidthInput').value), pp[1] + parseFloat(document.getElementById('lineHeightInput').value), 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+            currentIndex = snr.shapes.length - 1
+            repaint()
+        }
+        function chinok() {
+            if (currentIndex < 0) return
+            if (currentIndex >= snr.shapes.length) return
+            snr.shapes[currentIndex][11] = parseInt(document.getElementById('chinenableInput').value)
+            snr.shapes[currentIndex][12] = parseFloat(document.getElementById('chinbiasInput').value)
+            snr.shapes[currentIndex][13] = parseFloat(document.getElementById('chinWidthInput').value)
+            snr.shapes[currentIndex][14] = parseFloat(document.getElementById('chinHeightInput').value)
+            snr.shapes[currentIndex][15] = parseFloat(document.getElementById('chinLInput').value)
+            snr.shapes[currentIndex][16] = parseFloat(document.getElementById('chinMaxInput').value)
+            snr.shapes[currentIndex][17] = parseFloat(document.getElementById('chindirInput').value)
+            repaint()
+        }
+        function chinenableInputchange() {
+            document.getElementById('chinenableInput').value = 0
+            if ((document.getElementById('chinenableInputRange').value) > 50) document.getElementById('chinenableInput').value = 1
+            chinok()
+        }
+        function chinbiasInputchange() {
+            document.getElementById('chinbiasInput').value = (document.getElementById('chinbiasInputRange').value) / 5 * sliderOptionScaler
+            chinok()
+        }
+        function chinWidthInputchange() {
+            document.getElementById('chinWidthInput').value = (document.getElementById('chinWidthInputRange').value) / 5 * sliderOptionScaler
+            chinok()
+        }
+        function chinHeightInputchange() {
+            document.getElementById('chinHeightInput').value = (document.getElementById('chinHeightInputRange').value) / 5 * sliderOptionScaler
+            chinok()
+        }
+        function chinLInputchange() {
+            document.getElementById('chinLInput').value = (document.getElementById('chinLInputRange').value) / 5 * sliderOptionScaler
+            chinok()
+        }
+        function chinMaxInputchange() {
+            document.getElementById('chinMaxInput').value = (document.getElementById('chinMaxInputRange').value) / 5 * sliderOptionScaler
+            chinok()
+        }
+        function chindirInputchange() {
+            document.getElementById('chindirInput').value = -1
+            if (document.getElementById('chindirInputRange').value > 50) document.getElementById('chindirInput').value = 1
+            chinok()
+        }
+        function rot(x, y, t) {
+            return [x * Math.cos(t) - y * Math.sin(t), x * Math.sin(t) + y * Math.cos(t)]
+        }
+        function newarcbtn() {
+            currentIndex = snr.shapes.length
+            var pp = getStartPoint(currentIndex)
+            var t0=parseFloat(document.getElementById('arcstartangle').value)
+            var tL=parseFloat(document.getElementById('arcLengthInput').value)
+            var R=parseFloat(document.getElementById('arcDiameterInput').value)
+            var D=parseFloat(document.getElementById('arcDirectionInput').value)
+            var eps=parseFloat(document.getElementById('arcDecayInput').value)
+            
+            var xy=[(R/2-eps*0/360)*Math.cos((t0+D*0)/180*Math.PI),(R/2-eps*0/360)*Math.sin((t0+D*0)/180*Math.PI)]
+                    pp[0]-=xy[0]
+                    pp[1]-=xy[1]
+            xy=[(R/2-eps*tL/360)*Math.cos((t0+D*tL)/180*Math.PI),(R/2-eps*tL/360)*Math.sin((t0+D*tL)/180*Math.PI)]
+            snr.shapes.push([3, pp[0] + xy[0], pp[1] + xy[1], t0, tL, R, D, eps, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+            currentIndex = snr.shapes.length - 1
+            repaint()
+        }
+        function arcok() {
+            var pp = getStartPoint(currentIndex)
+            var t0=parseFloat(document.getElementById('arcstartangle').value)
+            var tL=parseFloat(document.getElementById('arcLengthInput').value)
+            var R=parseFloat(document.getElementById('arcDiameterInput').value)
+            var D=parseFloat(document.getElementById('arcDirectionInput').value)
+            var eps=parseFloat(document.getElementById('arcDecayInput').value)
+            var xy=[(R/2-eps*0/360)*Math.cos((t0+D*0)/180*Math.PI),(R/2-eps*0/360)*Math.sin((t0+D*0)/180*Math.PI)]
+                    pp[0]-=xy[0]
+                    pp[1]-=xy[1]
+            xy=[(R/2-eps*tL/360)*Math.cos((t0+D*tL)/180*Math.PI),(R/2-eps*tL/360)*Math.sin((t0+D*tL)/180*Math.PI)]
+            snr.shapes[currentIndex][1]= pp[0] + xy[0]
+            snr.shapes[currentIndex][2]= pp[1] + xy[1]
+            snr.shapes[currentIndex][3]= t0
+            snr.shapes[currentIndex][4]= tL
+            snr.shapes[currentIndex][5]= R
+            snr.shapes[currentIndex][6]= D
+            snr.shapes[currentIndex][7]= eps
+            repaint()
+        }
+        function arcstartanglechange() {
+            document.getElementById('arcstartangle').value = (document.getElementById('arcstartangleRange').value - 1) / 99 * 360
+            arcok()
+        }
+        
+        function arcLengthInputchange() {
+            document.getElementById('arcLengthInput').value = (document.getElementById('arcLengthInputRange').value - 1) / 99 * 360
+            arcok()
+        }
+        
+        function arcDiameterInputchange() {
+            document.getElementById('arcDiameterInput').value = (document.getElementById('arcDiameterInputRange').value - 1) 
+            arcok()
+        }
+        function arcDirectionInputchange() {
+            if((document.getElementById('arcDirectionInputRange').value>50))document.getElementById('arcDirectionInput').value = 1
+            else document.getElementById('arcDirectionInput').value = -1
+            arcok()
+        }
+        
+        function arcDecayInputchange() {
+            document.getElementById('arcDecayInput').value = Math.round((document.getElementById('arcDecayInputRange').value - 1) /9.9)/10
+            arcok()
+        }
+        function newsinbtn() {
+            currentIndex = snr.shapes.length
+            var pp = getStartPoint(currentIndex)
+            var d = parseFloat(document.getElementById('sinWidthInput').value)
+            var N = parseFloat(document.getElementById('sinNInput').value)
+            var H = parseFloat(document.getElementById('sinHeightInput').value)
+            var t = Math.PI * parseFloat(document.getElementById('sinAngleInput').value) / 180
+            var st = Math.PI * parseFloat(document.getElementById('sinstartAngleInput').value) / 180
+            
+            var xy = rot(0, H * Math.sin(st), t)
+                    pp[0]-=xy[0]
+                    pp[1]-=xy[1]
+            var x = N * d
+            var y = H * Math.sin(2 * Math.PI * x / d + st)
+            var xy = rot(x, y, t)
+            snr.shapes.push([5, pp[0] + xy[0], pp[1] + xy[1], N, d, H, t, st, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+            currentIndex = snr.shapes.length - 1
+            repaint()
+        }
+        function sinok() {
+            var pp = getStartPoint(currentIndex)
+            var d = parseFloat(document.getElementById('sinWidthInput').value)
+            var N = parseFloat(document.getElementById('sinNInput').value)
+            var H = parseFloat(document.getElementById('sinHeightInput').value)
+            var t = Math.PI * parseFloat(document.getElementById('sinAngleInput').value) / 180
+            var st = Math.PI * parseFloat(document.getElementById('sinstartAngleInput').value) / 180
+            
+            var xy = rot(0, H * Math.sin(st), t)
+                    pp[0]-=xy[0]
+                    pp[1]-=xy[1]
+            var x = N * d
+            var y = H * Math.sin(2 * Math.PI * x / d + st)
+            var xy = rot(x, y, t)
+            snr.shapes[currentIndex] = [5, pp[0] + xy[0], pp[1] + xy[1], N, d, H, t, st, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            repaint()
+        }
+        function sinAngleInputchange() {
+            document.getElementById('sinAngleInput').value = (document.getElementById('sinAngleInputRange').value - 1) / 99 * 360
+            sinok()
+        }
+        
+        function sinstartAngleInputchange() {
+            document.getElementById('sinstartAngleInput').value = (document.getElementById('sinstartAngleInputRange').value - 1) / 99 * 360
+            sinok()
+        }
+        function sinNInputchange() {
+            document.getElementById('sinNInput').value = (document.getElementById('sinNInputRange').value) / 5 * sliderOptionScaler
+            sinok()
+        }
+        function sinWidthInputchange() {
+            document.getElementById('sinWidthInput').value = (document.getElementById('sinWidthInputRange').value) / 5 * sliderOptionScaler
+            sinok()
+        }
+        function sinHeightInputchange() {
+            document.getElementById('sinHeightInput').value = (document.getElementById('sinHeightInputRange').value) / 5 * sliderOptionScaler
+            sinok()
+        }
+        function bzok() {
+            var pp = getStartPoint(currentIndex)
+            bzp = document.getElementById('selbz').selectedIndex
+            snr.shapes[currentIndex][1 + 2 * bzp] = pp[0] + parseFloat(document.getElementById('bzWidthInput').value)
+            snr.shapes[currentIndex][2 + 2 * bzp] = pp[1] + parseFloat(document.getElementById('bzHeightInput').value)
+            repaint()
+        }
+        function bzHeightInputchange() {
+            document.getElementById('bzHeightInput').value = (document.getElementById('bzHeightInputRange').value - 50) * sliderOptionScaler
+            bzok()
+        }
+        function bzWidthInputchange() {
+            document.getElementById('bzWidthInput').value = (document.getElementById('bzWidthInputRange').value - 50) * sliderOptionScaler
+            bzok()
+        }
+        function newbzbtn() {
+            currentIndex = snr.shapes.length
+            var pp = getStartPoint(currentIndex)
+            snr.shapes.push([4, pp[0] + parseFloat(document.getElementById('bzWidthInput').value), pp[1] + parseFloat(document.getElementById('bzHeightInput').value), 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+            currentIndex = snr.shapes.length - 1
+            repaint()
+        }
+        var sliderOption = 0
+        var sliderOptionScaler = 1
+        function slidersettingsok() {
+            sliderOption = document.getElementById('sel1').selectedIndex
+            sliderOptionScaler = parseFloat($("#sliderscale").val())
+        }
+        function btnselback() {
+            currentIndex -= 1
+            if (currentIndex < 0) currentIndex = -1
+            repaint()
+        }
+        function btnselfw() {
+            currentIndex += 1
+            if (currentIndex >= snr.shapes.length) currentIndex = snr.shapes.length
+            repaint()
+        }
+        function closepathok() {
+            if (snr.shapes.length > 1) {
+                s = getStartPoint(0)
+                snr.shapes[snr.shapes.length - 1][1] = s[0]
+                snr.shapes[snr.shapes.length - 1][2] = s[1]
+                repaint()
+            }
+        }
+        function closepathiok() {
+            if (snr.shapes.length > 1) {
+                //if(currentIndex!=snr.shapes.length-1)
+                s = getStartPoint(currentIndex)
+                snr.shapes[snr.shapes.length - 1][1] = s[0]
+                snr.shapes[snr.shapes.length - 1][2] = s[1]
+                repaint()
+            }
+        }
+        var isdrawboundingrect = 1
+        var isdrawgridtext = 1
+        var isdrawgrid = 1
+        function settingsok() {
+            movePanParameter = parseFloat($("#panvalue").val())
+            isdrawboundingrect = parseFloat($("#drawboundingrect").val())
+            isdrawgridtext = parseFloat($("#drawgridtext").val())
+            isdrawgrid = parseFloat($("#drawgrid").val())
+            saveasfilename = $("#saveasfilenameInput").val()
+            repaint()
+        }
+        function rangechange() {
+            if (sliderOption == 0) {
+                c.height = 100 + sliderOptionScaler * 10 * parseFloat($("#myRange").val())
+            }
+            if (sliderOption == 1) {
+                dsp.scale_image = sliderOptionScaler * parseFloat($("#myRange").val()) / 30
+            }
+            if (sliderOption == 2) {
+                dsp.opavity_image = parseFloat($("#myRange").val()) / 100
+            }
+            if (sliderOption == 3) {
+                dsp.bias_image[0] = sliderOptionScaler * 50 * (parseFloat($("#myRange").val()) - 50) / 50
+            }
+            if (sliderOption == 4) {
+                dsp.bias_image[1] = sliderOptionScaler * 50 * (parseFloat($("#myRange").val()) - 50) / 50
+            }
+            repaint()
+        }
+        function linecheck(N) {}
+        $(document).ready(function() {
+            c.width = document.getElementById('canvcont').clientWidth
+            c.height = document.documentElement.clientHeight * .4
+            repaint()
+        });
+        var currentIndex = 0
+        function repaint() {
+            var ctx = c.getContext("2d");
+            ctx.beginPath();
+            ctx.clearRect(0, 0, c.width, c.height);
+            if (dsp.loaded_image == 1) {
+                ctx.globalAlpha = dsp.opavity_image
+                ctx.drawImage(img, dsp.bias_image[0], dsp.bias_image[1], dsp.scale_image * img.width, dsp.scale_image * img.height);
+                ctx.globalAlpha = 1
+            }
+            if (isdrawgrid) {
+                ctx.strokeStyle = 'rgba(0,0,0,0.2)'
+                for (var i = -10; i <= 10; i++) {
+                    var p0 = dsp.xy2pixel([i * 10, -100])
+                    var p1 = dsp.xy2pixel([i * 10, 100])
+                    var p2 = dsp.xy2pixel([i * 10, 0])
+                    ctx.moveTo(p0[0], p0[1])
+                    ctx.lineTo(p1[0], p1[1])
+                    if (isdrawgridtext) {
+                        ctx.fillText(i * 10, p2[0], p2[1]);
+                    }
+                }
+                for (var i = -10; i <= 10; i++) {
+                    var p0 = dsp.xy2pixel([-100, i * 10])
+                    var p1 = dsp.xy2pixel([100, i * 10])
+                    var p2 = dsp.xy2pixel([0, i * 10])
+                    ctx.moveTo(p0[0], p0[1])
+                    ctx.lineTo(p1[0], p1[1])
+                    if (isdrawgridtext) {
+                        ctx.fillText(i * 10, p2[0], p2[1])
+                    }
+                }
+                ctx.stroke();
+            }
+            var startPointxy = [0, 0]
+            var startPoint = dsp.xy2pixel(startPointxy)
+            comment.innerHTML = snr.shapes.length
+            var startAngs = []
+            var endAngs = []
+            allpoints = []
+            for (var iijj = 0; iijj < snr.shapes.length; iijj++) {
+                ctx.beginPath();
+                if (iijj == currentIndex) {
+                    ctx.strokeStyle = 'rgba(255,0,0,1)'
+                } else {
+                    ctx.strokeStyle = 'rgba(0,0,0,1)'
+                }
+                ctx.moveTo(startPoint[0], startPoint[1]);
+                allpoints.push(dsp.pixel2xy(startPoint))
+                var startPoint_ = startPoint
+                var onepath = snr.shapes[iijj];
+                if (onepath[0] == 1) {
+                    var w, h;
+                    var startPointxy_ = startPointxy
+                    startPointxy = [onepath[1], onepath[2]]
+                    startPoint = dsp.xy2pixel(startPointxy)
+                    var ang0 = Math.atan2(startPointxy[1] - startPointxy_[1], startPointxy[0] - startPointxy_[0])
+                    startAngs.push(ang0)
+                    endAngs.push(ang0)
+                    var allPathDis = norm(startPointxy_, startPointxy)
+                    var allPathDisnow = 0
+                    if (onepath[11]) {
+                        var bias_Q = onepath[12]
+                        var W_Q = onepath[13]
+                        var WF_Q = onepath[15]
+                        var H_Q = onepath[14]
+                        var N_Q = onepath[16]
+                        var d_Q = onepath[17]
+                        var N_Qi = 0
+                        var QP = moveDistanceDirection(startPointxy_, bias_Q, ang0)
+                        allPathDisnow += bias_Q
+                        while (1) {
+                            if (allPathDisnow >= allPathDis) break
+                            N_Qi += 1
+                            if (N_Qi > N_Q) break
+                            var wh = dsp.xy2pixel(QP)
+                            allpoints.push(QP)
+                            ctx.lineTo(wh[0], wh[1])
+                            allPathDisnow += W_Q
+                            if (allPathDisnow >= allPathDis) break
+                            var QP1 = moveDistanceDirection(QP, H_Q, ang0 + d_Q * Math.PI / 2)
+                            wh = dsp.xy2pixel(QP1)
+                            allpoints.push(QP1)
+                            ctx.lineTo(wh[0], wh[1])
+                            var QP2 = moveDistanceDirection(QP1, W_Q, ang0)
+                            wh = dsp.xy2pixel(QP2)
+                            allpoints.push(QP2)
+                            ctx.lineTo(wh[0], wh[1])
+                            QP1 = moveDistanceDirection(QP2, H_Q, ang0 - d_Q * Math.PI / 2)
+                            wh = dsp.xy2pixel(QP1)
+                            allpoints.push(QP1)
+                            ctx.lineTo(wh[0], wh[1])
+                            allPathDisnow += WF_Q
+                            if (allPathDisnow >= allPathDis) break
+                            QP = moveDistanceDirection(QP1, WF_Q, ang0)
+                            wh = dsp.xy2pixel(QP)
+                            allpoints.push(QP)
+                            ctx.lineTo(wh[0], wh[1])
+                        }
+                    }
+                    allpoints.push(dsp.pixel2xy(startPoint))
+                    ctx.lineTo(startPoint[0], startPoint[1])
+                }
+                if (onepath[0] == 4) {
+                    p0 = {
+                        x: startPointxy[0],
+                        y: startPointxy[1]
+                    }
+                    p3 = {
+                        x: onepath[1],
+                        y: onepath[2]
+                    }
+                    p2 = {
+                        x: onepath[3],
+                        y: onepath[4]
+                    }
+                    p1 = {
+                        x: onepath[5],
+                        y: onepath[6]
+                    }
+                    var pb
+                    var allPathDis = 0
+                    for (var i = 0; i <= 100; i += 1) {
+                        var p = bezier(i / 100, p0, p1, p2, p3);
+                        if (i == 0) pb = p
+                        else allPathDis += normxy(p, pb)
+                        if (i == 1) startAngs.push(Math.atan2(p.y - pb.y, p.x - pb.x))
+                        if (i == 99) pb = p
+                        if (i == 100) endAngs.push(Math.atan2(p.y - pb.y, p.x - pb.x))
+                    }
+                    if (onepath[11] == 1) {
+                        var allPathDisnow = 0
+                        var bzparanorm = 0
+                        var bzstep = 1 / 100
+                        var bzstep2 = 1 / 1000
+                        var bias_Q = onepath[12]
+                        var W_Q = onepath[13]
+                        var WF_Q = onepath[15]
+                        var H_Q = onepath[14]
+                        var N_Q = onepath[16]
+                        var d_Q = onepath[17]
+                        var N_Qi = 0
+                        var ii = 0
+                        var ppp = {
+                            x: startPointxy[0],
+                            y: startPointxy[1]
+                        }
+                        while (bzparanorm <= 1) {
+                            bzparanorm += bzstep
+                            if (bzparanorm >= 1) break;
+                            var p = bezier(bzparanorm, p0, p1, p2, p3);
+                            allPathDisnow += normxy(ppp, p)
+                            ppp = p
+                            var wh = dsp.xy2pixel([p.x, p.y])
+                            allpoints.push([p.x, p.y])
+                            w = wh[0]
+                            h = wh[1]
+                            ctx.lineTo(w, h)
+                            if (allPathDisnow >= bias_Q) break
+                        }
+                        while (bzparanorm <= 1) {
+                            var disnow = 0
+                            var pre = bzparanorm
+                            ppp = bezier(bzparanorm, p0, p1, p2, p3)
+                            while (disnow < W_Q) {
+                                bzparanorm += bzstep2
+                                if (bzparanorm >= 1) break;
+                                var p = bezier(bzparanorm, p0, p1, p2, p3);
+                                disnow += normxy(ppp, p)
+                                ppp = p
+                            }
+                            q0 = bezier(pre, p0, p1, p2, p3)
+                            q01 = bezier(pre + 1 / 1000, p0, p1, p2, p3)
+                            t0 = Math.atan2(q01.y - q0.y, q01.x - q0.x)
+                            var QP1 = moveDistanceDirection([q0.x, q0.y], H_Q, t0 + d_Q * Math.PI / 2)
+                            wh = dsp.xy2pixel(QP1)
+                            allpoints.push(QP1)
+                            ctx.lineTo(wh[0], wh[1])
+                            q0 = bezier(bzparanorm - .001, p0, p1, p2, p3)
+                            q01 = bezier(bzparanorm, p0, p1, p2, p3)
+                            t0 = Math.atan2(q01.y - q0.y, q01.x - q0.x)
+                            QP1 = moveDistanceDirection([p.x, p.y], H_Q, t0 + d_Q * Math.PI / 2)
+                            wh = dsp.xy2pixel(QP1)
+                            allpoints.push(QP1)
+                            ctx.lineTo(wh[0], wh[1])
+                            var wh = dsp.xy2pixel([p.x, p.y])
+                            allpoints.push([p.x, p.y])
+                            ctx.lineTo(wh[0], wh[1])
+                            disnow = 0
+                            ppp = bezier(bzparanorm, p0, p1, p2, p3);
+                            while (bzparanorm < 1) {
+                                bzparanorm += bzstep
+                                if (bzparanorm >= 1) break;
+                                var p = bezier(bzparanorm, p0, p1, p2, p3);
+                                disnow += normxy(ppp, p)
+                                ppp = p
+                                var wh = dsp.xy2pixel([p.x, p.y])
+                                w = wh[0]
+                                h = wh[1]
+                                allpoints.push([p.x, p.y])
+                                ctx.lineTo(w, h)
+                                if (disnow >= WF_Q) break
+                            }
+                            N_Qi += 1
+                            if (N_Qi >= N_Q) {
+                                while (bzparanorm < 1) {
+                                    bzparanorm += bzstep
+                                    if (bzparanorm >= 1) break;
+                                    var p = bezier(bzparanorm, p0, p1, p2, p3);
+                                    disnow += normxy(ppp, p)
+                                    ppp = p
+                                    var wh = dsp.xy2pixel([p.x, p.y])
+                                    w = wh[0]
+                                    h = wh[1]
+                                    allpoints.push([p.x, p.y])
+                                    ctx.lineTo(w, h)
+                                }
+                            }
+                        }
+                        startPointxy = [onepath[1], onepath[2]]
+                        wh = dsp.xy2pixel(startPointxy)
+                        allpoints.push(startPointxy)
+                        ctx.lineTo(wh[0], wh[1])
+                    } else {
+                        for (var i = 0; i <= 100; i += 1) {
+                            var p = bezier(i / 100, p0, p1, p2, p3);
+                            var wh = dsp.xy2pixel([p.x, p.y])
+                            w = wh[0];
+                            h = wh[1];
+                            allpoints.push([p.x, p.y])
+                            ctx.lineTo(w, h);
+                        }
+                    }
+                    startPointxy = [onepath[1], onepath[2]]
+                    startPoint = dsp.xy2pixel(startPointxy)
+                }
+                if (onepath[0] == 5) {
+                    startPointxy = [onepath[1], onepath[2]]
+                    startPoint = dsp.xy2pixel(startPointxy)
+                    var pp = getStartPoint(iijj)
+                    var st = onepath[7]
+                    var N = onepath[3]
+                    var d = onepath[4]
+                    var H = onepath[5]
+                    var t = onepath[6]
+                    var xy = rot(0, H * Math.sin(st), t)
+                    pp[0]-=xy[0]
+                    pp[1]-=xy[1]
+                    var x = N * d
+                    var dx = 0
+                    var res = .1
+                    if (onepath[11] == 1) {
+                        var bias_Q = onepath[12]
+                        var W_Q = onepath[13]
+                        var WF_Q = onepath[15]
+                        var H_Q = onepath[14]
+                        var N_Q = onepath[16]
+                        var d_Q = onepath[17]
+                        var N_Qi = 0
+                        allPathDisnow = 0
+                        while (dx <= x) {
+                            var p = [dx, H * Math.sin(2 * Math.PI * dx / d + st)]
+                            var ppp = [dx,H * Math.sin(2 * Math.PI * (dx - res) / d + st)]
+                            allPathDisnow += norm(ppp, p)
+                            var xy = rot(p[0], p[1], t)
+                            xy[0] += pp[0]
+                            xy[1] += pp[1]
+                            var wh = dsp.xy2pixel(xy)
+                            allpoints.push(xy)
+                            w = wh[0]
+                            h = wh[1]
+                            ctx.lineTo(w, h)
+                            if (allPathDisnow >= bias_Q) break
+                            dx+=res
+                        }
+                        while (dx <= x) {
+                            q0 = [dx-.01,H * Math.sin(2 * Math.PI * (dx - .01) / d + st)]
+                            q01 = [dx,H * Math.sin(2 * Math.PI * dx / d + st)]
+                            t0 = Math.atan2(q01[1] - q0[1], q01[0] - q0[0])
+                            var QP1 = moveDistanceDirection(q0, H_Q, t0 + d_Q * Math.PI / 2)
+                            var xy = rot(QP1[0], QP1[1], t)
+                            xy[0] += pp[0]
+                            xy[1] += pp[1]
+                            var wh = dsp.xy2pixel(xy)
+                            allpoints.push(xy)
+                            w = wh[0]
+                            h = wh[1]
+                            ctx.lineTo(w, h)
+                            var disnow = 0
+                            while (disnow < W_Q) {
+                                dx += .01
+                                if (dx >= x) break;
+                                disnow += norm([dx,H * Math.sin(2 * Math.PI * dx / d + st)], [dx-.01,H * Math.sin(2 * Math.PI * (dx - .01) / d + st)])
+                            }
+                            
+                            q0 = [dx-.01,H * Math.sin(2 * Math.PI * (dx - .01) / d + st)]
+                            q01 = [dx,H * Math.sin(2 * Math.PI * dx / d + st)]
+                            t0 = Math.atan2(q01[1] - q0[1], q01[0] - q0[0])
+                            QP1 = moveDistanceDirection(q0, H_Q, t0 + d_Q * Math.PI / 2)
+                            xy = rot(QP1[0], QP1[1], t)
+                            xy[0] += pp[0]
+                            xy[1] += pp[1]
+                            var wh = dsp.xy2pixel(xy)
+                            allpoints.push(xy)
+                            w = wh[0]
+                            h = wh[1]
+                            ctx.lineTo(w, h)
+                            xy = rot(q0[0], q0[1], t)
+                            xy[0] += pp[0]
+                            xy[1] += pp[1]
+                            var wh = dsp.xy2pixel(xy)
+                            allpoints.push(xy)
+                            w = wh[0]
+                            h = wh[1]
+                            ctx.lineTo(w, h)
+                            disnow = 0
+                            while (disnow < WF_Q) {
+                                dx += .1
+                                if (dx >= x) break;
+                                disnow += norm([dx,H * Math.sin(2 * Math.PI * dx / d + st)],[dx-.1, H * Math.sin(2 * Math.PI * (dx - .1) / d + st)])
+                                QP1 = [dx,H * Math.sin(2 * Math.PI * dx / d + st)]
+                                xy = rot(QP1[0], QP1[1], t)
+                                xy[0] += pp[0]
+                                xy[1] += pp[1]
+                                var wh = dsp.xy2pixel(xy)
+                                allpoints.push(xy)
+                                w = wh[0]
+                                h = wh[1]
+                                ctx.lineTo(w, h)
+                            }
+                            N_Qi += 1
+                            if (N_Qi >= N_Q) {
+                                while (1) {
+                                    dx += .1
+                                    if (dx >= x) break;
+                                    disnow += norm([dx,H * Math.sin(2 * Math.PI * dx / d + st)],[dx-.1, H * Math.sin(2 * Math.PI * (dx - .1) / d + st)])
+                                    QP1 = [dx,H * Math.sin(2 * Math.PI * dx / d + st)]
+                                    xy = rot(QP1[0], QP1[1], t)
+                                    xy[0] += pp[0]
+                                    xy[1] += pp[1]
+                                    var wh = dsp.xy2pixel(xy)
+                                    allpoints.push(xy)
+                                    w = wh[0]
+                                    h = wh[1]
+                                    ctx.lineTo(w, h)
+                                }
+                            }
+                        }
+                    } else {
+                        while (dx <= x) {
+                            var y = H * Math.sin(2 * Math.PI * dx / d + st)
+                            var xy = rot(dx, y, t)
+                            xy[0] += pp[0]
+                            xy[1] += pp[1]
+                            wh = dsp.xy2pixel(xy)
+                            allpoints.push(xy)
+                            ctx.lineTo(wh[0], wh[1])
+                            dx += res
+                        }
+                    }
+                    ctx.lineTo(startPoint[0], startPoint[1])
+                }
+               
+               
+               if (onepath[0] == 3) {
+                    startPointxy = [onepath[1], onepath[2]]
+                    startPoint = dsp.xy2pixel(startPointxy)
+                    var pp = getStartPoint(iijj)
+                    var t0=onepath[3]
+                    var tL0=onepath[4]
+                    var R=onepath[5]
+                    var D=onepath[6]
+                    var eps=onepath[7]
+                    var tL=0
+                    var tLres=.1/(R*Math.PI)*360
+                    var xy=arcPoint(t0,R,eps,tL,D)
+                    pp[0]-=xy[0]
+                    pp[1]-=xy[1]
+                    if (onepath[11] == 1) {
+                        var bias_Q = onepath[12]
+                        var W_Q = onepath[13]
+                        var WF_Q = onepath[15]
+                        var H_Q = onepath[14]
+                        var N_Q = onepath[16]
+                        var d_Q = onepath[17]
+                        var N_Qi = 0
+                        allPathDisnow = 0
+                        while (tL <= tL0) {
+                            var xy = arcPoint(t0,R,eps,tL,D)
+                            var ppp = arcPoint(t0,R,eps,tL-tLres,D)
+                            allPathDisnow += norm(ppp, xy)
+                            xy[0] += pp[0]
+                            xy[1] += pp[1]
+                            wh = dsp.xy2pixel(xy)
+                            ctx.lineTo(wh[0], wh[1])
+                            if (allPathDisnow >= bias_Q) break
+                            tL += tLres
+                        }
+                        while (tL <= tL0) {
+                            q0 = arcPoint(t0,R,eps,tL-tLres,D)
+                            q01 = arcPoint(t0,R,eps,tL,D)
+                            t0q = Math.atan2(q01[1] - q0[1], q01[0] - q0[0])
+                            xy = moveDistanceDirection(q0, H_Q, t0q + d_Q * Math.PI / 2)
+                            xy[0] += pp[0]
+                            xy[1] += pp[1]
+                            var wh = dsp.xy2pixel(xy)
+                            allpoints.push(xy)
+                            w = wh[0]
+                            h = wh[1]
+                            ctx.lineTo(w, h)
+                            var disnow = 0
+                            while (disnow < W_Q) {
+                                tL += tLres/5
+                                if (tL > tL0) break;
+                                disnow += norm(arcPoint(t0,R,eps,tL,D),arcPoint(t0,R,eps,tL- tLres/5,D))
+                            }
+                            
+                            q0 = arcPoint(t0,R,eps,tL-tLres,D)
+                            q01 = arcPoint(t0,R,eps,tL,D)
+                            t0q = Math.atan2(q01[1] - q0[1], q01[0] - q0[0])
+                            xy = moveDistanceDirection(q0, H_Q, t0q + d_Q * Math.PI / 2)
+                            xy[0] += pp[0]
+                            xy[1] += pp[1]
+                            wh = dsp.xy2pixel(xy)
+                            allpoints.push(xy)
+                            w = wh[0]
+                            h = wh[1]
+                            ctx.lineTo(w, h)
+                            xy = q0
+                            xy[0] += pp[0]
+                            xy[1] += pp[1]
+                            wh = dsp.xy2pixel(xy)
+                            allpoints.push(xy)
+                            w = wh[0]
+                            h = wh[1]
+                            ctx.lineTo(w, h)
+                            disnow = 0
+                            while (disnow < WF_Q) {
+                                tL += tLres
+                                if (tL >= tL0) break;
+                                xy=arcPoint(t0,R,eps,tL,D)
+                                xyL=arcPoint(t0,R,eps,tL-tLres,D)
+                                disnow += norm(xy,xyL)
+                                xy[0] += pp[0]
+                                xy[1] += pp[1]
+                                wh = dsp.xy2pixel(xy)
+                                allpoints.push(xy)
+                                w = wh[0]
+                                h = wh[1]
+                                ctx.lineTo(w, h)
+                            }
+                            N_Qi += 1
+                            if (N_Qi >= N_Q) {
+                                while (tL < tL0) {
+                                    tL += tLres
+                                    xy=arcPoint(t0,R,eps,tL,D)
+                                    xy[0] += pp[0]
+                                    xy[1] += pp[1]
+                                    wh = dsp.xy2pixel(xy)
+                                    allpoints.push(xy)
+                                    w = wh[0]
+                                    h = wh[1]
+                                    ctx.lineTo(w, h)
+                                }
+                            }
+                        }
+                    } else {
+                        while (tL <= tL0) {
+                            xy=[(R/2-eps*tL/360)*Math.cos((t0+D*tL)/180*Math.PI),(R/2-eps*tL/360)*Math.sin((t0+D*tL)/180*Math.PI)]
+                            xy[0] += pp[0]
+                            xy[1] += pp[1]
+                            wh = dsp.xy2pixel(xy)
+                            allpoints.push(xy)
+                            ctx.lineTo(wh[0], wh[1])
+                            tL += tLres
+                        }
+                    }
+                    ctx.lineTo(startPoint[0], startPoint[1])
+                }
+               
+               
+               
+               
+               
+               
+               
+               
+               
+            
+               
+               
+                if (iijj == currentIndex) {
+                    ctx.strokeStyle = 'rgba(255,0,0,1)'
+                    if (isdrawboundingrect && 0) {
+                        ctx.rect(startPoint_[0], startPoint_[1], startPoint[0] - startPoint_[0], startPoint[1] - startPoint_[1])
+                        var WH = dsp.pixel2xyLen([Math.abs(startPoint[0] - startPoint_[0]), Math.abs(startPoint[1] - startPoint_[1])])
+                        ctx.fillText(Math.round(100 * WH[1]) / 100, startPoint[0], (startPoint[1] + startPoint_[1]) / 2)
+                        ctx.fillText(Math.round(100 * WH[0]) / 100, (startPoint[0] + startPoint_[0]) / 2, startPoint[1]);
+                        ctx.fillText(ii, (startPoint[0] + startPoint_[0]) / 2, (startPoint[1] + startPoint_[1]) / 2);
+                        if (onepath[0] == 4) {
+                            ctx.stroke();
+                            ctx.beginPath();
+                            ctx.strokeStyle = 'rgba(0,255,0,1)'
+                            wh = dsp.xy2pixel([p0.x, p0.y])
+                            var dc = 2
+                            ctx.rect(wh[0] - dc, wh[1] - dc, 2 * dc, 2 * dc)
+                            wh = dsp.xy2pixel([p1.x, p1.y])
+                            dc = 40
+                            ctx.rect(wh[0] - dc, wh[1] - dc, 2 * dc, 2 * dc)
+                            wh = dsp.xy2pixel([p2.x, p2.y])
+                            dc = 6
+                            ctx.rect(wh[0] - dc, wh[1] - dc, 2 * dc, 2 * dc)
+                            wh = dsp.xy2pixel([p3.x, p3.y])
+                            dc = 10
+                            ctx.rect(wh[0] - dc, wh[1] - dc, 2 * dc, 2 * dc)
+                        }
+                    }
+                } else {
+                    ctx.strokeStyle = 'rgba(0,0,0,1)'
+                }
+                ctx.stroke();
+            }
+            if (startAngs.length > currentIndex) {
+                if (currentIndex >= 0) {
+                    var Comx = ''
+                    if (currentIndex >= 1) {
+                        Comx += Math.round(startAngs[currentIndex - 1] / Math.PI * 1800) / 10 + "," + Math.round(endAngs[currentIndex - 1] / Math.PI * 1800) / 10 + "("
+                    } else {
+                        Comx += "-,-("
+                    }
+                    Comx += Math.round(startAngs[currentIndex] / Math.PI * 1800) / 10 + "," + Math.round(endAngs[currentIndex] / Math.PI * 1800) / 10 + "("
+                    if (startAngs.length > currentIndex + 1) {
+                        Comx += Math.round(startAngs[currentIndex + 1] / Math.PI * 1800) / 10 + "," + Math.round(endAngs[currentIndex + 1] / Math.PI * 1800) / 10
+                    } else {
+                        Comx += "-,-"
+                    }
+                    ctx.fillText(Comx, 10, 10)
+                }
+            }
+            var scatterimagedata = ctx.getImageData(0, 0, c.width / 2, c.height / 2);
+            for (var i = 0; i < scatterimagedata.data.length; i += 4) {
+                scatterimagedata.data[i] = 255 - scatterimagedata.data[i]; // red
+                scatterimagedata.data[i + 1] = 255 - scatterimagedata.data[i + 1]; // green
+                scatterimagedata.data[i + 2] = 255 - scatterimagedata.data[i + 2]; // blue
+            }
+            //ctx.putImageData( scatterimagedata, 0,0);
+            ctx.closePath();
+        }
+        function arcPoint(t0,R,eps,theta,dir){
+            return [(R/2-eps*theta/360)*Math.cos((t0+dir*theta)/180*Math.PI),(R/2-eps*theta/360)*Math.sin((t0+dir*theta)/180*Math.PI)]
+        }
+        function getStartPoint(i) {
+            var ind = i - 1
+            if (ind >= snr.shapes.length) {
+                return [0, 0]
+            }
+            if (ind < 0) {
+                return [0, 0]
+            }
+            return [snr.shapes[ind][1], snr.shapes[ind][2]]
+        }
+        var toolButton_Shape_N = 0
+        function btnshapetool(N) {
+            toolButton_Shape_N = N
+            if (N == 1) {
+                if (currentIndex >= snr.shapes.length) {
+                    currentIndex = snr.shapes.length
+                    var pp = getStartPoint(currentIndex)
+                    snr.shapes.push([1, pp[0] + 10, pp[1] + 10, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+                    currentIndex = snr.shapes.length - 1
+                    repaint()
+                    return
+                }
+                if (currentIndex < 0) {
+                    currentIndex = snr.shapes.length
+                    var pp = getStartPoint(currentIndex)
+                    snr.shapes.push([1, pp[0] + 10, pp[1] + 10, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+                    currentIndex = snr.shapes.length - 1
+                    repaint()
+                    return
+                }
+                if (snr.shapes[currentIndex][0] != 1) {
+                    currentIndex = snr.shapes.length
+                    var pp = getStartPoint(currentIndex)
+                    snr.shapes.push([1, pp[0] + 10, pp[1] + 10, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+                    currentIndex = snr.shapes.length - 1
+                    repaint()
+                    return
+                }
+                var pp = getStartPoint(currentIndex)
+                var ee = [snr.shapes[currentIndex][1], snr.shapes[currentIndex][2]]
+                document.getElementById('lineWidthInput').value = ee[0] - pp[0]
+                document.getElementById('lineHeightInput').value = ee[1] - pp[1]
+                document.getElementById('LineClickedHidden').click()
+            }
+            if (N == 4) {
+                if (0) {
+                    if (currentIndex >= snr.shapes.length) {
+                        currentIndex = snr.shapes.length
+                        var pp = getStartPoint(currentIndex)
+                        snr.shapes.push([4, pp[0] + 10, pp[1] + 10, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+                        currentIndex = snr.shapes.length - 1
+                        repaint()
+                        return
+                    }
+                    if (currentIndex < 0) {
+                        currentIndex = snr.shapes.length
+                        var pp = getStartPoint(currentIndex)
+                        snr.shapes.push([4, pp[0] + 10, pp[1] + 10, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+                        currentIndex = snr.shapes.length - 1
+                        repaint()
+                        return
+                    }
+                    if (snr.shapes[currentIndex][0] != 1) {
+                        currentIndex = snr.shapes.length
+                        var pp = getStartPoint(currentIndex)
+                        snr.shapes.push([4, pp[0] + 10, pp[1] + 10, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+                        currentIndex = snr.shapes.length - 1
+                        repaint()
+                        return
+                    }
+                    var pp = getStartPoint(currentIndex)
+                    var ee = [snr.shapes[currentIndex][1], snr.shapes[currentIndex][2]]
+                    document.getElementById('bzWidthInput').value = ee[0] - pp[0]
+                    document.getElementById('bzHeightInput').value = ee[1] - pp[1]
+                }
+                document.getElementById('bzClickedHidden').click()
+            }
+            if (N == 5) {
+                document.getElementById('sinClickedHidden').click()
+            }
+            if (N == 6) {
+                document.getElementById('chinClickedHidden').click()
+            }
+            if (N == 3) {
+                document.getElementById('arcClickedHidden').click()
+            }
+        }
+        const c = document.getElementById('myCanvas');
+        c.addEventListener('wheel', wheelhandle);
+        c.addEventListener('mousemove', mousemovehandle);
+        c.addEventListener('touchmove', touchmovehandle);
+        c.addEventListener('touchstart', touchstarthandle);
+        c.addEventListener('touchend', touchendhandle);
+        c.addEventListener('mousedown', mousedownhandle);
+        c.addEventListener('mouseup', mouseuphandle);
+        var mouseOption = 0
+        var mousePos
+        function movehandle(mP) {
+            var so = document.getElementById('sel2').selectedIndex
+            if(so==0){
+                dsp.bias = [dsp.bias[0] - mP[0] / dsp.scale, dsp.bias[1] + mP[1] / dsp.scale]
+            }
+            else{
+                if(currentIndex<snr.shapes.length){
+                    if(currentIndex>=0){
+                        if(snr.shapes[currentIndex][0]==1){//line
+                            snr.shapes[currentIndex][1]+=mP[0] / dsp.scale
+                            snr.shapes[currentIndex][2]-=mP[1] / dsp.scale
+                        }
+                        if(snr.shapes[currentIndex][0]==3){ //arc
+                            if(so==1){
+                            }
+                            if(so==2){
+                            }
+                        }
+                        if(snr.shapes[currentIndex][0]==4){ //bz
+                            if(so==1){
+                                snr.shapes[currentIndex][1]+=mP[0] / dsp.scale
+                                snr.shapes[currentIndex][2]-=mP[1] / dsp.scale
+                            }
+                            if(so==2){
+                                snr.shapes[currentIndex][3]+=mP[0] / dsp.scale
+                                snr.shapes[currentIndex][4]-=mP[1] / dsp.scale
+                            }
+                            if(so==3){
+                                snr.shapes[currentIndex][5]+=mP[0] / dsp.scale
+                                snr.shapes[currentIndex][6]-=mP[1] / dsp.scale
+                            }
+                        }
+                        if(snr.shapes[currentIndex][0]==5){ //sin
+                        }
+                        if(snr.shapes[currentIndex][0]==6){ //chin
+                        }
+                    }
+                }
+            }
+            repaint()
+            return;
+            var Pos = [mP[0] - c.offsetLeft, mP[1] - c.offsetTop]
+            var PosX = [mP[1] - c.offsetLeft, mP[1] - c.offsetTop]
+            var dPos = [mousePos[0] - Pos[0], mousePos[1] - Pos[1]]
+            dPos = dsp.pixel2xyLen(dPos)
+            mousePos = Pos
+            if (mouseOption == 1) {
+                dsp.bias[0] += dPos[0]
+                dsp.bias[1] += dPos[1]
+                repaint()
+                return
+            }
+            if (toolButton_Shape_N == 1) {
+                PosX = dsp.pixel2xy(PosX)
+                snr.shapes[currentIndex][1] = PosX[0]
+                snr.shapes[currentIndex][2] = PosX[1]
+                repaint()
+            }
+            if (toolButton_Shape_N == 4) {
+                PosX = dsp.pixel2xy(PosX)
+                snr.shapes[currentIndex][5] = PosX[0]
+                snr.shapes[currentIndex][6] = PosX[1]
+                repaint()
+            }
+        }
+        function mousemovehandle(e) {
+            if (dsp.mousePressed == 0) return;
+            var dx = e.pageX-mouseP[0]
+            var dy = e.pageY-mouseP[1]
+            mouseP =  [e.pageX,e.pageY]
+            movehandle([dx,dy])
+        }
+        var touchP
+        var mouseP
+        function touchmovehandle(e) {
+            var dx = e.touches[0].pageX-touchP[0]
+            var dy = e.touches[0].pageY-touchP[1]
+            movehandle([dx,dy])
+            touchP = [e.touches[0].pageX,e.touches[0].pageY]
+        }
+        function touchstarthandle(e) {
+            touchP = [e.touches[0].pageX,e.touches[0].pageY]
+        }
+        function touchendhandle(e) {
+        }
+        function mousedownhandle(e) {
+            dsp.mousePressed = 1
+            mouseP =  [e.pageX,e.pageY]
+        }
+        function mouseuphandle(e) {
+            dsp.mousePressed = 0
+        }
+        var NZI = 0
+        function btnzintool() {
+            NZI = 0
+            setTimeout(btnzintoolanim, 1)
+        }
+        function btnzintoolanim() {
+            dsp.scale *= 1.01
+            repaint()
+            NZI += 1
+            if (NZI > 20) {
+                clearTimeout(btnzintoolanim)
+            } else {
+                setTimeout(btnzintoolanim, 1)
+            }
+        }
+        function btnzouttool() {
+            NZI = 0
+            setTimeout(btnzouttoolanim, 1)
+        }
+        function btnzouttoolanim() {
+            dsp.scale /= 1.01
+            repaint()
+            NZI += 1
+            if (NZI > 20) {
+                clearTimeout(btnzouttoolanim)
+            } else {
+                setTimeout(btnzouttoolanim, 1)
+            }
+        }
+        var movePanParameter = 10
+        function btnpantoolanim() {
+            N = NPAN
+            if (N == 1) {
+                dsp.bias = [dsp.bias[0] + movePanParameter / dsp.scale, dsp.bias[1]]
+            }
+            if (N == 2) {
+                dsp.bias = [dsp.bias[0] - movePanParameter / dsp.scale, dsp.bias[1]]
+            }
+            if (N == 3) {
+                dsp.bias = [dsp.bias[0], dsp.bias[1] + movePanParameter / dsp.scale]
+            }
+            if (N == 4) {
+                dsp.bias = [dsp.bias[0], dsp.bias[1] - movePanParameter / dsp.scale]
+            }
+            repaint()
+            NZI += 1
+            if (NZI > 20) {
+                clearTimeout(btnpantoolanim)
+            } else {
+                setTimeout(btnpantoolanim, 1)
+            }
+        }
+        var NPAN = 0
+        function btnpantool(N) {
+            if (N == 5) {
+                dsp.bias = [0, 0]
+                dsp.scale = 5
+                repaint()
+                return
+            }
+            NZI = 0
+            NPAN = N
+            setTimeout(btnpantoolanim, 1)
+            if (mouseOption == 0) {
+                mouseOption = 1
+            } else {
+                mouseOption = 0
+            }
+        }
+        function btndeltool() {
+            if (currentIndex >= snr.shapes.length) return
+            snr.shapes.splice(currentIndex, 1)
+            if (currentIndex > 0) currentIndex -= 1
+            repaint()
+        }
+        const command = document.getElementById('command');
+        const comment = document.getElementById('comment');
+        //command.addEventListener('keyup', updateValue);
+        //range.addEventListener('input', updateRange);
+        document.addEventListener('keyup', keyhandle);
+        document.getElementById('avatar').addEventListener('change', filehandle);
+        document.getElementById('fileopenx').addEventListener('change', filehandle2);
+        var img = new Image;
+        var imloaded = 0;
+        img.onload = function() {
+            dsp.loaded_image = 1;
+            repaint()
+        }
+        function updateRange(e) {}
+        var downloadBlob, downloadURL;
+        downloadBlob = function(data, fileName, mimeType) {
+            var blob, url;
+            blob = new Blob([data], {
+                type: mimeType
+            });
+            url = window.URL.createObjectURL(blob);
+            downloadURL(url, fileName);
+            setTimeout(function() {
+                return window.URL.revokeObjectURL(url);
+            }, 1000);
+        };
+        downloadURL = function(data, fileName) {
+            var a;
+            a = document.createElement('a');
+            a.href = data;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.style = 'display: none';
+            a.click();
+            a.remove();
+        };
+        var allpoints = []
+        function filedownload() {
+            var md = new Float64Array(allpoints.length * 2);
+            for (var i = 0; i < allpoints.length; i++) {
+                md[2 * i] = allpoints[i][0]
+                md[2 * i + 1] = allpoints[i][1]
+            }
+            downloadBlob(md, saveasfilename + '.aig', 'application/octet-stream');
+        }
+        var saveasfilename = 'File'
+        function filehandle(e) {
+            img.src = URL.createObjectURL(e.target.files[0]);
+        }
+        function filehandle2(e) {
+            reader.readAsBinaryString(e.target.files[0])
+        }
+        var reader = new FileReader();
+        reader.onload = function() {
+            var res = reader.result
+            console.log(res)
+            var dataview = new DataView(res);
+            var ints = new Float64Array(res.byteLength / 8);
+            for (var i = 0; i < ints.length; i++) {
+                ints[i] = dataview.getFloat64(i * 8);
+            }
+            console.log(ints)
+        };
+        function wheelhandle(e) {
+            if (e.deltaY > 0) {
+                dsp.scale /= 1.04
+            } else {
+                dsp.scale *= 1.04
+            }
+            repaint()
+        }
+        function keyhandle(e) {
+            e = e || window.event;
+            if (e.keyCode == '38') {
+                // up arrow
+                if (draworim == 1) {
+                    bias[1] += scale / .100;
+                } else {
+                    biasim[1] += scaleim / .100;
+                }
+                paintfunc();
+            } else if (e.keyCode == '40') {
+                // down arrow
+                if (draworim == 1) {
+                    bias[1] -= scale / .100;
+                } else {
+                    biasim[1] -= scaleim / .100;
+                }
+                paintfunc();
+            } else if (e.keyCode == '37') {
+                // left arrow
+                if (draworim == 1) {
+                    bias[0] += scale / .100;
+                } else {
+                    biasim[0] += scaleim / .100;
+                }
+                paintfunc();
+            } else if (e.keyCode == '39') {
+                if (draworim == 1) {
+                    bias[0] -= scale / .100;
+                } else {
+                    biasim[0] -= scaleim / .100;
+                }
+                paintfunc();
+                // right arrow
+            }
+        }
+        function bezier(t, p0, p1, p2, p3) {
+            var cX = 3 * (p1.x - p0.x),
+                bX = 3 * (p2.x - p1.x) - cX,
+                aX = p3.x - p0.x - cX - bX;
+            var cY = 3 * (p1.y - p0.y),
+                bY = 3 * (p2.y - p1.y) - cY,
+                aY = p3.y - p0.y - cY - bY;
+            var x = (aX * Math.pow(t, 3)) + (bX * Math.pow(t, 2)) + (cX * t) + p0.x;
+            var y = (aY * Math.pow(t, 3)) + (bY * Math.pow(t, 2)) + (cY * t) + p0.y;
+            return {
+                x: x,
+                y: y
+            };
+        }
+    </script>
+
+</body>
+
+</html>
