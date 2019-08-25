@@ -123,7 +123,8 @@
                 <option style="font-family:'B Yekan'">تغییر پارامتر 3</option>
                 <option style="font-family:'B Yekan'">تغییر پارامتر 4</option>
                 <option style="font-family:'B Yekan'">تغییر پارامتر 5</option>
-                <option style="font-family:'B Yekan'">تغییر پارامتر 6</option>
+                <option style="font-family:'B Yekan'">جابجایی عکس</option>
+                <option style="font-family:'B Yekan'">زوم عکس</option>
             </select>
         </div>
     </div>
@@ -764,7 +765,7 @@
             }
             var startPointxy = [0, 0]
             var startPoint = dsp.xy2pixel(startPointxy)
-            comment.innerHTML = snr.shapes.length
+            //comment.innerHTML = snr.shapes.length
             var startAngs = []
             var endAngs = []
             allpoints = []
@@ -1381,18 +1382,99 @@
             if(so==0){
                 dsp.bias = [dsp.bias[0] - mP[0] / dsp.scale, dsp.bias[1] + mP[1] / dsp.scale]
             }
+            else if(so==6){
+                dsp.bias_image = [dsp.bias_image[0] + mP[0] / dsp.scale, dsp.bias_image[1] + mP[1] / dsp.scale]
+            }
+            else if(so==7){
+                if(mP[0]>0) dsp.scale_image *= 1.02 
+                if(mP[0]<0) dsp.scale_image /= 1.02 
+            }
             else{
                 if(currentIndex<snr.shapes.length){
                     if(currentIndex>=0){
+
+                        if(toolButton_Shape_N==6){
+                            if(snr.shapes[currentIndex][11]==1){ //chin          
+                                if(so==1){
+                                    snr.shapes[currentIndex][12] +=mP[0] / dsp.scale/10
+                                    if(snr.shapes[currentIndex][12]<=0)snr.shapes[currentIndex][12]=0
+                                    comment.innerHTML=snr.shapes[currentIndex][12]
+                                }
+                                if(so==2){
+                                    snr.shapes[currentIndex][13] +=mP[0] / dsp.scale/10
+                                    if(snr.shapes[currentIndex][13]<=0)snr.shapes[currentIndex][13]=0
+                                    comment.innerHTML=snr.shapes[currentIndex][13]
+                                }
+                                if(so==3){
+                                    snr.shapes[currentIndex][14] +=mP[0] / dsp.scale/10
+                                    if(snr.shapes[currentIndex][14]<=0)snr.shapes[currentIndex][14]=0
+                                    comment.innerHTML=snr.shapes[currentIndex][14]
+                                }
+
+                                if(so==4){
+                                    snr.shapes[currentIndex][15] +=mP[0] / dsp.scale/10
+                                    if(snr.shapes[currentIndex][15]<=0)snr.shapes[currentIndex][15]=0
+                                    comment.innerHTML=snr.shapes[currentIndex][15]
+                                }
+
+                                if(so==5){
+                                    snr.shapes[currentIndex][16] +=mP[0] 
+                                    if(snr.shapes[currentIndex][16]<=0)snr.shapes[currentIndex][16]=0
+                                    comment.innerHTML=snr.shapes[currentIndex][16]
+                                }
+
+                                if(so==5){
+                                    snr.shapes[currentIndex][17] =1
+                                    if(mP[0]<0)snr.shapes[currentIndex][17]=-1
+                                    comment.innerHTML=snr.shapes[currentIndex][17]
+                                }
+
+                                }
+
+                        }
+                        else{
                         if(snr.shapes[currentIndex][0]==1){//line
                             snr.shapes[currentIndex][1]+=mP[0] / dsp.scale
                             snr.shapes[currentIndex][2]-=mP[1] / dsp.scale
                         }
                         if(snr.shapes[currentIndex][0]==3){ //arc
+                            var pp = getStartPoint(currentIndex)
+                            var t0=snr.shapes[currentIndex][3]
+                            var tL=snr.shapes[currentIndex][4]
+                            var R=snr.shapes[currentIndex][5]
+                            var D=snr.shapes[currentIndex][6]
+                            var eps=snr.shapes[currentIndex][7]
                             if(so==1){
+                                R+=mP[0] / dsp.scale
+                                if(R<=1)R=1
+
                             }
                             if(so==2){
+                                tL+=mP[0]
+                                if(tL<=1)tL=1
                             }
+                            if(so==3){
+                                t0+=mP[0]
+                            }
+                            if(so==4){
+                                eps+=mP[0] / dsp.scale
+                                if(eps<=0)eps=0
+                            }
+                            if(so==5){
+                                if(mP[0]>0)D=1
+                                else D=-1
+                            }
+                            var xy=[(R/2-eps*0/360)*Math.cos((t0+D*0)/180*Math.PI),(R/2-eps*0/360)*Math.sin((t0+D*0)/180*Math.PI)]
+                            pp[0]-=xy[0]
+                            pp[1]-=xy[1]
+                            xy=[(R/2-eps*tL/360)*Math.cos((t0+D*tL)/180*Math.PI),(R/2-eps*tL/360)*Math.sin((t0+D*tL)/180*Math.PI)]
+                            snr.shapes[currentIndex][1]=pp[0] + xy[0]
+                            snr.shapes[currentIndex][2]=pp[1] + xy[1]
+                            snr.shapes[currentIndex][3]=t0
+                            snr.shapes[currentIndex][4]=tL
+                            snr.shapes[currentIndex][5]=R
+                            snr.shapes[currentIndex][6]=D
+                            snr.shapes[currentIndex][7]=eps
                         }
                         if(snr.shapes[currentIndex][0]==4){ //bz
                             if(so==1){
@@ -1409,8 +1491,57 @@
                             }
                         }
                         if(snr.shapes[currentIndex][0]==5){ //sin
+                        
+
+                            var pp = getStartPoint(currentIndex)
+                            var N = snr.shapes[currentIndex][3]
+                            var d = snr.shapes[currentIndex][4]
+                            var H = snr.shapes[currentIndex][5]
+                            var t = snr.shapes[currentIndex][6]
+                            var st = snr.shapes[currentIndex][7]
+                            
+                            if(so==1){
+                                d+=mP[0] / dsp.scale/10
+                                if(d<=.1)d=.1
+                                comment.innerHTML=d
+                            }
+                            if(so==2){
+                                H+=mP[0]/ dsp.scale
+                                if(H<=0)H=0
+                                comment.innerHTML=H
+                            }
+                            if(so==3){
+                                N+=mP[0] / 50
+                                if(N<=.1)N=.1
+                                comment.innerHTML=N
+                            }
+                            if(so==4){
+                                t+=mP[0]/100
+                                comment.innerHTML=t
+                            }
+                            if(so==5){
+                                st+=mP[0]/100
+                                comment.innerHTML=st
+                            }
+
+
+
+
+                            var xy = rot(0, H * Math.sin(st), t)
+                                    pp[0]-=xy[0]
+                                    pp[1]-=xy[1]
+                            var x = N * d
+                            var y = H * Math.sin(2 * Math.PI * x / d + st)
+                            var xy = rot(x, y, t)
+                            snr.shapes[currentIndex][1]=pp[0] + xy[0]
+                            snr.shapes[currentIndex][2]=pp[1] + xy[1]
+                            snr.shapes[currentIndex][3]=N
+                            snr.shapes[currentIndex][4]=d
+                            snr.shapes[currentIndex][5]=H
+                            snr.shapes[currentIndex][6]=t
+                            snr.shapes[currentIndex][7]=st
+
                         }
-                        if(snr.shapes[currentIndex][0]==6){ //chin
                         }
                     }
                 }
