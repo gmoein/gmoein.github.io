@@ -51,14 +51,9 @@
 <body>
     <div class="container pt-1">
         <div class="btn-group">
-            <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'" onclick="btnshapetool(1)">خط
-            </button>
-
-            <!--button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'" onclick="btnshapetool(2)">دایره</button-->
-            <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'" onclick="btnshapetool(3)">کمان</button>
-            <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'" onclick="btnshapetool(4)">بازیر</button>
-            <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'" onclick="btnshapetool(5)">موج</button>
-            <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'" onclick="btnshapetool(6)">چین</button>
+            <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="document.getElementById('fileopenx').click()">فایل</i></button>
+            <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="filesavehandle()">ذخیره</i></button>
+            <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="filedownload()">خروجی</i></button>
             <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'"  data-toggle="modal" data-target="#exampleModal">تنظیمات</button>
             <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
             <ul class="dropdown-menu p-2" role="menu">
@@ -88,18 +83,36 @@
                 </li>
 
             </ul>
+        </div>
+    </div>
+    <div class="container pt-1">
+        <div class="btn-group">
+            <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'" onclick="btnshapetool(1)">خط
+            </button>
 
+            <!--button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'" onclick="btnshapetool(2)">دایره</button-->
+            <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'" onclick="btnshapetool(3)">کمان</button>
+            <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'" onclick="btnshapetool(4)">بازیر</button>
+            <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'" onclick="btnshapetool(5)">موج</button>
+            <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'" onclick="btnshapetool(6)">چین</button>
+
+
+        </div>
+    </div>
+    
+    <div class="container pt-1">
+        <div class="btn-group">
+                <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="document.getElementById('avatar').click()">عکس</i></button>
+           
+            <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btndeltool()">حذف</i></button>
+            
         </div>
     </div>
     <div class="container pt-1">
         <div class="btn-group">
             <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'"onclick="btnselback()">عقب</i></button>
             <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btnselfw()">جلو</i></button>
-            <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="document.getElementById('fileopenx').click()">فایل</i></button>
-            <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btndeltool()">حذف</i></button>
-            <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="document.getElementById('avatar').click()">عکس</i></button>
-            <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="filedownload()">خروجی</i></button>
-            <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btnzintool()">زوم</i></button>
+             <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btnzintool()">زوم</i></button>
             <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btnzouttool()">کوچک کردن</i></button>
 
         </div>
@@ -116,18 +129,22 @@
             </button>
             <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btnpantool(5)">ریست
             </button>
-            <select class="form-control"  style="font-family:'B Yekan'" id="sel2">
-                <option style="font-family:'B Yekan'">جابجایی</option>
-                <option style="font-family:'B Yekan'">تغییر پارامتر 1</option>
-                <option style="font-family:'B Yekan'">تغییر پارامتر 2</option>
-                <option style="font-family:'B Yekan'">تغییر پارامتر 3</option>
-                <option style="font-family:'B Yekan'">تغییر پارامتر 4</option>
-                <option style="font-family:'B Yekan'">تغییر پارامتر 5</option>
-                <option style="font-family:'B Yekan'">جابجایی عکس</option>
-                <option style="font-family:'B Yekan'">زوم عکس</option>
-            </select>
         </div>
     </div>
+    <div class="container pt-1">
+        <div class="btn-group">
+                <select class="form-control"  style="font-family:'B Yekan'" id="sel2">
+                    <option style="font-family:'B Yekan'">جابجایی</option>
+                    <option style="font-family:'B Yekan'">تغییر پارامتر 1</option>
+                    <option style="font-family:'B Yekan'">تغییر پارامتر 2</option>
+                    <option style="font-family:'B Yekan'">تغییر پارامتر 3</option>
+                    <option style="font-family:'B Yekan'">تغییر پارامتر 4</option>
+                    <option style="font-family:'B Yekan'">تغییر پارامتر 5</option>
+                    <option style="font-family:'B Yekan'">جابجایی عکس</option>
+                    <option style="font-family:'B Yekan'">زوم عکس</option>
+                </select>
+            </div>
+        </div>
     <div class="container pt-1">
         <div class="row">
             <div class="col-11">
@@ -156,7 +173,7 @@
         </div>
     </div>
     <input type="file" id="avatar" name="avatar" style="display:none" accept="image/png, image/jpeg">
-    <input type="file" id="fileopenx" name="fileopenx" style="display:none" accept=".aig">
+    <input type="file" id="fileopenx" name="fileopenx" style="display:none" accept=".aigjs">
     <button type="button" class="btn btn-outline-secondary" id="LineClickedHidden" data-toggle="modal" data-target="#myModalLine" style="display:none"></button>
     <button type="button" class="btn btn-outline-secondary" id="bzClickedHidden" data-toggle="modal" data-target="#myModalBZ" style="display:none"></button>
     <button type="button" class="btn btn-outline-secondary" id="sinClickedHidden" data-toggle="modal" data-target="#myModalSin" style="display:none"></button>
@@ -275,10 +292,10 @@
                         </select>
 
                         <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">عرض</label>
-                        <input type="text" class="form-control" id="bzWidthInput" value="">
+                        <input type="text" class="form-control" id="bzWidthInput" value="10">
                         <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="bzWidthInputRange" oninput="bzWidthInputchange()">
                         <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">ارتفاع</label>
-                        <input type="text" class="form-control" id="bzHeightInput" value="">
+                        <input type="text" class="form-control" id="bzHeightInput" value="10">
                         <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="bzHeightInputRange" oninput="bzHeightInputchange()">
                     </div>
                 </div>
@@ -303,19 +320,19 @@
                 <div class="modal-body" style="font-family:'B Yekan'">
                     <div class="form-group" style="font-family:'B Yekan'">
                         <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">طول قله تا قله</label>
-                        <input type="text" class="form-control" id="sinWidthInput" value="">
+                        <input type="text" class="form-control" id="sinWidthInput" value="10">
                         <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="sinWidthInputRange" oninput="sinWidthInputchange()">
                         <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">ارتفاع</label>
-                        <input type="text" class="form-control" id="sinHeightInput" value="">
+                        <input type="text" class="form-control" id="sinHeightInput" value="2">
                         <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="sinHeightInputRange" oninput="sinHeightInputchange()">
                         <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">تعداد قله ها</label>
-                        <input type="text" class="form-control" id="sinNInput" value="">
+                        <input type="text" class="form-control" id="sinNInput" value="6">
                         <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="sinNInputRange" oninput="sinNInputchange()">
                         <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">زاویه</label>
-                        <input type="text" class="form-control" id="sinAngleInput" value="">
+                        <input type="text" class="form-control" id="sinAngleInput" value="0">
                         <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="sinAngleInputRange" oninput="sinAngleInputchange()">
                         <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">زاویه شروع</label>
-                        <input type="text" class="form-control" id="sinstartAngleInput" value="">
+                        <input type="text" class="form-control" id="sinstartAngleInput" value="0">
                         <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="sinstartAngleInputRange" oninput="sinstartAngleInputchange()">
                     </div>
                 </div>
@@ -341,7 +358,7 @@
                     <div class="form-group" style="font-family:'B Yekan'">
 
                         <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">فعال کردن</label>
-                        <input type="text" class="form-control" id="chinenableInput" value="3">
+                        <input type="text" class="form-control" id="chinenableInput" value="-1">
                         <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="chinenableInputRange" oninput="chinenableInputchange()">
 
                         <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">فاصله ابتدای کار</label>
@@ -1681,6 +1698,7 @@
         document.addEventListener('keyup', keyhandle);
         document.getElementById('avatar').addEventListener('change', filehandle);
         document.getElementById('fileopenx').addEventListener('change', filehandle2);
+       // document.getElementById('filesavex').addEventListener('change', filesavehandle);
         var img = new Image;
         var imloaded = 0;
         img.onload = function() {
@@ -1723,19 +1741,44 @@
         function filehandle(e) {
             img.src = URL.createObjectURL(e.target.files[0]);
         }
+        function filesavehandle() {
+            var N = snr.shapes.length
+            if(N==0)return
+            var M = snr.shapes[0].length
+            var md = new Float64Array(N*M)
+            for (var i = 0; i < N; i++) {
+                for (var j = 0; j < M; j++) {
+                    md[i*M+j] = snr.shapes[i][j]
+                }
+            }
+            downloadBlob(md, saveasfilename + '.aigjs', 'application/octet-stream');
+        }
+
         function filehandle2(e) {
             reader.readAsBinaryString(e.target.files[0])
         }
         var reader = new FileReader();
         reader.onload = function() {
             var res = reader.result
-            console.log(res)
-            var dataview = new DataView(res);
-            var ints = new Float64Array(res.byteLength / 8);
-            for (var i = 0; i < ints.length; i++) {
-                ints[i] = dataview.getFloat64(i * 8);
+            var buf = new ArrayBuffer(res.length)
+            var bufView = new Uint8Array(buf);
+            for (var i = 0; i < res.length; i++) {
+                bufView[i] = res.charCodeAt(i);
             }
-            console.log(ints)
+            var dv = new DataView(buf)
+            var k=0
+            var N = 21
+            snr.shapes=[]
+            for (var i = 0; i < res.length/8 / N; i++) {
+                var sh = []
+                for(var j=0;j<N;j++){
+                sh.push(dv.getFloat64(8*k,true))
+                 k++
+                }
+                snr.shapes.push(sh)
+            }
+            repaint()
+
         };
         function wheelhandle(e) {
             if (e.deltaY > 0) {
