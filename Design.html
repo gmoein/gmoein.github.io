@@ -104,7 +104,13 @@
         <div class="btn-group">
                 <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="document.getElementById('avatar').click()">عکس</i></button>
            
-            <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btndeltool()">حذف</i></button>
+                <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btndeltool()">حذف</i></button>
+
+                <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btnnextgallery()">قبلی</i></button>
+
+                <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btnpregallery()">بعدی</i></button>
+                <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btnsavegallery()">توسعه</i></button>
+                
             
         </div>
     </div>
@@ -1327,7 +1333,7 @@
                     repaint()
                     return
                 }
-                if (snr.shapes[currentIndex][0] != 1) {
+                if (snr.shapes[currentIndex][0] != N) {
                     currentIndex = snr.shapes.length
                     var pp = getStartPoint(currentIndex)
                     snr.shapes.push([1, pp[0] + 10, pp[1] + 10, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
@@ -1695,7 +1701,7 @@
         const comment = document.getElementById('comment');
         //command.addEventListener('keyup', updateValue);
         //range.addEventListener('input', updateRange);
-        document.addEventListener('keyup', keyhandle);
+        //document.addEventListener('keyup', keyhandle);
         document.getElementById('avatar').addEventListener('change', filehandle);
         document.getElementById('fileopenx').addEventListener('change', filehandle2);
        // document.getElementById('filesavex').addEventListener('change', filesavehandle);
@@ -1780,6 +1786,41 @@
             repaint()
 
         };
+
+        function btnnextgallery(){
+            galleryi++
+            if(galleryi>=gallery.length)galleryi=gallery.length-1
+            if(galleryi<0)galleryi=0
+            if(galleryi>=gallery.length)return
+            snr.shapes = gallery[galleryi]
+            repaint()
+        }
+        function btnpregallery(){
+            galleryi--
+            if(galleryi<0)galleryi=0
+            if(galleryi>=gallery.length)return
+            snr.shapes = gallery[galleryi]
+            repaint()
+        }
+        function btnsavegallery(){
+            var ss = "["
+            for(var i=0;i<snr.shapes.length;i++){
+                ss+="["
+                for(var j=0;j<snr.shapes[i].length;j++){
+                    if(j==snr.shapes[i].length-1)ss+=snr.shapes[i][j]
+                    else ss+=snr.shapes[i][j]+","
+                }
+                if(i==snr.shapes.length-1)ss+="]"
+                else ss+="],"
+            }
+            
+            ss+="]"
+            console.log(ss)
+        }
+        var galleryi=0
+var gallery =[]
+gallery.push([[1,27,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[3,27,10.432454100139857,-83,166,10.510800009539356,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[4,17.247432442100678,8.712597349119605,17.6456270183901,8.69112972547576,20.015935125338032,11.851540534739616,0,0,0,1,1,0.2,0.5,0.507035350657093,1,1000,1,0,0,0],[4,0.3839405633575649,5.80758654462537,8.296078374317732,9.349548644072364,11.061437832423628,5.135667565053837,0,0,0,1,1,0.6,0.5,0.5,1,1000,1,0,0,0],[4,0,0,-2.9475179607417905,0.24884735158817645,-0.9849490919930193,5.346866499390678,0,0,0,1,0,0,0,0,0,0,0,0,0,0]])
+gallery.push([[3,0,-1.2246467991473533e-15,0,360,10,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[1,-10,-1.2246467991473533e-15,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0]])
         function wheelhandle(e) {
             if (e.deltaY > 0) {
                 dsp.scale /= 1.04
@@ -1824,6 +1865,12 @@
                 // right arrow
             }
         }
+
+
+
+
+
+
         function bezier(t, p0, p1, p2, p3) {
             var cX = 3 * (p1.x - p0.x),
                 bX = 3 * (p2.x - p1.x) - cX,
