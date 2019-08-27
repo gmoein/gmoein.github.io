@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>رستافوم دیزاینر</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="jquery.min.js"></script>
+    <script src="popper.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    
+        <div id="main" dir="rtl">
+                <div class="container pt-1">
+                
+                        <select class="form-control" id="sel1" style="font-family:'B Yekan'" onchange="changefield()">
+                                <option style="font-family:'B Yekan'">کارشناسی مخابرات</option>
+                                <option style="font-family:'B Yekan'">کارشناسی کنترل</option>
+                                <option style="font-family:'B Yekan'">کارشناسی قدرت</option>
+                                <option style="font-family:'B Yekan'">کارشناسی ارشد</option>
+                            </select>
+        
+                            <select class="form-control" id="sel2" style="font-family:'B Yekan'" onchange="changefield()">
+                                    <option style="font-family:'B Yekan'">پیش نیاز (قرمز)-هم نیاز (زرد)</option>
+                                    <option style="font-family:'B Yekan'">سلسله مراتب</option>
+                                </select>
+                    
+                    </div>
+        </div>
+
+
+    <script>
+        var dict={}
+ $(document).ready(function() {cre(0)})
+ function cre(fld){
+     var les
+     if(fld==0){
+         les=comm
+     }
+     if(fld==1){
+         les=cont
+     }
+     if(fld==2){
+         les=pow
+     }
+     if(fld==3){
+         les=[]
+     }
+    var para = document.createElement("DIV")
+    para.classList.add("container")
+    para.classList.add("pt-1")
+    para.id="grad"
+    para.align="right"
+    document.getElementById("main").appendChild(para)
+    dict={}
+    for(var i=0;i<les.length;i++){
+        para = document.createElement("P")
+        para.innerHTML = "ترم "+ tart[i]
+        para.style="font-family:'B Yekan'"
+        para.dir="rtl"
+        document.getElementById("grad").appendChild(para)
+        para = document.createElement("DIV")
+        para.classList.add("btn-group")
+        para.classList.add("flex")
+        para.classList.add("flex-wrap")
+        var myid = "term_"+i
+        para.id=myid
+        document.getElementById("grad").appendChild(para)
+        for(var j=0;j<les[i].length;j++){
+            dict[les[i][j][1]]=[i,j,fld]
+            
+        para = document.createElement("BUTTON")
+        para.classList.add("btn")
+        para.classList.add("btn-outline-secondary")
+        para.innerHTML = les[i][j][1] +  " <span class='badge badge-"+colors[les[i][j][2]%colors.length] +"'>" + les[i][j][2] +"</span>" 
+        para.style="font-family:'B Yekan'"
+        para.dir="rtl"
+        para.title= "" 
+        para.id="BTN_"+i+"_"+j+"_"+fld
+        para.onclick=function() { btnclk(this.id) }
+        if(les[i][j][3].length>0)para.title+="پیش نیاز : " + les[i][j][3] 
+        if(les[i][j][4].length>0)para.title+="\n" + "هم نیاز : " + les[i][j][4]
+        document.getElementById(myid).appendChild(para);
+     }
+
+    }
+
+ }
+    function btnclk(id){
+        var term_less_field = id.split("_")
+        fld = term_less_field[3]
+        var les
+        if(fld==0){
+            les=comm
+        }
+        if(fld==1){
+            les=cont
+        }
+        if(fld==2){
+            les=pow
+        }
+        if(fld==3){
+            les=[]
+        }
+
+        var info = les[term_less_field[1]][term_less_field[2]]
+        if(document.getElementById("sel2").selectedIndex==0){
+            document.getElementById(id).classList.remove("btn-outline-secondary")
+            document.getElementById(id).classList.add("btn-primary")
+            for(var i=0;i<info[2].length;i++){
+                var id1="BTN_"+dict[info[2][i]][0]+"_"+dict[info[2][i]][1]+"_"+dict[info[2][i]][2]
+                document.getElementById(id1).classList.remove("btn-outline-secondary")
+                document.getElementById(id1).classList.add("btn-warning")
+
+            }
+            for(var i=0;i<info[3].length;i++){
+                var id1="BTN_"+dict[info[3][i]][0]+"_"+dict[info[3][i]][1]+"_"+dict[info[3][i]][2]
+                document.getElementById(id1).classList.remove("btn-outline-secondary")
+                document.getElementById(id1).classList.add("btn-danger")
+            }
+        }else{
+
+        }
+    }
+    function changefield(){
+        var i = document.getElementById("sel1").selectedIndex
+        document.getElementById("grad").remove()
+        cre(i)
+    }
+
+    var colors=["primary","secondary","success","danger","warning","info"]
+var tart =["اول","دوم","سوم","چهارم","پنجم","ششم","ترم تابستان","هفتم","هشتم","نهم","دهم"]
+var common=[
+    [
+        [1,"ریاضی عمومی 1",3,[],[]],
+        [1,"فیزیک 1",3,[],[]],
+        [1,"زبان انگلیسی",3,[],[]],
+        [1,"درس عمومی",2,[],[]],
+        [1,"نقشه‌کشی مهندسی",1,[],[]],
+        [1,"تربیت بدنی 1",1,[],[]],
+        [1,"کارگاه عمومی",1,[],[]],
+        [1,"آزمایشگاه فیزیک 1",1,[],["فیزیک 1"]],
+        [2,"مهارت های زندگی",2,[],[],"واحد مازاد"]
+    ],
+    [
+        [1,"ریاضی عمومی 2",3,["ریاضی عمومی 1"],[]],
+        [1,"فیزیک 2",3,["فیزیک 1"],[]],
+        [1,"معادلات دیفرانسیل",3,["ریاضی عمومی 2"],[]],
+        [1,"درس عمومی",2,[],[]],
+        [1,"آشنایی با مهندسی برق",1,[],[]],
+        [1,"تربیت بدنی 2",1,[],[]],
+        [1,"آزمایشگاه فیزیک 2",1,[],["فیزیک 2"]]
+    ],
+    [
+        [1,"احتمال مهندسی",3,["ریاضی عمومی 2"],[]],
+        [1,"ریاضی مهندسی",3,["ریاضی عمومی 2","معادلات دیفرانسیل"],[]],
+        [1,"مدارهای الکتریکی",3,[],["فیزیک 2","معادلات دیفرانسیل"]],
+        [1,"الکترومغناطیس",3,["فیزیک 2","ریاضی عمومی 2"],[]],
+        [1,"کارگاه برق",1,["کارگاه عمومی"],[]],
+        [1,"درس عمومی",2,[],[]],
+        [1,"زبان فارسی",3,[],[]]
+    ],
+    [
+    [1,"مدارهای الکتریکی 2",2,	"مدارهای الکتریکی 1",[],[]],
+    [1,"سیگنال ها و  سیستم ها",3,"ریاضیات مهندسی",[],[]],
+    [1,"الکترونیک 1",2,"مدارهای الکتریکی 1",[],[]],
+    [1,"ماشین‌های الکتریکی 1",2,"مدارهای الکتریکی 1","الکترومغناطیس",[],[]],
+    [1,"سیستم های دیجیتال 1",3,"الکترونیک 1",[],[]],
+    [1,"محاسبات عددی",2,"ریاضی عمومی 2", "برنامه نویسی",[],[]],
+    [1,"درس عمومی",2,[],[]],
+    [1,"آز مدارهای الکتریکی و اندازه گیری",1,"مدارهای الکتریکی 1",[],[]],
+    [1,"آز سیستم‌های دیجیتال 1",1,"سیستم‌های دیجیتال 1",[],[]],
+    [1,"زبان تخصصی برق",2,"زبان انگلیسی",[],[]]
+    ],
+    [
+    [1,"سیستم‌های کنترل خطی",3,	"سیگنال ها و سیستم ها","مدار های الکتریکی 2",[],[]],
+    [1,"الکترونیک 2",2,"الکترونیک 1",[],[]],
+    [1,"ماشین‌های الکتریکی 2",2,"ماشین‌های الکتریکی 1",[],[]],
+    [1,"اصول سیستم های مخابراتی",3,"سیگنال ها و سیستم ها","احتمال مهندسی",[],[]],
+    [1,"تحلیل سیستم های انرژی  الکتریکی1",3,"ماشین‌های الکتریکی 2",[],[]],
+    [1,"دانش خانواده و جمعیت",2,[],[]],
+    [1,"آز ماشین‌های الکتریکی 1",1,"ماشین‌های الکتریکی 1",[],[]],
+    [1,"آزمایشگاه الکترونیک 	1",1,"آز مدارهای الکتریکی و اندازه گیری","الکترونیک 2",[],[]]
+    ]
+]
+var comm=[
+common[0],
+common[1],
+common[2],
+common[3],
+common[4],
+    [
+    [1,"سیستم های دیجیتال 2",3,"سیستم های دیجیتال 1",[],[]],
+    [1,"تخصصی اختیاری(1)",3,[],[]],
+    [1,"میدان ها و امواج",3,"الکترومغناطیس",[],[]],
+    [1,"پردازش و سیگنال",3, "سیگنال و سیستم",[],[]],
+    [1,"تخصصی انتخابی(1)",3,[],[]],
+    [1,"آزسیستم‌های کنترل خطی",1,["سیستم‌های کنترل خطی"],[]],
+    [1,"آز سیستم های دیجیتال 2",1,"آز سیستم های دیجیتال 1","سیستم های دیجیتال 2",[],[]],
+    [1,"درس عمومی",2,[],[]]
+    ],
+    [
+    [3,"کارآموزی",2,"گذراندن حداقل 100 واحد",[],[]]
+    ],
+    [
+    [1,"ریز موج و آنتن",3,"میدان و امواج",[],[]],
+    [1,"مخابرات دیجیتال",3,"اصول سیستم های مخابراتی",[],[]],
+    [1,"مدارهای مخابراتی",3,"الکترونیک /مخابرات",[],[]],
+    [1,"تخصصی انتخابی(2)",3,[],[]],
+    [1,"تخصصی اختیاری(2)",3,[],[]],
+    [1,"آزمایشگاه* (1)",1,[],[]],
+    [1,"درس عمومی",2,[],[]]
+    ],
+    [
+    [1,"اقتصاد مهندسی",3,[],[]],
+    [1,"اختیاری (3)",3,[],[]],
+    [1,"اختیاری (4)",3,[],[]],
+    [1,"پروژه کارشناسی",3,"گذراندن حداقل 100 واحد",[],[]],
+    [1,"آزمایشگاه* (2)",1,[],[]],
+    [1,"آزمایشگاه* (3)",1,[],[]]
+    ]
+    ]
+var cont=[
+common[0],
+common[1],
+common[2],
+common[3],
+common[4],
+[
+    [1,"سیستم های دیجیتال 2",3,"سیستم های دیجیتال 1",[],[]],
+    [1,"سیستم های کنترل دیجیتال",3,["سیستم های کنترل خطی"],[]],
+    [1,"جبر خطی",3,"ریاضی عمومی 2",[],[]],
+    [1,"سیستم های کنترل مدرن",3, "سیستم های کنترل خطی	جبر خطی",[],[]],
+    [1,"تخصصی انتخابی(1)",3,[],[]],
+    [1,"آزسیستم‌های کنترل خطی",1,["سیستم‌های کنترل خطی"],[]],
+    [1,"آز سیستم های دیجیتال 2",1,"آز سیستم های دیجیتال 1","سیستم های دیجیتال 2",[],[]],
+    [1,"درس عمومی",2,[],[]]
+    ],
+    [
+    [3,"کارآموزی",2,"گذراندن حداقل 100 واحد",[],[]]
+    ],
+    [
+    [1,"کنترل صنعتی",3,["سیستم های کنترل خطی"],[]],
+    [1,"ابزار دقیق",3,["سیستم های کنترل خطی"],[]],
+    [1,"تخصصی انتخابی(2)",3,[],[]],
+    [1,"اختیاری (1)" ,3,[],[]],
+    [1,"اختیاری (2)" ,3,[],[]],
+    [1,"آزمایشگاه* (1)",1,[],[]],
+    [1,"درس عمومی",2,[],[]]
+    ],
+    [
+    [1,"اقتصاد مهندسی",3,[],[]],
+    [1,"اختیاری (3)",3,[],[]],
+    [1,"اختیاری (4)",3,[],[]],
+    [1,"پروژه کارشناسی",3,"گذراندن حداقل 100 واحد",[],[]],
+    [1,"آزمایشگاه* (2)",1,[],[]],
+    [1,"آزمایشگاه* (3)",1,[],[]]
+    ]
+    ]
+var pow=[
+common[0],
+common[1],
+common[2],
+common[3],
+common[4],
+    [
+    [1,"الکترونیک صنعتی",3,"الکترونیک 2","ماشین‌های الکتریکی 2",[],[]],
+    [1,"ماشین های الکتریکی 3",3,"ماشین‌های الکتریکی 2",[],[]],
+    [1,"تاسیسات الکتریکی",3,"تحلیل سیستم های انرژی", "الکتریکی1",[],[]],
+    [1,"آز سیستم های دیجیتال 2",1, "آز سیستم‌های دیجیتال 1","سیستم های دیجیتال 2",[],[]],
+    [1,"آزسیستم‌های کنترل خطی",1,"سیستم‌های کنترل خطی",[],[]],
+    [1,"آزمایشگاه* (1)",1,[],[]],
+    [1,"تحلیل سیستم های انرژی الکتریکی 2",3,"تحلیل سیستم های انرژی","الکتریکی1",[],[]],
+    [1,"درس عمومی",2,[],[]]
+    ],
+    [
+    [3,"کارآموزی",2,"گذراندن حداقل 100 واحد",[],[]]
+    ],
+    [
+    [1,"تخصصی انتخابی(1)",3,[],[]],
+    [1,"تخصصی انتخابی(2)",3,[],[]],
+    [1,"سیستم های دیجیتال 2",3,"سیستم های دیجیتال 1",[],[]],
+    [1,"اختیاری (1)" ,3,[],[]],
+    [1,"اقتصاد مهندسی",3,[],[]],
+    [1,"درس عمومی",2,[],[]]
+    ],
+    [
+    [1,"اختیاری (2)",3,[],[]],
+    [1,"اختیاری (3)",3,[],[]],
+    [1,"اختیاری (4)",3,[],[]],
+    [1,"حفاظت و رله",3,"تحلیل سیستم های انرژی الکتریکی 2",[],[]],
+    [1,"پروژه کارشناسی",3,"گذراندن حداقل 100 واحد",[],[]],
+    [1,"آزمایشگاه* (2)",1,[],[]],
+    [1,"آزمایشگاه* (3)",1,[],[]]
+    ]
+    ]
+    </script>
+
+</body>
+
+</html>
