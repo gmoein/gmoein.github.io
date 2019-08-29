@@ -50,58 +50,18 @@
 
 <body>
     <div class="container pt-1">
-        <div class="btn-group">
+        <div class="btn-group flex flex-wrap">
             <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="document.getElementById('fileopenx').click()">فایل</i></button>
             <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="filesavehandle()">ذخیره</i></button>
             <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="filedownload()">خروجی</i></button>
             <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'"  data-toggle="modal" data-target="#exampleModal">تنظیمات</button>
-            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-            <ul class="dropdown-menu p-2" role="menu">
-                <li>
-                    <p style="font-family:'B Yekan'" id="paramoption">ایجاد</p>
-                </li>
-                <li>
-                    <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan';width: 100%;" onclick="linecheck(1)"> ایجاد </label>
-                </li>
-                <li>
-                    <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan';width: 100%" onclick="linecheck(2)"> تغییر پارامتر اول </label>
-                </li>
-                <li>
-                    <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan';width: 100%" onclick="linecheck(3)"> تغییر پارامتر دوم </label>
-                </li>
-                <li>
-                    <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan';width: 100%" onclick="linecheck(4)"> تغییر پارامتر سوم </label>
-                </li>
-                <li>
-                    <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan';width: 100%" onclick="linecheck(5)"> تغییر پارامتر چهارم </label>
-                </li>
-                <li>
-                    <input type="text" class="form-control">
-                </li>
-                <li>
-                    <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan';width: 100%;" onclick="linecheck(10)"> اعمال </label>
-                </li>
-
-            </ul>
-        </div>
-    </div>
-    <div class="container pt-1">
-        <div class="btn-group">
-            <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'" onclick="btnshapetool(1)">خط
-            </button>
-
-            <!--button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'" onclick="btnshapetool(2)">دایره</button-->
+            <div style="border-left: 6px solid;height: 100%;"></div>
+            <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'" onclick="btnshapetool(1)">خط</button>
             <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'" onclick="btnshapetool(3)">کمان</button>
             <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'" onclick="btnshapetool(4)">بازیر</button>
             <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'" onclick="btnshapetool(5)">موج</button>
             <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'" onclick="btnshapetool(6)">چین</button>
-
-
-        </div>
-    </div>
-    
-    <div class="container pt-1">
-        <div class="btn-group">
+            <div style="border-left: 6px solid;height: 100%;"></div>
                 <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="document.getElementById('avatar').click()">عکس</i></button>
            
                 <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btndeltool()">حذف</i></button>
@@ -110,21 +70,12 @@
 
                 <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btnpregallery()">بعدی</i></button>
                 <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btnsavegallery()">توسعه</i></button>
-                
-            
-        </div>
-    </div>
-    <div class="container pt-1">
-        <div class="btn-group">
+                <div style="border-left: 6px solid;height: 100%;"></div>
             <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'"onclick="btnselback()">عقب</i></button>
             <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btnselfw()">جلو</i></button>
              <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btnzintool()">زوم</i></button>
             <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btnzouttool()">کوچک کردن</i></button>
-
-        </div>
-    </div>
-    <div class="container pt-1">
-        <div class="btn-group">
+            <div style="border-left: 6px solid;height: 100%;"></div>
             <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btnpantool(1)">چپ
             </button>
             <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btnpantool(2)">راست
@@ -135,11 +86,11 @@
             </button>
             <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btnpantool(5)">ریست
             </button>
-        </div>
-    </div>
-    <div class="container pt-1">
-        <div class="btn-group">
-                <select class="form-control"  style="font-family:'B Yekan'" id="sel2">
+            <div style="border-left: 6px solid;height: 100%;"></div>
+            <button type="button" class="btn btn-outline-secondary"  style="font-family:'B Yekan'" data-toggle="modal" data-target="#myModal">تنظیمات اسلایدر</button>
+            <div style="border-left: 6px solid;height: 100%;"></div>
+            <div class="flex flex-wrap">
+                <select style="font-family:'B Yekan'" id="sel2">
                     <option style="font-family:'B Yekan'">جابجایی</option>
                     <option style="font-family:'B Yekan'">تغییر پارامتر 1</option>
                     <option style="font-family:'B Yekan'">تغییر پارامتر 2</option>
@@ -149,16 +100,20 @@
                     <option style="font-family:'B Yekan'">جابجایی عکس</option>
                     <option style="font-family:'B Yekan'">زوم عکس</option>
                 </select>
+                <select style="font-family:'B Yekan'" id="selCNC">
+                    <option style="font-family:'B Yekan'">سی ان سی اسفنج</option>
+                    <option style="font-family:'B Yekan'">سی ان سی برش پروفیل</option>
+                </select>
+            </div>
             </div>
         </div>
     <div class="container pt-1">
         <div class="row">
-            <div class="col-11">
+            <div class="col-12">
                 <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="myRange" oninput="rangechange()">
             </div>
-            <div class="col-1">
-                <button type="button" class="btn btn-outline-secondary"  style="font-family:'B Yekan'" data-toggle="modal" data-target="#myModal">تنظیمات</button>
-            </div>
+                
+            
         </div>
 
     </div>
@@ -1893,8 +1848,8 @@ gallery.push([[1,3.431693005628722,-0.004328861368970399,0,0,0,0,0,0,0,1,0,0,0,0
         }
         , true)
     var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
-    //var camera = new THREE.OrthographicCamera( -5,5, -5,5, -5,5, )
+    //var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+    var camera = new THREE.OrthographicCamera( window.innerWidth / - 50, window.innerWidth / 50, window.innerHeight / 50, window.innerHeight / -50, - 500, 1000); 
 
     var renderer = new THREE.WebGLRenderer();
     renderer.setClearColor(0xffffff, 1);
@@ -1905,8 +1860,8 @@ gallery.push([[1,3.431693005628722,-0.004328861368970399,0,0,0,0,0,0,0,1,0,0,0,0
     //var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
     //var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 , wireframe:true} );
     var texture = new THREE.TextureLoader().load( "https://gmoein.github.io/images/foam.png" );
-    var material = new THREE.MeshBasicMaterial( { map: texture,side:THREE.DoubleSide } );
-    //var material = new THREE.MeshLambertMaterial( { map: texture,side:THREE.DoubleSide } );
+    //var material = new THREE.MeshBasicMaterial( { map: texture,side:THREE.DoubleSide } );
+    var material = new THREE.MeshLambertMaterial( { map: texture,side:THREE.DoubleSide } );
     //var material = new THREE.MeshPhongMaterial( { map: texture,side:THREE.DoubleSide } );
     // var cube = new THREE.Mesh( geometry, material );
     // var geometry2 = new THREE.Geometry();
@@ -1918,17 +1873,18 @@ gallery.push([[1,3.431693005628722,-0.004328861368970399,0,0,0,0,0,0,0,1,0,0,0,0
     // scene.add( line);
 
     camera.position.z = 5;
+    camera.position.y = 1;
 
     controls = new THREE.OrbitControls(camera,renderer.domElement)
 
     createGeo()
     var amL = new THREE.AmbientLight(0xFFFFFF,2.0)
-    //scene.add(amL)
+    scene.add(amL)
     var animate = function () {
-      requestAnimationFrame( animate );
-      //  cube.rotation.x += 0.01;
-       // cube.rotation.y += 0.01;
-
+         requestAnimationFrame( animate );
+         var d = new Date();
+        var n = d.getTime()
+        amL.intensity=2+1*Math.sin(n/1000)
         renderer.render( scene, camera );
     };
 
@@ -1939,8 +1895,8 @@ gallery.push([[1,3.431693005628722,-0.004328861368970399,0,0,0,0,0,0,0,1,0,0,0,0
     }
 
     var mesh
-        var scale3d = .04
-        var Lfoam = 2
+        var scale3d = .4
+        var Lfoam = 15
     function createGeo(){
         var geom = new THREE.Geometry();
         var k=0
