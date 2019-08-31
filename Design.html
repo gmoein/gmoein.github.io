@@ -87,7 +87,9 @@
             <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="btnpantool(5)">ریست
             </button>
             <div style="border-left: 6px solid;height: 100%;"></div>
+            
             <button type="button" class="btn btn-outline-secondary"  style="font-family:'B Yekan'" data-toggle="modal" data-target="#myModal">تنظیمات اسلایدر</button>
+            <button type="button" class="btn btn-outline-secondary"  style="font-family:'B Yekan'" data-toggle="modal" data-target="#myModalcncPipe">پروفیل</button>
             <div style="border-left: 6px solid;height: 100%;"></div>
             <div class="flex flex-wrap">
                 <select style="font-family:'B Yekan';height: 100%" id="sel2">
@@ -397,18 +399,475 @@
             </div>
         </div>
     </div>
+    
+
+    
+    <div class="modal fade" id="myModalcncPipe" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="background-color: rgba(255, 255, 255, .1)">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-family:'B Yekan'">سی ان سی برش پروفیل</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="font-family:'B Yekan'">
+                    <div class="form-group" style="font-family:'B Yekan'">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">زاویه xy</label>
+                        <input type="text" class="form-control" id="pipe_txy_text" value="0">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="pipe_txy_slider" oninput="pipe(10)">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">زاویه z</label>
+                        <input type="text" class="form-control" id="pipe_tz_text" value="0">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="pipe_tz_slider" oninput="pipe(11)">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">طول قطعه</label>
+                        <input type="text" class="form-control" id="pipe_L_text" value="0">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="pipe_L_slider" oninput="pipe(12)">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">x0</label>
+                        <input type="text" class="form-control" id="pipe_x0_text" value="0">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="pipe_x0_slider" oninput="pipe(13)">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">y0</label>
+                        <input type="text" class="form-control" id="pipe_y0_text" value="0">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="pipe_y0_slider" oninput="pipe(14)">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">z0</label>
+                        <input type="text" class="form-control" id="pipe_z0_text" value="0">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="pipe_z0_slider" oninput="pipe(15)">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">ضخامت</label>
+                        <input type="text" class="form-control" id="pipe_T_text" value="0">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="pipe_T_slider" oninput="pipe(16)">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">نوع سطح مقطع درونی</label>
+                        <input type="text" class="form-control" id="pipe_inT_text" value="0">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="pipe_inT_slider" oninput="pipe(17)">
+                        <label for="recipient-name" class="col-form-label" style="font-family:'B Yekan'">جابجایی</label>
+                        <input type="text" class="form-control" id="pipe_Move_text" value="0">
+                        <input type="range" width="100%" min="1" max="100" value="50" class="slider" id="pipe_Move_slider" oninput="pipe(18)">
+                        
+                    </div>
+                </div>
+                <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="pipe(3)" style="font-family:'B Yekan'">پاک کردن قطعه</button>
+                        <button type="button" class="btn btn-secondary" onclick="pipe(0)" style="font-family:'B Yekan'">قطعه جدید</button>
+                        <button type="button" class="btn btn-secondary" onclick="pipe(1)" style="font-family:'B Yekan'">سطح مقطع بیرونی</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-family:'B Yekan'">بستن</button>
+                    <button type="button" class="btn btn-primary" style="font-family:'B Yekan'" onclick="pipe(2)">تایید</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        AllPipes = []
+        AllPipes_i = 0
+        //CNCType
+    function pipe(O){
+        if(O==0){//قطعه جدید
+            AllPipes.push([[],0,0,0,0,0,0,0,0,0,0,0,0,0,0])
+            AllPipes_i=AllPipes.length-1
+        }
+        if(O==1){//سطح مقطع بیرونی
+            if(AllPipes_i<AllPipes.length){
+                AllPipes[AllPipes_i][0]=[]
+                for(var i=0;i<snr.shapes.length;i++){
+                    var x = []
+                    for(var j=0;j<snr.shapes[i].length;j++){
+                        x.push(snr.shapes[i][j])
+                    }
+                    AllPipes[AllPipes_i][0].push(x)
+                }
+            }
+        }
+        if(O==2){//تایید
+            
+        }
+        if(O==3){//پاک
+            AllPipes.splice(AllPipes_i, 1)
+            AllPipes_i=AllPipes.length-1
+        }
+        if(O==10){//Az
+            document.getElementById('pipe_txy_text').value = (document.getElementById('pipe_txy_slider').value-1) * 360/99
+        }
+        if(O==11){//El
+            document.getElementById('pipe_tz_text').value = (document.getElementById('pipe_tz_slider').value-1) * 360/99
+            
+        }
+        if(O==12){//L
+            document.getElementById('pipe_L_text').value = (document.getElementById('pipe_L_slider').value) * sliderOptionScaler
+        }
+        if(O==13){//X0
+            document.getElementById('pipe_x0_text').value = (document.getElementById('pipe_x0_slider').value) * sliderOptionScaler
+            
+        }
+        if(O==14){//Y0
+            document.getElementById('pipe_y0_text').value = (document.getElementById('pipe_y0_slider').value) * sliderOptionScaler
+            
+        }
+        if(O==15){//Z0
+            document.getElementById('pipe_z0_text').value = (document.getElementById('pipe_z0_slider').value) * sliderOptionScaler
+            
+        }
+        if(O==16){//ضخامت
+            document.getElementById('pipe_T_text').value = (document.getElementById('pipe_T_slider').value) * sliderOptionScaler/50
+            
+        }
+        if(O==17){//نوع سطح مقطع درونی
+            
+        }
+        if(O==18){//Move
+            if(document.getElementById('pipe_Move_slider').value>50){
+                AllPipes_i++
+            }else{
+                AllPipes_i--
+            }
+            if(AllPipes_i>=AllPipes.length-1)AllPipes_i=AllPipes.length-1
+            if(AllPipes_i<0)AllPipes_i=0
+            document.getElementById('pipe_Move_text').value = AllPipes_i
+            repaintpipe()
+            return
+
+        }
+        if(AllPipes.length>0){
+            if(AllPipes_i>=0){
+                if(AllPipes_i<AllPipes.length){
+                    AllPipes[AllPipes_i][1]=parseFloat(document.getElementById('pipe_txy_text').value)
+                    AllPipes[AllPipes_i][2]=parseFloat(document.getElementById('pipe_tz_text').value)
+                    AllPipes[AllPipes_i][3]=parseFloat(document.getElementById('pipe_L_text').value)
+                    AllPipes[AllPipes_i][4]=parseFloat(document.getElementById('pipe_x0_text').value)
+                    AllPipes[AllPipes_i][5]=parseFloat(document.getElementById('pipe_y0_text').value)
+                    AllPipes[AllPipes_i][6]=parseFloat(document.getElementById('pipe_z0_text').value)
+                    AllPipes[AllPipes_i][7]=parseFloat(document.getElementById('pipe_T_text').value)
+                    AllPipes[AllPipes_i][8]=parseFloat(document.getElementById('pipe_inT_text').value)
+                }
+            }
+        }
+        repaintpipe()
+    }
+    function repaintpipe(){
+        var k=0
+        var geom = new THREE.Geometry()
+        for (var i = 0; i < AllPipes.length; i++) {
+            var onePipe = AllPipes[i]
+            var pn = getPoints(onePipe[0])
+            var az = onePipe[1]*Math.PI/180
+            var el = onePipe[2]*Math.PI/180
+            var L = onePipe[3]
+            var x0 = onePipe[4]
+            var y0 = onePipe[5]
+            var z0 = onePipe[6]
+            var T = onePipe[7]
+            var pn3D=[]
+            var pn3DL=[]
+            var pn3D2=[]
+            var pn3DL2=[]
+            var ang=[]
+            for (var j = 0; j < pn.length-1; j++) {
+                
+                if(norm(pn[j],pn[j+1])<1e-6){
+                    if(ang.length>0)
+                        ang.push(ang[ang.length-1])
+                    else
+                        ang.push(0)
+                }else{
+                    ang.push(Math.atan2(pn[j+1][1]-pn[j][1],pn[j+1][0]-pn[j][0]))
+                }
+                
+            }
+            if(pn.length>0)ang.push(ang[ang.length-1])
+            for (var j = 0; j < pn.length; j++) {
+                N = [pn[j][0],pn[j][1],0]
+                N=rotate(N,az,el,0)
+                N[0]+=x0
+                N[1]+=y0
+                N[2]+=z0
+                pn3D.push(N)
+                N = [pn[j][0],pn[j][1],L]
+                N=rotate(N,az,el,0)
+                N[0]+=x0
+                N[1]+=y0
+                N[2]+=z0
+                pn3DL.push(N)
+
+                N = [pn[j][0],pn[j][1],0]
+                N = moveDistanceDirection(N, T, ang[j] + Math.PI / 2)
+                N=[N[0],N[1],0]
+                N=rotate(N,az,el,0)
+                N[0]+=x0
+                N[1]+=y0
+                N[2]+=z0
+                pn3D2.push(N)
+                
+                N2 = [pn[j][0],pn[j][1],0]
+                N2 = moveDistanceDirection(N2, T, ang[j] + Math.PI / 2)
+                N2=[N2[0],N2[1],L]
+                N2=rotate(N2,az,el,0)
+                N2[0]+=x0
+                N2[1]+=y0
+                N2[2]+=z0
+                pn3DL2.push(N2)
+            }
+            for (var j = 0; j < pn3D.length-1; j++) {
+                var z = .6
+                var zn = .2
+                geom.vertices.push(new THREE.Vector3(scale3d*pn3D[j][0],scale3d*pn3D[j][1],scale3d*pn3D[j][2]))
+                geom.vertices.push(new THREE.Vector3(scale3d*pn3DL[j][0],scale3d*pn3DL[j][1],scale3d*pn3DL[j][2]))
+                geom.vertices.push(new THREE.Vector3(scale3d*pn3D[j+1][0],scale3d*pn3D[j+1][1],scale3d*pn3D[j+1][2]))
+                if(AllPipes_i==i){
+                    geom.faceVertexUvs[0].push([new THREE.Vector2(z,.5),new THREE.Vector2(z,1),new THREE.Vector2(zn,.5)])
+                }
+                else{
+                    geom.faceVertexUvs[0].push([new THREE.Vector2(z,0),new THREE.Vector2(z,.5),new THREE.Vector2(zn,0)])
+                }
+                geom.faces.push( new THREE.Face3( k, k+1, k+2 ) );k+=3
+                geom.vertices.push(new THREE.Vector3(scale3d*pn3DL[j+1][0],scale3d*pn3DL[j+1][1],scale3d*pn3DL[j+1][2]))
+                geom.vertices.push(new THREE.Vector3(scale3d*pn3D[j+1][0],scale3d*pn3D[j+1][1],scale3d*pn3D[j+1][2]))
+                geom.vertices.push(new THREE.Vector3(scale3d*pn3DL[j][0],scale3d*pn3DL[j][1],scale3d*pn3DL[j][2]))
+                if(AllPipes_i==i){
+                    geom.faceVertexUvs[0].push([new THREE.Vector2(zn,1),new THREE.Vector2(zn,0.5),new THREE.Vector2(z,1)])
+                }
+                else{
+                    geom.faceVertexUvs[0].push([new THREE.Vector2(zn,.5),new THREE.Vector2(zn,0),new THREE.Vector2(z,.5)])
+                }
+                geom.faces.push( new THREE.Face3( k, k+1, k+2 ) );k+=3
+            }
+            for (var j = 0; j < pn3D.length-1; j++) {
+                z = .9
+                zn = .7
+                geom.vertices.push(new THREE.Vector3(scale3d*pn3D2[j][0],scale3d*pn3D2[j][1],scale3d*pn3D2[j][2]))
+                geom.vertices.push(new THREE.Vector3(scale3d*pn3DL2[j][0],scale3d*pn3DL2[j][1],scale3d*pn3DL2[j][2]))
+                geom.vertices.push(new THREE.Vector3(scale3d*pn3D2[j+1][0],scale3d*pn3D2[j+1][1],scale3d*pn3D2[j+1][2]))
+                if(AllPipes_i==i){
+                    geom.faceVertexUvs[0].push([new THREE.Vector2(z,.5),new THREE.Vector2(z,1),new THREE.Vector2(zn,.5)])
+                }
+                else{
+                    geom.faceVertexUvs[0].push([new THREE.Vector2(z,0),new THREE.Vector2(z,.5),new THREE.Vector2(zn,0)])
+                }
+                geom.faces.push( new THREE.Face3( k, k+1, k+2 ) );k+=3
+                geom.vertices.push(new THREE.Vector3(scale3d*pn3DL2[j+1][0],scale3d*pn3DL2[j+1][1],scale3d*pn3DL2[j+1][2]))
+                geom.vertices.push(new THREE.Vector3(scale3d*pn3D2[j+1][0],scale3d*pn3D2[j+1][1],scale3d*pn3D2[j+1][2]))
+                geom.vertices.push(new THREE.Vector3(scale3d*pn3DL2[j][0],scale3d*pn3DL2[j][1],scale3d*pn3DL2[j][2]))
+                if(AllPipes_i==i){
+                    geom.faceVertexUvs[0].push([new THREE.Vector2(zn,1),new THREE.Vector2(zn,0.5),new THREE.Vector2(z,1)])
+                }
+                else{
+                    geom.faceVertexUvs[0].push([new THREE.Vector2(zn,.5),new THREE.Vector2(zn,0),new THREE.Vector2(z,.5)])
+                }
+                geom.faces.push( new THREE.Face3( k, k+1, k+2 ) );k+=3
+            }
+        }
+        geom.computeBoundingSphere();
+        mesh.geometry.dispose();
+        mesh.material.dispose();
+        scene.remove(mesh)
+        mesh = new THREE.Mesh( geom, material );
+        scene.add(mesh)
+    }
+function vec3diff(a,b){
+    return [a[0]-b[0],a[1]-b[1],a[2]-b[2]]
+}
+function dot(a,b){
+    return a[0]*b[0]+a[1]*b[1]+a[2]*b[2]
+}
+function norm(p0, p1) {
+    return Math.sqrt((p1[0] - p0[0]) * (p1[0] - p0[0]) + (p1[1] - p0[1]) * (p1[1] - p0[1]))
+}
+function norm3D(p0) {
+    return Math.sqrt(p0[0]*p0[0]+p0[1]*p0[1]+p0[2]*p0[2])
+}
+function normxy(p0, p1) {
+    return Math.sqrt((p1.x - p0.x) * (p1.x - p0.x) + (p1.y - p0.y) * (p1.y - p0.y))
+}
+function moveDistanceDirection(Point, d, a) {
+    return [Point[0] + d * Math.cos(a), Point[1] + d * Math.sin(a)]
+}
+
+var SMALL_NUM = 1e-10
+function dist3D_Line_to_Line( L1P0,L1P1,L2P0,L2P1)
+{
+    u = vec3diff(L1P1 , L1P0)
+    v = vec3diff(L2P1 , L2P0)
+    w = vec3diff(L1P0 , L2P0)
+    a = dot(u,u);         // always >= 0
+    b = dot(u,v);
+    c = dot(v,v);         // always >= 0
+    d = dot(u,w);
+    e = dot(v,w);
+    D = a*c - b*b;        // always >= 0
+    var sc, tc;
+
+    // compute the line parameters of the two closest points
+    if (D < SMALL_NUM) {          // the lines are almost parallel
+        sc = 0.0;
+        if(b>c)tc=d/b
+        else tc=e/c
+    }
+    else {
+        sc = (b*e - c*d) / D;
+        tc = (a*e - b*d) / D;
+    }
+
+    // get the difference of the two closest points
+    dP = [w[0] + (sc * u[0]) - (tc * v[0]),w[1] + (sc * u[1]) - (tc * v[1]),w[2] + (sc * u[2]) - (tc * v[2])]  // =  L1(sc) - L2(tc)
+
+    return norm3D(dP);   // return the closest distance
+}
+//===================================================================
+
+// dist3D_Segment_to_Segment(): get the 3D minimum distance between 2 segments
+//    Input:  two 3D line segments S1 and S2
+//    Return: the shortest distance between S1 and S2
+function dist3D_Segment_to_Segment(S1P0,S1P1,S2P0,S2P1)
+{
+    u = vec3diff(S1P1 , S1P0)
+    v = vec3diff(S2P1 , S2P0)
+    w = vec3diff(S1P0 , S2P0)
+    a = dot(u,u);         // always >= 0
+    b = dot(u,v);
+    c = dot(v,v);         // always >= 0
+    d = dot(u,w);
+    e = dot(v,w);
+    D = a*c - b*b;        // always >= 0
+    sc=D;sN=D;sD = D;       // sc = sN / sD, default sD = D >= 0
+    tc=D;tN=D;tD = D;       // tc = tN / tD, default tD = D >= 0
+
+    // compute the line parameters of the two closest points
+    if (D < SMALL_NUM) { // the lines are almost parallel
+        sN = 0.0;         // force using point P0 on segment S1
+        sD = 1.0;         // to prevent possible division by 0.0 later
+        tN = e;
+        tD = c;
+    }
+    else {                 // get the closest points on the infinite lines
+        sN = (b*e - c*d);
+        tN = (a*e - b*d);
+        if (sN < 0.0) {        // sc < 0 => the s=0 edge is visible
+            sN = 0.0;
+            tN = e;
+            tD = c;
+        }
+        else if (sN > sD) {  // sc > 1  => the s=1 edge is visible
+            sN = sD;
+            tN = e + b;
+            tD = c;
+        }
+    }
+
+    if (tN < 0.0) {            // tc < 0 => the t=0 edge is visible
+        tN = 0.0;
+        // recompute sc for this edge
+        if (-d < 0.0)
+            sN = 0.0;
+        else if (-d > a)
+            sN = sD;
+        else {
+            sN = -d;
+            sD = a;
+        }
+    }
+    else if (tN > tD) {      // tc > 1  => the t=1 edge is visible
+        tN = tD;
+        // recompute sc for this edge
+        if ((-d + b) < 0.0)
+            sN = 0;
+        else if ((-d + b) > a)
+            sN = sD;
+        else {
+            sN = (-d +  b);
+            sD = a;
+        }
+    }
+    // finally do the division to get sc and tc
+    if(Math.abs(sN) < SMALL_NUM){
+        sc = 0
+    tc = 0
+
+    }else{
+        sc =  sN / sD
+        tc =  tN / tD
+    }
+    
+    // get the difference of the two closest points
+    dP = [w[0] + (sc * u[0]) - (tc * v[0]),w[1] + (sc * u[1]) - (tc * v[1]),w[2] + (sc * u[2]) - (tc * v[2])]  // =  L1(sc) - L2(tc)
+    return norm3D(dP);   // return the closest distance
+}
+//===================================================================
+
+
+// cpa_time(): compute the time of CPA for two tracks
+//    Input:  two tracks Tr1 and Tr2
+//    Return: the time at which the two tracks are closest
+function cpa_time( Tr1v, Tr2v,Tr1P0, Tr2P0 )
+{
+    dv = vec3diff(Tr1v, Tr2v)
+    dv2 = dot(dv,dv)
+    if (dv2 < SMALL_NUM)      // the  tracks are almost parallel
+        return 0.0;             // any time is ok.  Use time 0.
+
+    w0 = vec3diff(Tr1P0, Tr2P0)
+    cpatime = -1*dot(w0,dv) / dv2;
+
+    return cpatime;             // time of CPA
+}
+//===================================================================
+
+
+// cpa_distance(): compute the distance at CPA for two tracks
+//    Input:  two tracks Tr1 and Tr2
+//    Return: the distance for which the two tracks are closest
+function cpa_distance( Tr1v, Tr2v,Tr1P0, Tr2P0 )
+{
+    ctime = cpa_time( Tr1v, Tr2v,Tr1P0, Tr2P0 )
+    P1 = [Tr1P0[0] + (ctime * Tr1v[0]),Tr1P0[1] + (ctime * Tr1v[1]),Tr1P0[2] + (ctime * Tr1v[2])]
+    P2 = [Tr2P0[0] + (ctime * Tr2v[0]),Tr2P0[1] + (ctime * Tr2v[1]),Tr2P0[2] + (ctime * Tr2v[2])]
+    d=vec3diff(P1,P2)
+    return norm3D(d)            // distance at CPA
+}
+// console.log(dist3D_Line_to_Line([0,0,0],[1,0,0],[0,10,0],[10,10,0]))
+// console.log(dist3D_Segment_to_Segment([0,0,0],[1,0,0],[0,10,0],[10,10,0]))
+// console.log(cpa_distance([0,0,1],[0,0,1],[1,0,0],[0,1,0]))
+
+    </script>
     <script>
         (function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='stats.min.js';document.head.appendChild(script);})()
 
-        function norm(p0, p1) {
-            return Math.sqrt((p1[0] - p0[0]) * (p1[0] - p0[0]) + (p1[1] - p0[1]) * (p1[1] - p0[1]))
+        
+        // (x-x0)/a=(y-y0)/b=(z-z0)/c
+        // az = atan(b/a)
+        // r = z0/c sqrt(a*a+b*b+c*c)
+        // el = acos(c/sqrt(a*a+b*b+c*c))
+        // a = cos az sin el
+        // b = sin az sin el
+        // c = cos el
+        function rotate(v,pitch, roll, yaw) {
+            var cosa = Math.cos(yaw);
+            var sina = Math.sin(yaw);
+
+            var cosb = Math.cos(pitch);
+            var sinb = Math.sin(pitch);
+
+            var cosc = Math.cos(roll);
+            var sinc = Math.sin(roll);
+
+            var Axx = cosa*cosb;
+            var Axy = cosa*sinb*sinc - sina*cosc;
+            var Axz = cosa*sinb*cosc + sina*sinc;
+
+            var Ayx = sina*cosb;
+            var Ayy = sina*sinb*sinc + cosa*cosc;
+            var Ayz = sina*sinb*cosc - cosa*sinc;
+
+            var Azx = -sinb;
+            var Azy = cosb*sinc;
+            var Azz = cosb*cosc;
+            return [Axx*v[0] + Axy*v[1] + Axz*v[2],Ayx*v[0] + Ayy*v[1] + Ayz*v[2],Azx*v[0] + Azy*v[1] + Azz*v[2]]
+            // for (var i = 0; i < points.length; i++) {
+            //     var px = points[i].x;
+            //     var py = points[i].y;
+            //     var pz = points[i].z;
+
+            //     points[i].x = Axx*px + Axy*py + Axz*pz;
+            //     points[i].y = Ayx*px + Ayy*py + Ayz*pz;
+            //     points[i].z = Azx*px + Azy*py + Azz*pz;
+            // }
         }
-        function normxy(p0, p1) {
-            return Math.sqrt((p1.x - p0.x) * (p1.x - p0.x) + (p1.y - p0.y) * (p1.y - p0.y))
-        }
-        function moveDistanceDirection(Point, d, a) {
-            return [Point[0] + d * Math.cos(a), Point[1] + d * Math.sin(a)]
-        }
+
+
         class Scenario {
             constructor(Num) {
                 this.Number = Num
@@ -476,6 +935,440 @@
             snr.shapes[currentIndex][17] = parseFloat(document.getElementById('chindirInput').value)
             repaint()
         }
+
+
+        function getPoints(myShapes) {
+            var startPointxy = [0, 0]
+            var startPoint = dsp.xy2pixel(startPointxy)
+            allpointsret = []
+            for (var iijj = 0; iijj < myShapes.length; iijj++) {
+                allpointsret.push(dsp.pixel2xy(startPoint))
+                var startPoint_ = startPoint
+                var onepath = myShapes[iijj];
+                if (onepath[0] == 1) {
+                    var w, h;
+                    var startPointxy_ = startPointxy
+                    startPointxy = [onepath[1], onepath[2]]
+                    startPoint = dsp.xy2pixel(startPointxy)
+                    var allPathDis = norm(startPointxy_, startPointxy)
+                    var allPathDisnow = 0
+                    if (onepath[11]) {
+                        var bias_Q = onepath[12]
+                        var W_Q = onepath[13]
+                        var WF_Q = onepath[15]
+                        var H_Q = onepath[14]
+                        var N_Q = onepath[16]
+                        var d_Q = onepath[17]
+                        var N_Qi = 0
+                        var QP = moveDistanceDirection(startPointxy_, bias_Q, ang0)
+                        allPathDisnow += bias_Q
+                        while (1) {
+                            if (allPathDisnow >= allPathDis) break
+                            N_Qi += 1
+                            if (N_Qi > N_Q) break
+                            var wh = dsp.xy2pixel(QP)
+                            allpointsret.push(QP)
+                            allPathDisnow += W_Q
+                            if (allPathDisnow >= allPathDis) break
+                            var QP1 = moveDistanceDirection(QP, H_Q, ang0 + d_Q * Math.PI / 2)
+                            wh = dsp.xy2pixel(QP1)
+                            allpointsret.push(QP1)
+                            var QP2 = moveDistanceDirection(QP1, W_Q, ang0)
+                            wh = dsp.xy2pixel(QP2)
+                            allpointsret.push(QP2)
+                            QP1 = moveDistanceDirection(QP2, H_Q, ang0 - d_Q * Math.PI / 2)
+                            wh = dsp.xy2pixel(QP1)
+                            allpointsret.push(QP1)
+                            allPathDisnow += WF_Q
+                            if (allPathDisnow >= allPathDis) break
+                            QP = moveDistanceDirection(QP1, WF_Q, ang0)
+                            wh = dsp.xy2pixel(QP)
+                            allpointsret.push(QP)
+                        }
+                    }
+                    allpointsret.push(dsp.pixel2xy(startPoint))
+                }
+                if (onepath[0] == 4) {
+                    p0 = {
+                        x: startPointxy[0],
+                        y: startPointxy[1]
+                    }
+                    p3 = {
+                        x: onepath[1],
+                        y: onepath[2]
+                    }
+                    p2 = {
+                        x: onepath[3],
+                        y: onepath[4]
+                    }
+                    p1 = {
+                        x: onepath[5],
+                        y: onepath[6]
+                    }
+                    var pb
+                    var allPathDis = 0
+                    for (var i = 0; i <= 100; i += 1) {
+                        var p = bezier(i / 100, p0, p1, p2, p3);
+                        if (i == 0) pb = p
+                        else allPathDis += normxy(p, pb)
+                        
+                        if (i == 99) pb = p
+                    }
+                    if (onepath[11] == 1) {
+                        var allPathDisnow = 0
+                        var bzparanorm = 0
+                        var bzstep = 1 / 100
+                        var bzstep2 = 1 / 1000
+                        var bias_Q = onepath[12]
+                        var W_Q = onepath[13]
+                        var WF_Q = onepath[15]
+                        var H_Q = onepath[14]
+                        var N_Q = onepath[16]
+                        var d_Q = onepath[17]
+                        var N_Qi = 0
+                        var ii = 0
+                        var ppp = {
+                            x: startPointxy[0],
+                            y: startPointxy[1]
+                        }
+                        while (bzparanorm <= 1) {
+                            bzparanorm += bzstep
+                            if (bzparanorm >= 1) break;
+                            var p = bezier(bzparanorm, p0, p1, p2, p3);
+                            allPathDisnow += normxy(ppp, p)
+                            ppp = p
+                            var wh = dsp.xy2pixel([p.x, p.y])
+                            allpointsret.push([p.x, p.y])
+                            w = wh[0]
+                            h = wh[1]
+                            //ctx.lineTo(w, h)
+                            if (allPathDisnow >= bias_Q) break
+                        }
+                        while (bzparanorm <= 1) {
+                            var disnow = 0
+                            var pre = bzparanorm
+                            ppp = bezier(bzparanorm, p0, p1, p2, p3)
+                            while (disnow < W_Q) {
+                                bzparanorm += bzstep2
+                                if (bzparanorm >= 1) break;
+                                var p = bezier(bzparanorm, p0, p1, p2, p3);
+                                disnow += normxy(ppp, p)
+                                ppp = p
+                            }
+                            q0 = bezier(pre, p0, p1, p2, p3)
+                            q01 = bezier(pre + 1 / 1000, p0, p1, p2, p3)
+                            t0 = Math.atan2(q01.y - q0.y, q01.x - q0.x)
+                            var QP1 = moveDistanceDirection([q0.x, q0.y], H_Q, t0 + d_Q * Math.PI / 2)
+                            wh = dsp.xy2pixel(QP1)
+                            allpointsret.push(QP1)
+                            //ctx.lineTo(wh[0], wh[1])
+                            q0 = bezier(bzparanorm - .001, p0, p1, p2, p3)
+                            q01 = bezier(bzparanorm, p0, p1, p2, p3)
+                            t0 = Math.atan2(q01.y - q0.y, q01.x - q0.x)
+                            QP1 = moveDistanceDirection([p.x, p.y], H_Q, t0 + d_Q * Math.PI / 2)
+                            wh = dsp.xy2pixel(QP1)
+                            allpointsret.push(QP1)
+                            //ctx.lineTo(wh[0], wh[1])
+                            var wh = dsp.xy2pixel([p.x, p.y])
+                            allpointsret.push([p.x, p.y])
+                            //ctx.lineTo(wh[0], wh[1])
+                            disnow = 0
+                            ppp = bezier(bzparanorm, p0, p1, p2, p3);
+                            while (bzparanorm < 1) {
+                                bzparanorm += bzstep
+                                if (bzparanorm >= 1) break;
+                                var p = bezier(bzparanorm, p0, p1, p2, p3);
+                                disnow += normxy(ppp, p)
+                                ppp = p
+                                var wh = dsp.xy2pixel([p.x, p.y])
+                                w = wh[0]
+                                h = wh[1]
+                                allpointsret.push([p.x, p.y])
+                                //ctx.lineTo(w, h)
+                                if (disnow >= WF_Q) break
+                            }
+                            N_Qi += 1
+                            if (N_Qi >= N_Q) {
+                                while (bzparanorm < 1) {
+                                    bzparanorm += bzstep
+                                    if (bzparanorm >= 1) break;
+                                    var p = bezier(bzparanorm, p0, p1, p2, p3);
+                                    disnow += normxy(ppp, p)
+                                    ppp = p
+                                    var wh = dsp.xy2pixel([p.x, p.y])
+                                    w = wh[0]
+                                    h = wh[1]
+                                    allpointsret.push([p.x, p.y])
+                                    //ctx.lineTo(w, h)
+                                }
+                            }
+                        }
+                        startPointxy = [onepath[1], onepath[2]]
+                        wh = dsp.xy2pixel(startPointxy)
+                        allpointsret.push(startPointxy)
+                        //ctx.lineTo(wh[0], wh[1])
+                    } else {
+                        for (var i = 0; i <= 100; i += 1) {
+                            var p = bezier(i / 100, p0, p1, p2, p3);
+                            var wh = dsp.xy2pixel([p.x, p.y])
+                            w = wh[0];
+                            h = wh[1];
+                            allpointsret.push([p.x, p.y])
+                            //ctx.lineTo(w, h);
+                        }
+                    }
+                    startPointxy = [onepath[1], onepath[2]]
+                    startPoint = dsp.xy2pixel(startPointxy)
+                }
+                if (onepath[0] == 5) {
+                    startPointxy = [onepath[1], onepath[2]]
+                    startPoint = dsp.xy2pixel(startPointxy)
+                    var pp = getStartPoint(iijj)
+                    var st = onepath[7]
+                    var N = onepath[3]
+                    var d = onepath[4]
+                    var H = onepath[5]
+                    var t = onepath[6]
+                    var xy = rot(0, H * Math.sin(st), t)
+                    pp[0]-=xy[0]
+                    pp[1]-=xy[1]
+                    var x = N * d
+                    var dx = 0
+                    var res = .1
+                    if (onepath[11] == 1) {
+                        var bias_Q = onepath[12]
+                        var W_Q = onepath[13]
+                        var WF_Q = onepath[15]
+                        var H_Q = onepath[14]
+                        var N_Q = onepath[16]
+                        var d_Q = onepath[17]
+                        var N_Qi = 0
+                        allPathDisnow = 0
+                        while (dx <= x) {
+                            var p = [dx, H * Math.sin(2 * Math.PI * dx / d + st)]
+                            var ppp = [dx,H * Math.sin(2 * Math.PI * (dx - res) / d + st)]
+                            allPathDisnow += norm(ppp, p)
+                            var xy = rot(p[0], p[1], t)
+                            xy[0] += pp[0]
+                            xy[1] += pp[1]
+                            var wh = dsp.xy2pixel(xy)
+                            allpointsret.push(xy)
+                            w = wh[0]
+                            h = wh[1]
+                            //ctx.lineTo(w, h)
+                            if (allPathDisnow >= bias_Q) break
+                            dx+=res
+                        }
+                        while (dx <= x) {
+                            q0 = [dx-.01,H * Math.sin(2 * Math.PI * (dx - .01) / d + st)]
+                            q01 = [dx,H * Math.sin(2 * Math.PI * dx / d + st)]
+                            t0 = Math.atan2(q01[1] - q0[1], q01[0] - q0[0])
+                            var QP1 = moveDistanceDirection(q0, H_Q, t0 + d_Q * Math.PI / 2)
+                            var xy = rot(QP1[0], QP1[1], t)
+                            xy[0] += pp[0]
+                            xy[1] += pp[1]
+                            var wh = dsp.xy2pixel(xy)
+                            allpointsret.push(xy)
+                            w = wh[0]
+                            h = wh[1]
+                            //ctx.lineTo(w, h)
+                            var disnow = 0
+                            while (disnow < W_Q) {
+                                dx += .01
+                                if (dx >= x) break;
+                                disnow += norm([dx,H * Math.sin(2 * Math.PI * dx / d + st)], [dx-.01,H * Math.sin(2 * Math.PI * (dx - .01) / d + st)])
+                            }
+                            
+                            q0 = [dx-.01,H * Math.sin(2 * Math.PI * (dx - .01) / d + st)]
+                            q01 = [dx,H * Math.sin(2 * Math.PI * dx / d + st)]
+                            t0 = Math.atan2(q01[1] - q0[1], q01[0] - q0[0])
+                            QP1 = moveDistanceDirection(q0, H_Q, t0 + d_Q * Math.PI / 2)
+                            xy = rot(QP1[0], QP1[1], t)
+                            xy[0] += pp[0]
+                            xy[1] += pp[1]
+                            var wh = dsp.xy2pixel(xy)
+                            allpointsret.push(xy)
+                            w = wh[0]
+                            h = wh[1]
+                            //ctx.lineTo(w, h)
+                            xy = rot(q0[0], q0[1], t)
+                            xy[0] += pp[0]
+                            xy[1] += pp[1]
+                            var wh = dsp.xy2pixel(xy)
+                            allpointsret.push(xy)
+                            w = wh[0]
+                            h = wh[1]
+                            //ctx.lineTo(w, h)
+                            disnow = 0
+                            while (disnow < WF_Q) {
+                                dx += .1
+                                if (dx >= x) break;
+                                disnow += norm([dx,H * Math.sin(2 * Math.PI * dx / d + st)],[dx-.1, H * Math.sin(2 * Math.PI * (dx - .1) / d + st)])
+                                QP1 = [dx,H * Math.sin(2 * Math.PI * dx / d + st)]
+                                xy = rot(QP1[0], QP1[1], t)
+                                xy[0] += pp[0]
+                                xy[1] += pp[1]
+                                var wh = dsp.xy2pixel(xy)
+                                allpointsret.push(xy)
+                                w = wh[0]
+                                h = wh[1]
+                                //ctx.lineTo(w, h)
+                            }
+                            N_Qi += 1
+                            if (N_Qi >= N_Q) {
+                                while (1) {
+                                    dx += .1
+                                    if (dx >= x) break;
+                                    disnow += norm([dx,H * Math.sin(2 * Math.PI * dx / d + st)],[dx-.1, H * Math.sin(2 * Math.PI * (dx - .1) / d + st)])
+                                    QP1 = [dx,H * Math.sin(2 * Math.PI * dx / d + st)]
+                                    xy = rot(QP1[0], QP1[1], t)
+                                    xy[0] += pp[0]
+                                    xy[1] += pp[1]
+                                    var wh = dsp.xy2pixel(xy)
+                                    allpointsret.push(xy)
+                                    w = wh[0]
+                                    h = wh[1]
+                                    //ctx.lineTo(w, h)
+                                }
+                            }
+                        }
+                    } else {
+                        while (dx <= x) {
+                            var y = H * Math.sin(2 * Math.PI * dx / d + st)
+                            var xy = rot(dx, y, t)
+                            xy[0] += pp[0]
+                            xy[1] += pp[1]
+                            wh = dsp.xy2pixel(xy)
+                            allpointsret.push(xy)
+                            //ctx.lineTo(wh[0], wh[1])
+                            dx += res
+                        }
+                    }
+                    //ctx.lineTo(startPoint[0], startPoint[1])
+                }
+               
+               
+               if (onepath[0] == 3) {
+                    startPointxy = [onepath[1], onepath[2]]
+                    startPoint = dsp.xy2pixel(startPointxy)
+                    var pp = getStartPoint(iijj)
+                    var t0=onepath[3]
+                    var tL0=onepath[4]
+                    var R=onepath[5]
+                    var D=onepath[6]
+                    var eps=onepath[7]
+                    var tL=0
+                    var tLres=.1/(R*Math.PI)*360
+                    var xy=arcPoint(t0,R,eps,tL,D)
+                    pp[0]-=xy[0]
+                    pp[1]-=xy[1]
+                    if (onepath[11] == 1) {
+                        var bias_Q = onepath[12]
+                        var W_Q = onepath[13]
+                        var WF_Q = onepath[15]
+                        var H_Q = onepath[14]
+                        var N_Q = onepath[16]
+                        var d_Q = onepath[17]
+                        var N_Qi = 0
+                        allPathDisnow = 0
+                        while (tL <= tL0) {
+                            var xy = arcPoint(t0,R,eps,tL,D)
+                            var ppp = arcPoint(t0,R,eps,tL-tLres,D)
+                            allPathDisnow += norm(ppp, xy)
+                            xy[0] += pp[0]
+                            xy[1] += pp[1]
+                            wh = dsp.xy2pixel(xy)
+                            //ctx.lineTo(wh[0], wh[1])
+                            if (allPathDisnow >= bias_Q) break
+                            tL += tLres
+                        }
+                        while (tL <= tL0) {
+                            q0 = arcPoint(t0,R,eps,tL-tLres,D)
+                            q01 = arcPoint(t0,R,eps,tL,D)
+                            t0q = Math.atan2(q01[1] - q0[1], q01[0] - q0[0])
+                            xy = moveDistanceDirection(q0, H_Q, t0q + d_Q * Math.PI / 2)
+                            xy[0] += pp[0]
+                            xy[1] += pp[1]
+                            var wh = dsp.xy2pixel(xy)
+                            allpointsret.push(xy)
+                            w = wh[0]
+                            h = wh[1]
+                            //ctx.lineTo(w, h)
+                            var disnow = 0
+                            while (disnow < W_Q) {
+                                tL += tLres/5
+                                if (tL > tL0) break;
+                                disnow += norm(arcPoint(t0,R,eps,tL,D),arcPoint(t0,R,eps,tL- tLres/5,D))
+                            }
+                            
+                            q0 = arcPoint(t0,R,eps,tL-tLres,D)
+                            q01 = arcPoint(t0,R,eps,tL,D)
+                            t0q = Math.atan2(q01[1] - q0[1], q01[0] - q0[0])
+                            xy = moveDistanceDirection(q0, H_Q, t0q + d_Q * Math.PI / 2)
+                            xy[0] += pp[0]
+                            xy[1] += pp[1]
+                            wh = dsp.xy2pixel(xy)
+                            allpointsret.push(xy)
+                            w = wh[0]
+                            h = wh[1]
+                            //ctx.lineTo(w, h)
+                            xy = q0
+                            xy[0] += pp[0]
+                            xy[1] += pp[1]
+                            wh = dsp.xy2pixel(xy)
+                            allpointsret.push(xy)
+                            w = wh[0]
+                            h = wh[1]
+                            //ctx.lineTo(w, h)
+                            disnow = 0
+                            while (disnow < WF_Q) {
+                                tL += tLres
+                                if (tL >= tL0) break;
+                                xy=arcPoint(t0,R,eps,tL,D)
+                                xyL=arcPoint(t0,R,eps,tL-tLres,D)
+                                disnow += norm(xy,xyL)
+                                xy[0] += pp[0]
+                                xy[1] += pp[1]
+                                wh = dsp.xy2pixel(xy)
+                                allpointsret.push(xy)
+                                w = wh[0]
+                                h = wh[1]
+                                //ctx.lineTo(w, h)
+                            }
+                            N_Qi += 1
+                            if (N_Qi >= N_Q) {
+                                while (tL < tL0) {
+                                    tL += tLres
+                                    xy=arcPoint(t0,R,eps,tL,D)
+                                    xy[0] += pp[0]
+                                    xy[1] += pp[1]
+                                    wh = dsp.xy2pixel(xy)
+                                    allpointsret.push(xy)
+                                    w = wh[0]
+                                    h = wh[1]
+                                    //ctx.lineTo(w, h)
+                                }
+                            }
+                        }
+                    } else {
+                        while (tL <= tL0) {
+                            xy=[(R/2-eps*tL/360)*Math.cos((t0+D*tL)/180*Math.PI),(R/2-eps*tL/360)*Math.sin((t0+D*tL)/180*Math.PI)]
+                            xy[0] += pp[0]
+                            xy[1] += pp[1]
+                            wh = dsp.xy2pixel(xy)
+                            allpointsret.push(xy)
+                            //ctx.lineTo(wh[0], wh[1])
+                            tL += tLres
+                        }
+                    }
+                    //ctx.lineTo(startPoint[0], startPoint[1])
+                }  
+            }
+            return allpointsret
+        }
+      
+
+
         function chinenableInputchange() {
             document.getElementById('chinenableInput').value = 0
             if ((document.getElementById('chinenableInputRange').value) > 50) document.getElementById('chinenableInput').value = 1
@@ -657,6 +1550,8 @@
             sliderOptionScaler = parseFloat($("#sliderscale").val())
         }
         function btnselback() {
+            mesh.geometry.dispose();
+             mesh.material.dispose();
             scene.remove(mesh)
             currentIndex -= 1
             if (currentIndex < 0) currentIndex = -1
@@ -1811,6 +2706,7 @@ gallery.push([[5,4.2,0,1,4.2,0.28,0,4.71238898038469,0,0,1,0,0,0,0,0,0,0,0,0,0],
 gallery.push([[5,4.2,0,1,4.2,0.28,0,4.71238898038469,0,0,1,0,0,0,0,0,0,0,0,0,0],[4,6.994503525235996,3.341455402858351,6.159153752356035,0.9036596238977962,4.803664316509331,-0.07134154925508969,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[3,6.694032320967007,8.254116167385954,248,129,5.453048122377617,-1,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[3,3.027920598734838,9.314806001095166,34.36363636363636,79,6,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[5,0.9279205987348385,9.285687241653719,0.75,2.8,0.2,3.141592653589793,5.394654051618836,0,0,1,0,0,0,0,0,0,0,0,0,0],[3,-0.15028184335689776,9.51129257245211,65.45454545454545,25.454545454545453,5,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[3,-2.981162872695965,7.356867859954774,90.90909090909092,72.72727272727272,6,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[3,-2.1683971431476343,2.005677175562365,165,47.27272727272728,13.5,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[4,0,0,-0.7411738249188924,0.13897009217229392,-1.2738925115793556,0.37058691245944514,0,0,0,1,0,0,0,0,0,0,0,0,0,0]])
 gallery.push([[1,1.3227221156721505,10.12078140875769,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[1,5.0943216945636465,10.06638204010785,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[1,6.60592447875573,-0.005736220987041504,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[1,3.9221635468898595,-0.016574982033444756,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[1,3.8201649018288855,1.8139902408912914,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[1,3.3384953322377795,1.8221350260713958,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[1,3.33141441830934,3.5957496103166116,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[1,3.7229879751375368,3.584910849270209,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[1,3.3172525904524597,7.712485165602234,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[1,2.816599474634849,3.6012004196304086,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[1,3.322074308822084,3.5903616585840052,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[1,3.3339769411201523,1.8330366446989974,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[1,2.8523073715290495,1.8411814298791034,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[1,2.6933580877885572,-0.011061315138439526,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0]])
 gallery.push([[1,3.431693005628722,-0.004328861368970399,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[4,5.990142884838141,1.3201905131175207,5.770998052857999,0.32272028585061135,5.25844230474234,0.03796709245301344,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[4,4.58103160270769,5.435291182900478,5.20149166606281,5.315392943421827,6.530339901918264,5.1635245736097914,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[4,5.013324304548363,9.588358945136456,6.093718338708611,8.827348995325565,6.492372809465241,5.69506386795197,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[4,1.8767103158058192,10.058618739430148,4.404182724549525,9.890427584009892,4.157396623604939,10.118230138727986,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[1,0.01199392423920903,10.054289878061182,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[1,0.007665062870244016,0.026648609096739384,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[1,2.6040820345326807,1.7498224543398695,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[1,2.599753173163716,8.35176767979519,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[4,2.6144078580212624,6.12636390992494,3.7967092453013174,5.865915783990532,4.2523143547374715,8.40971097834241,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[1,2.6100789966522946,4.489450073076405,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[4,2.586766589056821,1.7325070088639827,4.1004459849254244,1.3668153283084727,4.17638016983145,4.821820741532668,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[1,-0.01830810534354855,0.01965898710942445,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0]])
+gallery.push([[1,16,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[3,20,3.999999999999999,270,90,8,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[1,20,20,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[3,16,24,0,90,8,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[1,0,24,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[3,-4,20,90,90,8,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[1,-4,4,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[3,-7.347880794884119e-16,-4.440892098500626e-16,180,90,8,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0]])
         function wheelhandle(e) {
             if (e.deltaY > 0) {
                 dsp.scale /= 1.04
@@ -1891,7 +2787,8 @@ gallery.push([[1,3.431693005628722,-0.004328861368970399,0,0,0,0,0,0,0,1,0,0,0,0
     // var geometry = new THREE.BoxGeometry( 1, 1, 1 );
     //var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
     //var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 , wireframe:true} );
-    var texture = new THREE.TextureLoader().load( "https://gmoein.github.io/images/foam.png" );
+    //var texture = new THREE.TextureLoader().load( "https://gmoein.github.io/images/foam.png" );
+    var texture = new THREE.TextureLoader().load( "https://gmoein.github.io/images/colors.png" );
     //var material = new THREE.MeshBasicMaterial( { map: texture,side:THREE.DoubleSide } );
     var material = new THREE.MeshLambertMaterial( { map: texture,side:THREE.DoubleSide } );
     //var material = new THREE.MeshPhongMaterial( { map: texture,side:THREE.DoubleSide } );
@@ -1903,6 +2800,17 @@ gallery.push([[1,3.431693005628722,-0.004328861368970399,0,0,0,0,0,0,0,1,0,0,0,0
     // var line = new THREE.Line( geometry2, material );
     // scene.add( cube );
     // scene.add( line);
+
+    var geox = new THREE.Geometry();
+    geox.vertices.push(
+        new THREE.Vector3( 1, 0, 0 ),
+        new THREE.Vector3( 0, 0 , 0 ),
+        new THREE.Vector3( 0, 4, 0 ),
+        new THREE.Vector3( 0, 0 , 0 ),
+        new THREE.Vector3( 0, 0 , 9 ),
+    );
+    var linex = new THREE.Line( geox, new THREE.LineBasicMaterial({color: 0x0000ff}) );
+    scene.add( linex);
 
     camera.position.z = 5;
     camera.position.y = 1;
@@ -1999,29 +2907,29 @@ $(document).ready(function() {
     snr.shapes = gallery[galleryi]
             repaint()
 });
-async function asyncVid() {
-    const videoElement = document.createElement('video');
-    videoElement.width = 100;
-    videoElement.height = 100;
-    const cam = await tf.data.webcam(videoElement);
-    const img = await cam.capture();
-    img.print();
-    cam.stop();
-}
-async function asyncMic() {
-    const mic = await tf.data.microphone({
-        fftSize: 1024,
-        columnTruncateLength: 232,
-        numFramesPerSpectrogram: 43,
-        sampleRateHz:44100,
-        includeSpectrogram: true,
-        includeWaveform: true
-    });
-    const audioData = await mic.capture();
-    const spectrogramTensor = audioData.spectrogram;
-    const waveformTensor = audioData.waveform;
-    mic.stop();
-}
+// async function asyncVid() {
+//     const videoElement = document.createElement('video');
+//     videoElement.width = 100;
+//     videoElement.height = 100;
+//     const cam = await tf.data.webcam(videoElement);
+//     const img = await cam.capture();
+//     img.print();
+//     cam.stop();
+// }
+// async function asyncMic() {
+//     const mic = await tf.data.microphone({
+//         fftSize: 1024,
+//         columnTruncateLength: 232,
+//         numFramesPerSpectrogram: 43,
+//         sampleRateHz:44100,
+//         includeSpectrogram: true,
+//         includeWaveform: true
+//     });
+//     const audioData = await mic.capture();
+//     const spectrogramTensor = audioData.spectrogram;
+//     const waveformTensor = audioData.waveform;
+//     mic.stop();
+// }
 </script>
 
 </body>
