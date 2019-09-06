@@ -52,6 +52,7 @@
     <div class="container pt-1">
         <div class="btn-group flex flex-wrap">
             <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="document.getElementById('fileopenx').click()">فایل</i></button>
+            <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="document.getElementById('fileopen3D').click()"> فایل سه بعدی</i></button>
             <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="filesavehandle()">ذخیره</i></button>
             <button class="btn btn-outline-secondary"  style="font-family:'B Yekan'" onclick="filedownload()">خروجی</i></button>
             <button type="button" class="btn btn-outline-secondary" style="font-family:'B Yekan'"  data-toggle="modal" data-target="#exampleModal">تنظیمات</button>
@@ -137,6 +138,7 @@
     </div>
     <input type="file" id="avatar" name="avatar" style="display:none" accept="image/png, image/jpeg">
     <input type="file" id="fileopenx" name="fileopenx" style="display:none" accept=".aigjs">
+    <input type="file" id="fileopen3D" name="fileopen3D" style="display:none" accept=".cnc">
     <button type="button" class="btn btn-outline-secondary" id="LineClickedHidden" data-toggle="modal" data-target="#myModalLine" style="display:none"></button>
     <button type="button" class="btn btn-outline-secondary" id="bzClickedHidden" data-toggle="modal" data-target="#myModalBZ" style="display:none"></button>
     <button type="button" class="btn btn-outline-secondary" id="sinClickedHidden" data-toggle="modal" data-target="#myModalSin" style="display:none"></button>
@@ -2586,6 +2588,7 @@ function cpa_distance( Tr1v, Tr2v,Tr1P0, Tr2P0 )
         //document.addEventListener('keyup', keyhandle);
         document.getElementById('avatar').addEventListener('change', filehandle);
         document.getElementById('fileopenx').addEventListener('change', filehandle2);
+        document.getElementById('fileopen3D').addEventListener('change', filehandle3D);
        // document.getElementById('filesavex').addEventListener('change', filesavehandle);
         var img = new Image;
         var imloaded = 0;
@@ -2641,6 +2644,28 @@ function cpa_distance( Tr1v, Tr2v,Tr1P0, Tr2P0 )
             }
             downloadBlob(md, saveasfilename + '.aigjs', 'application/octet-stream');
         }
+        function filehandle3D(e) {
+            reader3D.readAsBinaryString(e.target.files[0])
+        }
+        var reader3D = new FileReader();
+        reader3D.onload = function() {
+            var res = reader3D.result
+            var buf = new ArrayBuffer(res.length)
+            var bufView = new Uint8Array(buf);
+            for (var i = 0; i < res.length; i++) {
+                bufView[i] = res.charCodeAt(i);
+            }
+            
+            var dv = new DataView(buf)
+            var k=0
+            xyz3Dread=[]
+            for (var i = 0; i < res.length/8; i++) {
+                xyz3Dread.push(dv.getFloat64(8*k,true))
+                k++
+            }
+            plotxyz3Dread()
+        };
+        var xyz3Dread=[]
         function filehandle2(e) {
             reader.readAsBinaryString(e.target.files[0])
         }
@@ -2666,6 +2691,8 @@ function cpa_distance( Tr1v, Tr2v,Tr1P0, Tr2P0 )
             }
             repaint()
         };
+        
+        
         function btnnextgallery(){
             galleryi++
             if(galleryi>=gallery.length)galleryi=gallery.length-1
@@ -2862,6 +2889,14 @@ gallery.push([[1,16,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[3,20,3.9999999999999
     }
     animate();
 
+    function plotxyz3Dread(){
+        alert(xyz3Dread.length)
+        alert(xyz3Dread[0])
+        alert(xyz3Dread[1])
+        alert(xyz3Dread[2])
+        alert(xyz3Dread[3])
+        
+    }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
 <script>
