@@ -399,10 +399,10 @@ Iran.<br />
 </div>
 
 </div>
-<div>
+<div class="content">
 	<button onclick="init()">Click me</button>
 </div>
-<div>
+<div class="content">
     <figure style="overflow:visible;" id="qtspinner">
       <center style="margin-top:1.5em; line-height:150%">
         <img src="qtlogo.svg" width="320" height="200" style="display:block"></img>
@@ -415,6 +415,7 @@ Iran.<br />
 
     <script type='text/javascript'>
         function init() {
+		alert("Qt");
           var spinner = document.querySelector('#qtspinner');
           var canvas = document.querySelector('#qtcanvas');
           var status = document.querySelector('#qtstatus')
