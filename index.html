@@ -324,20 +324,9 @@ CEO of Rastafoam Sanat Mobin Co.<br />
 <img src="images/TF.png" alt="" /><br />
 <img src="images/TF2.PNG" alt="" />
 </div>
-<div>
-```x=np.array([.1,.9])
-x2=np.array([.05,.05,.9])
-def H1(p):
-  return -p*np.log2(p)-(1-p)*np.log2(1-p)
-def H2(p):
-  return -2*p*np.log2(p)-(1-2*p)*np.log2(1-2*p)
-g=np.linspace(0,9/16-.001,1000000)
-I = H2(0.05+.8*g)-2*g*H1(.1)-(1-2*g)*H2(.05)
-plt.plot(g,I)
-print(I.max())
-print(g[I.argmax()])
-print(1-2*g[I.argmax()])
-print(50000*I.max())```
+
+<div class="content">
+	<button onclick="init()">Click me</button>
 </div>
 </section>
 
@@ -398,9 +387,6 @@ Iran.<br />
 </div>
 </div>
 
-<div class="content">
-	<button onclick="init()">Click me</button>
-</div>
 </div>
 <div class="content">
     <figure style="overflow:visible;" id="qtspinner">
