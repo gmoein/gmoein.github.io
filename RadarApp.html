@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Radar Simulator Parameter Form</title>
+    <style>
+		#parameterForm {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .form-group {
+            flex: 0 0 calc(20% - 20px);
+            margin: 10px;
+        }
+        label, input {
+            width: 100%;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f2f2f2;
+        }
+        h1 {
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+        }
+        form {
+            border-radius: 5px;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: inline-block;
+            width: 300px;
+            padding: 8px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 4px 0;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .form-group {
+            padding: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Radar Simulator Parameter Input Form</h1>
+
+    <form id="parameterForm">
+        <div class="form-group"><label for="RadarType">Radar Type (FMCW 0 Pulse 1 UWB 2):</label> <input type="number" id="RadarType" name="RadarType" value="0"></div>
+		<div class="form-group"><label for="CentralFrequency">Central Frequency (GHz):</label> <input type="text" id="CentralFrequency" name="CentralFrequency" value="70.000000"></div>
+		<div class="form-group"><label for="Idle_Time">Idle_Time (us):</label> <input type="text" id="Idle_Time" name="Idle_Time" value="5.000000"></div>
+		<div class="form-group"><label for="Ramp_End_Time">Ramp_End_Time (us):</label> <input type="text" id="Ramp_End_Time" name="Ramp_End_Time" value="55.840000"></div>
+		<div class="form-group"><label for="Chirp_Cycle_Time">Chirp_Cycle_Time (us):</label> <input type="text" id="Chirp_Cycle_Time" name="Chirp_Cycle_Time" value="60.840000"></div>
+		<div class="form-group"><label for="ADC_Start_Time">ADC_Start_Time (us):</label> <input type="text" id="ADC_Start_Time" name="ADC_Start_Time" value="3.610000"></div>
+		<div class="form-group"><label for="Total_Sweep_BW">Total_Sweep_BW (MHz):</label> <input type="text" id="Total_Sweep_BW" name="Total_Sweep_BW" value="2793.000000"></div>
+		<div class="form-group"><label for="Valid_Sweep_BW">Valid_Sweep_BW (MHz):</label> <input type="text" id="Valid_Sweep_BW" name="Valid_Sweep_BW" value="2560.000000"></div>
+		<div class="form-group"><label for="Inter_Chirp_Time">Inter_Chirp_Time (us):</label> <input type="text" id="Inter_Chirp_Time" name="Inter_Chirp_Time" value="9.600000"></div>
+		<div class="form-group"><label for="ADC_Sampling_Freq">ADC Sampling Freq (MSPS):</label> <input type="text" id="ADC_Sampling_Freq" name="ADC_Sampling_Freq" value="10.000000"></div>
+		<div class="form-group"><label for="CPI_Pulse_Number">CPI Pulse Number:</label> <input type="number" id="CPI_Pulse_Number" name="CPI_Pulse_Number" value="32"></div>
+		<div class="form-group"><label for="N_FFT_Range">N FFT Range:</label> <input type="number" id="N_FFT_Range" name="N_FFT_Range" value="1024"></div>
+		<div class="form-group"><label for="Range_Index_From">Range Index From:</label> <input type="number" id="Range_Index_From" name="Range_Index_From" value="0"></div>
+		<div class="form-group"><label for="Range_Index_To">Range Index To:</label> <input type="number" id="Range_Index_To" name="Range_Index_To" value="1023"></div>
+		<div class="form-group"><label for="NFFTDoppler">N FFT Doppler:</label> <input type="number" id="NFFTDoppler" name="NFFTDoppler" value="64"></div>
+		<div class="form-group"><label for="MIMOTechnique">MIMO Technique (1-PMCW 2-TDM 3-DDM  4-BPM  5-PA):</label> <input type="number" id="MIMOTechnique" name="MIMOTechnique" value="2"></div>
+		<div class="form-group"><label for="Time">Time:</label> <input type="text" id="Time" name="Time" value="0.000000"></div>
+		<div class="form-group"><label for="EffectiveBandwidth">Effective Bandwidth (MHz):</label> <input type="text" id="EffectiveBandwidth" name="EffectiveBandwidth" value="1000.000000"></div>
+		<div class="form-group"><label for="FMSlobeRate">FM Slobe Rate (MHz/usec):</label> <input type="text" id="FMSlobeRate" name="FMSlobeRate" value="19.516003"></div>
+		<div class="form-group"><label for="MTXy">M_TX_y:</label> <input type="number" id="MTXy" name="MTXy" value="3"></div>
+		<div class="form-group"><label for="MTXz">M_TX_z:</label> <input type="number" id="MTXz" name="MTXz" value="1"></div>
+		<div class="form-group"><label for="NRXy">N_RX_y:</label> <input type="number" id="NRXy" name="NRXy" value="4"></div>
+		<div class="form-group"><label for="NRXz">N_RX_z:</label> <input type="number" id="NRXz" name="NRXz" value="1"></div>
+		<div class="form-group"><label for="DTXy">D_TX_y (mm):</label> <input type="text" id="DTXy" name="DTXy" value="8.565499"></div>
+		<div class="form-group"><label for="DTXz">D_TX_z (mm):</label> <input type="text" id="DTXz" name="DTXz" value="2.141375"></div>
+		<div class="form-group"><label for="DRXy">D_RX_y (mm):</label> <input type="text" id="DRXy" name="DRXy" value="2.141375"></div>
+		<div class="form-group"><label for="DRXz">D_RX_z (mm):</label> <input type="text" id="DRXz" name="DRXz" value="2.141375"></div>
+		<div class="form-group"><label for="TX_Center_x">TX_Center[x] (m):</label> <input type="text" id="TX_Center_x" name="TX_Center[x]" value="-4.000000"></div>
+		<div class="form-group"><label for="TX_Center_y">TX_Center[y] (m):</label> <input type="text" id="TX_Center_y" name="TX_Center[y]" value="1.000000"></div>
+		<div class="form-group"><label for="TX_Center_z">TX_Center[z] (m):</label> <input type="text" id="TX_Center_z" name="TX_Center[z]" value="1.000000"></div>
+
+		<div class="form-group"><label for="TX_Velocity_x">TX_Velocity[x] (m/s):</label> <input type="text" id="TX_Velocity_x" name="TX_Velocity[x]" value="0.000000"></div>
+		<div class="form-group"><label for="TX_Velocity_y">TX_Velocity[y] (m/s):</label> <input type="text" id="TX_Velocity_y" name="TX_Velocity[y]" value="0.000000"></div>
+		<div class="form-group"><label for="TX_Velocity_z">TX_Velocity[z] (m/s):</label> <input type="text" id="TX_Velocity_z" name="TX_Velocity[z]" value="0.000000"></div>
+
+		<div class="form-group"><label for="RX_Center_x">RX_Center[x] (m):</label> <input type="text" id="RX_Center_x" name="RX_Center[x]" value="-4.000000"></div>
+		<div class="form-group"><label for="RX_Center_y">RX_Center[y] (m):</label> <input type="text" id="RX_Center_y" name="RX_Center[y]" value="1.000000"></div>
+		<div class="form-group"><label for="RX_Center_z">RX_Center[z] (m):</label> <input type="text" id="RX_Center_z" name="RX_Center[z]" value="1.000000"></div>
+
+		<div class="form-group"><label for="RX_Velocity_x">RX_Velocity[x] (m/s):</label> <input type="text" id="RX_Velocity_x" name="RX_Velocity[x]" value="0.000000"></div>
+		<div class="form-group"><label for="RX_Velocity_y">RX_Velocity[y] (m/s):</label> <input type="text" id="RX_Velocity_y" name="RX_Velocity[y]" value="0.000000"></div>
+		<div class="form-group"><label for="RX_Velocity_z">RX_Velocity[z] (m/s):</label> <input type="text" id="RX_Velocity_z" name="RX_Velocity[z]" value="0.000000"></div>
+		<div class="form-group"><label for="SteerBeamCenterAzimuth">SteerBeam Center Azimuth (deg):</label> <input type="text" id="SteerBeamCenterAzimuth" name="SteerBeamCenterAzimuth" value="0.000000"></div>
+		<div class="form-group"><label for="SteerBeamAzimuthBeamwidth">SteerBeam Azimuth Beamwidth (deg):</label> <input type="text" id="SteerBeamAzimuthBeamwidth" name="SteerBeamAzimuthBeamwidth" value="60.000000"></div>
+		<div class="form-group"><label for="SimulationAzimuthRayNumber">Simulation Azimuth Ray Number:</label> <input type="text" id="SimulationAzimuthRayNumber" name="SimulationAzimuthRayNumber" value="50"></div>
+		<div class="form-group"><label for="SteerBeamCenterElevation">SteerBeam Center Elevation (deg):</label> <input type="text" id="SteerBeamCenterElevation" name="SteerBeamCenterElevation" value="0.000000"></div>
+		<div class="form-group"><label for="SteerBeamAzimuthElevation">SteerBeam Azimuth Elevation (deg):</label> <input type="text" id="SteerBeamAzimuthElevation" name="SteerBeamAzimuthElevation" value="60.000000"></div>
+		<div class="form-group"><label for="SimulationElevationRayNumber">Simulation Elevation Ray Number:</label> <input type="text" id="SimulationElevationRayNumber" name="SimulationElevationRayNumber" value="10"></div>
+		<div class="form-group"><label for="BounceNumber">Bounce Number:</label> <input type="text" id="BounceNumber" name="BounceNumber" value="2"></div>
+		<div class="form-group"><label for="Simulation_Array_Option">Simulation_Array_Option:</label> <input type="text" id="Simulation_Array_Option" name="Simulation_Array_Option" value="2"></div>
+		<div class="form-group"><label for="RayAllocation_Option">RayAllocation_Option:</label> <input type="text" id="RayAllocation_Option" name="RayAllocation_Option" value="1"></div>
+		<div class="form-group"><label for="blender_frame_index">Blender Frame Index:</label> <input type="text" id="blender_frame_index" name="blender_frame_index" value="1"></div>
+		<div class="form-group"><label for="blender_frame_Jump">Blender Frame Jump:</label> <input type="text" id="blender_frame_Jump" name="blender_frame_Jump" value="1"></div>
+		<div class="form-group"><label for="blender_frame_Rate">Blender Frame Rate:</label> <input type="text" id="blender_frame_Rate" name="blender_frame_Rate" value="30"></div>
+		<div class="form-group"><label for="FileSizeMB">File Size MB:</label> <input type="text" id="FileSizeMB" name="FileSizeMB" value="100"></div>
+		<div class="form-group"><label for="CPI_Frame_JumpMode">CPI Frame Jump Mode:</label> <input type="text" id="CPI_Frame_JumpMode" name="CPI_Frame_JumpMode" value="0"></div>
+		<div class="form-group"><label for="ProcessinCUDA">Processing in CUDA:</label> <input type="text" id="ProcessinCUDA" name="ProcessinCUDA" value="1"></div>
+		<div class="form-group"><label for="LNA_PreADC_Amplification">LNA PreADC Amplification:</label> <input type="text" id="LNA_PreADC_Amplification" name="LNA_PreADC_Amplification" value="10000.000000"></div>
+		<div class="form-group"><label for="GetTrianglesfromblendFile">Get Triangles from Blend File:</label> <input type="text" id="GetTrianglesfromblendFile" name="GetTrianglesfromblendFile" value="1"></div>
+		<div class="form-group"><label for="pythonscript">Python Script:</label> <input type="text" id="pythonscript" name="pythonscript" value="..\\pythonBlender.py"></div>
+		<div class="form-group"><label for="blenderfile">Blender File:</label> <input type="text" id="blenderfile" name="blenderfile" value="..\\BlenderFile\\BlenderFile.blend"></div>
+		<div class="form-group"><label for="blender_output_text_folder">Blender Output Text Folder:</label> <input type="text" id="blender_output_text_folder" name="blender_output_text_folder" value="..\\BlenderOutputText\\"></div>
+		<div class="form-group"><label for="blender_decimation">Blender Decimation:</label> <input type="text" id="blender_decimation" name="blender_decimation" value="1"></div>
+		<div class="form-group"><label for="BlenderTrianglesOutputPath">Blender Triangles Output Path:</label> <input type="text" id="BlenderTrianglesOutputPath" name="BlenderTrianglesOutputPath" value="../BlenderOutputText/vertices_"></div>
+		<div class="form-group">
+		<label for="BlenderRawDataPath">BlenderRawDataPath:</label>
+		
+		<input type="text" id="BlenderRawDataPath" name="BlenderRawDataPath" value="../BlenderOutputText/DataCube_">
+		</div>
+		<div class="form-group">
+			<label for="SpecialFunction">Special Function:</label>
+			<input type="text" id="SpecialFunction" name="SpecialFunction" value="Render Frame 1">
+		</div>
+		<button type="button" onclick="saveToFile()">Save to File</button>
+	</form>
+    <script>
+        function saveToFile() {
+            const form = document.getElementById('parameterForm');
+            const formData = new FormData(form);
+            let outputText = "";
+
+            for (const [key, value] of formData) {
+                outputText += `${key}:${value}\n`;
+            }
+
+            const blob = new Blob([outputText], { type: 'text/plain;charset=utf-8' });
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = URL.createObjectURL(blob);
+            a.download = 'parameters.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
+
+</body>
+</html>
