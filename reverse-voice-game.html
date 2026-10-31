@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#121426">
+<meta name="description" content="A private, offline, two-player reverse voice game.">
+<title>Reverse Voice Challenge</title>
+<style>
+:root{color-scheme:dark;--bg:#121426;--panel:#1d2037;--line:#343953;--ink:#f7f6ff;--muted:#b7bad2;--violet:#aa8aff;--mint:#9bf0ce;--pink:#ff86ad;--radius:26px}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#382450 0,transparent 45%),radial-gradient(ellipse at 95% 60%,#143c42 0,transparent 40%),var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;min-height:100svh;line-height:1.7}
+button,input,select{font:inherit}button{touch-action:manipulation;cursor:pointer;min-height:52px;border:1px solid transparent;border-radius:17px;font-weight:700;padding:12px 18px;color:var(--ink);background:#353b59;transition:transform .15s,background .15s}button:active{transform:scale(.97)}button:disabled{opacity:.38;cursor:default;transform:none}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--mint);outline-offset:3px}input,select{width:100%;min-height:52px;background:#13162a;border:1px solid #4a4e6c;color:var(--ink);padding:12px 14px;border-radius:15px;font-size:16px}input::placeholder{color:#9298b5}label{display:block;color:var(--muted);font-size:14px;margin:12px 0 6px}h1,h2,h3,p{margin:0}h1{font-size:clamp(25px,6vw,38px);line-height:1.25;letter-spacing:-1px}h2{font-size:clamp(23px,5vw,31px);line-height:1.5}small{color:var(--muted)}bdi{overflow-wrap:anywhere}
+.shell{width:min(100% - 32px,600px);margin:auto;padding:24px 0 max(24px,env(safe-area-inset-bottom))}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;gap:12px}.wordmark{font-size:12px;letter-spacing:2px;color:var(--mint);direction:ltr}.language{width:auto;min-height:42px;padding:5px 10px;font-size:14px}.brand{display:flex;align-items:center;gap:10px}.logo{display:grid;place-items:center;background:var(--mint);color:#12392d;width:42px;height:42px;border-radius:14px;font-size:28px;line-height:1}.eyebrow{font-size:12px;color:var(--mint);margin-bottom:10px;letter-spacing:1px}.sub{color:var(--muted);margin-top:12px;font-size:15px}.card{background:linear-gradient(135deg,#252840,#1b1f34);border:1px solid var(--line);border-radius:var(--radius);padding:25px;margin-top:20px;box-shadow:0 16px 48px #0002}.card .actions{margin-top:22px}.actions{display:grid;gap:10px}.row{display:flex;gap:10px;align-items:center}.row>*{flex:1;min-width:0}.primary{background:var(--mint);color:#13372e}.secondary{background:var(--violet);color:#24153e}.danger{background:#48293e;border-color:#7c415e;color:#ffd2e0}.ghost{background:transparent;border-color:var(--line)}.big{font-size:17px;min-height:60px}.hint{font-size:13px;color:var(--muted);margin-top:14px}.pill{display:inline-block;border:1px solid #555575;background:#35304d;color:#d7c5ff;border-radius:100px;padding:4px 12px;font-size:12px}.hero{position:relative;overflow:hidden}.hero:after{content:'↶';font-size:140px;position:absolute;inset-inline-end:-4px;top:0;opacity:.06;pointer-events:none}.hero p{max-width:44ch}.steps{display:flex;gap:6px;margin:18px 0}.steps i{height:4px;flex:1;background:#3c405c;border-radius:4px}.steps i.on{background:var(--mint)}.scoreboard{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.score{padding:12px 16px;border:1px solid var(--line);border-radius:20px;background:#1d2138}.score.active{border-color:var(--mint);background:#203a3b}.score .name{font-size:14px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.points{font-size:32px;font-weight:800;line-height:1.4}.points small{font-size:14px;font-weight:400}.meta{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:12px;margin-top:12px}.orb{width:104px;height:104px;border-radius:32px;display:grid;place-items:center;margin:12px auto 22px;background:#38304f;font-size:50px;color:var(--violet)}.center{text-align:center}.audio-panel{margin:20px 0;background:#12162a;border:1px solid var(--line);border-radius:20px;padding:12px 16px}.audio-panel canvas{display:block;width:100%;height:76px}.audio-meta{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:var(--muted)}.audio-meta.active{color:var(--pink)}.clock{font-variant-numeric:tabular-nums;direction:ltr}.notice{border:1px solid #786140;background:#382e25;color:#ffe4b6;border-radius:16px;padding:13px 16px;margin:16px 0;font-size:14px}.error{border-color:#a94c73;background:#3c2235;color:#ffd2e2}.notice:empty{display:none}.guess{margin-top:16px;white-space:pre-wrap;overflow-wrap:anywhere;background:#13162a;border-radius:14px;padding:14px}.footer{text-align:center;color:var(--muted);font-size:12px;margin-top:22px}.toolbar{display:flex;justify-content:center;margin-top:18px}.toolbar button{font-size:13px;min-height:42px;color:var(--muted)}.celebrate{animation:pop .65s ease-out}.recording{animation:pulse 1.2s infinite}.toast{position:fixed;bottom:max(24px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);max-width:90vw;z-index:10;border-radius:16px;background:var(--mint);color:#13372e;padding:12px 20px;box-shadow:0 8px 40px #0006;text-align:center}.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:5}.confetti i{position:absolute;top:-20px;width:9px;height:16px;border-radius:3px;animation:fall 3s ease-in forwards}dialog{color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:24px;width:min(90vw,420px);padding:24px}dialog::backdrop{background:#070919c9}dialog .actions{margin-top:20px}summary{cursor:pointer;color:var(--muted);font-size:13px}details{margin-top:18px}details p{font-size:13px;color:var(--muted);margin-top:8px}.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@keyframes pulse{50%{box-shadow:0 0 0 9px #ff86ad18}}@keyframes pop{0%{transform:scale(.88)}60%{transform:scale(1.05)}100%{transform:scale(1)}}@keyframes fall{to{transform:translateY(110vh) rotate(600deg);opacity:0}}
+@media(max-width:380px){.shell{width:calc(100% - 24px)}.card{padding:19px}.row{flex-wrap:wrap}.row>*{flex-basis:100%}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.confetti{display:none}}
+</style>
+</head>
+<body>
+<div class="shell">
+ <header class="top"><div class="brand"><div class="logo" aria-hidden="true">↶</div><div class="wordmark">REVERSE VOICE<br>CHALLENGE</div></div><select id="language" class="language" aria-label="Language / زبان"><option value="fa">فارسی</option><option value="en">English</option></select></header>
+ <main id="app"></main>
+ <p id="error" class="notice error" role="alert"></p>
+ <div id="tools" class="toolbar"></div>
+ <p id="privacy" class="footer"></p>
+</div>
+<div id="announcer" class="sr" aria-live="polite"></div>
+<div id="party" class="confetti" aria-hidden="true"></div>
+<dialog id="confirm"><h2 id="confirmTitle"></h2><p id="confirmText" class="sub"></p><div class="actions"><button id="confirmYes" class="danger"></button><button id="confirmNo" class="ghost"></button></div></dialog>
+<noscript>This game needs JavaScript. برای این بازی جاوااسکریپت را فعال کنید.</noscript>
+<script>
+'use strict';
+(() => {
+const $ = id => document.getElementById(id);
+const MAX_SECONDS = 10, KEY = 'reverse-voice-challenge-v1';
+const TEXT = {
+ fa:{tag:'یک گوشی · دو بازیکن · کلی خنده',title:'برعکس بگو، درست حدس بزن!',intro:'یکی یک عبارت می‌گوید. دیگری صدای برعکس را تقلید می‌کند تا راز عبارت را پیدا کند.',p1:'نام بازیکن اول',p2:'نام بازیکن دوم',default1:'بازیکن ۱',default2:'بازیکن ۲',target:'امتیاز برد',custom:'دلخواه',customLabel:'امتیاز دلخواه (۱ تا ۹۹۹)',start:'شروع چالش',resume:'ادامهٔ مسابقه',saved:'مسابقهٔ ذخیره‌شده',resumeHint:'صداها ذخیره نمی‌شوند. با ادامه، دور ناتمام از ابتدا شروع می‌شود؛ امتیازها حفظ می‌شوند.',round:'دور',goal:'هدف',recordTitle:'یک عبارت مخفی بگو',recordHint:'فقط گوینده به صفحه نگاه کند. یک عبارت کوتاه ضبط کن؛ صدای اصلی تا مرحلهٔ آشکارسازی قفل است.',speaker:'گوینده',guesser:'حدس‌زننده',record:'● ضبط صدا',stopRecord:'■ پایان ضبط',preparing:'در انتظار میکروفون…',processing:'در حال آماده‌سازی صدا…',ready:'آمادهٔ ضبط',recording:'در حال ضبط',playing:'در حال پخش',idle:'میکروفون خاموش',seconds:'ثانیه',originalReady:'عبارت آماده است',duration:'مدت',rerecord:'ضبط دوباره',handoff:'تحویل گوشی',handoffTitle:'گوشی را بده به',handoffHint:'گوینده چیزی نگوید! نفر بعد فقط صدای برعکس را خواهد شنید.',imReady:'آماده‌ام',listenTitle:'به صدای برعکس گوش کن',listenHint:'هر چند بار خواستی گوش کن و صداها را به خاطر بسپار. بعد همان صدا را تقلید خواهی کرد.',playClue:'▶ پخش صدای برعکس',toImitate:'حالا تقلید می‌کنم',imitateTitle:'همان صدای عجیب را تقلید کن',imitateHint:'آنچه شنیدی را تا جای ممکن دقیق بگو. سپس تقلیدت را برعکس می‌کنیم.',recordImitation:'● ضبط تقلید من',resultTitle:'تقلیدت را برعکس بشنو',resultHint:'آیا شبیه یک عبارت آشنا شد؟ می‌توانی دوباره گوش کنی یا تقلیدت را از نو ضبط کنی.',playResult:'▶ پخش معکوس تقلید من',playRaw:'▶ پخش تقلید ضبط‌شده',toGuess:'حدسم را می‌گویم',guessTitle:'عبارت اصلی چه بود؟',guessHint:'حدست را بلند بگو. نوشتن آن اختیاری است. بعد از آشکار شدن، گوینده پاسخ را داوری می‌کند.',guessLabel:'حدس تو (اختیاری)',guessPlaceholder:'فکر می‌کنم عبارت این بود…',reveal:'آشکار کردن صدای اصلی',revealTitle:'وقت شنیدن اصل ماجراست!',revealHint:'گوینده، پاسخ را با حدس مقایسه کند و امتیاز بدهد.',playOriginal:'▶ پخش صدای اصلی',judge:'شنیدیم؛ ثبت نتیجه',scoringTitle:'حدس درست بود؟',scoringHint:'گوینده تأیید می‌کند؛ پاسخ درست برای حدس‌زننده یک امتیاز دارد.',correct:'درست بود (۱+)',incorrect:'نادرست بود (۰)',point:'یک امتیاز برای',noPoint:'این دور امتیازی نداشت',nextTitle:'نقش‌ها عوض می‌شوند',next:'دور بعد',winner:'برندهٔ مسابقه',final:'امتیاز نهایی',again:'دوباره بازی کنیم',reset:'بازنشانی مسابقه',resetTitle:'مسابقه بازنشانی شود؟',resetText:'امتیازها و ضبط‌های این مسابقه پاک می‌شوند. نام‌ها و تنظیمات باقی می‌مانند.',resetYes:'بله، بازنشانی کن',cancel:'انصراف',stopPlay:'■ توقف پخش',privacy:'صداها فقط در حافظهٔ همین دستگاه پردازش می‌شوند.',helpTitle:'راهنمای اجرا و حریم خصوصی',help:'پس از باز شدن صفحه، بازی اینترنت لازم ندارد. صفحه را هنگام ضبط باز و فعال نگه دار. صدا با جابه‌جایی تک‌تک نمونه‌های هر کانال معکوس می‌شود؛ سرعت و مدت آن تغییر نمی‌کند. بازخوانی یا بستن صفحه صداها را پاک می‌کند. برای ضبط از Safari یا Chrome و HTTPS استفاده کن؛ باز کردن فایل در پیش‌نمایش گوشی ممکن است میکروفون را مسدود کند.',secure:'میکروفون در این محیط در دسترس نیست. فایل را در مرورگر کامل از HTTPS باز کن؛ روی کامپیوتر localhost هم مجاز است. پیش‌نمایش فایل یا مرورگر داخل اپ ممکن است اجازهٔ ضبط ندهد.',denied:'مجوز میکروفون داده نشد. در تنظیمات مرورگر/سایت دسترسی میکروفون را فعال کن و دوباره ضبط را بزن. اگر صفحه داخل اپ یا پیش‌نمایش فایل است، از Safari یا Chrome با HTTPS استفاده کن.',missing:'میکروفونی پیدا نشد. اتصال و تنظیمات میکروفون را بررسی کن.',busyMic:'میکروفون در دسترس نیست؛ شاید اپ دیگری از آن استفاده می‌کند.',timeout:'پاسخی از میکروفون دریافت نشد. دسترسی مرورگر را بررسی کن و دوباره تلاش کن.',audioError:'ضبط یا پردازش صدا ناموفق بود. صفحه را فعال نگه دار و دوباره تلاش کن.',playError:'پخش صدا ممکن نشد. صدای دستگاه را بررسی کن و دوباره دکمهٔ پخش را بزن.',short:'ضبط خیلی کوتاه بود. حداقل نیم ثانیه صحبت کن.',hidden:'با ترک صفحه، ضبط لغو شد. برای ضبط دوباره صفحه را باز و فعال نگه دار.',storage:'مرورگر اجازهٔ ذخیرهٔ امتیازها را نداد؛ مسابقه در همین صفحه ادامه دارد.',unsupported:'این مرورگر قابلیت صوتی لازم را ندارد. از نسخهٔ جدید Safari یا Chrome استفاده کن.',savedLabel:'ذخیرهٔ امتیاز در دستگاه',listenFirst:'ابتدا صدا را تا پایان گوش کن.',reloaded:'امتیازها بازیابی شدند. عبارت این دور را دوباره ضبط کنید.'},
+ en:{tag:'ONE PHONE · TWO PLAYERS · BIG LAUGHS',title:'Say it backwards. Crack the phrase.',intro:'One player records a secret phrase. The other imitates its reversed sound to uncover the original.',p1:'Player one',p2:'Player two',default1:'Player 1',default2:'Player 2',target:'Points to win',custom:'Custom',customLabel:'Custom target (1–999)',start:'Start challenge',resume:'Resume match',saved:'Saved match',resumeHint:'Audio is never saved. Resume restarts an unfinished round and keeps your scores.',round:'Round',goal:'Target',recordTitle:'Record a secret phrase',recordHint:'Only the speaker should look. Record a short phrase; the original stays locked until the reveal.',speaker:'Speaker',guesser:'Guesser',record:'● Record',stopRecord:'■ Finish recording',preparing:'Waiting for microphone…',processing:'Preparing audio…',ready:'Ready to record',recording:'Recording',playing:'Playing',idle:'Microphone off',seconds:'seconds',originalReady:'Your secret is ready',duration:'Duration',rerecord:'Record again',handoff:'Pass the phone',handoffTitle:'Pass the phone to',handoffHint:'No hints from the speaker! The next player will only hear reversed audio.',imReady:'I’m ready',listenTitle:'Listen to the reversed voice',listenHint:'Listen as often as you like. Remember the sounds; you will imitate them next.',playClue:'▶ Play Reversed',toImitate:'I’m ready to imitate',imitateTitle:'Imitate that strange sound',imitateHint:'Repeat exactly what you heard. Then we will reverse your imitation.',recordImitation:'● Record My Imitation',resultTitle:'Reverse your imitation',resultHint:'Does it sound like a familiar phrase? Listen again or try a new imitation.',playResult:'▶ Play My Reversed Voice',playRaw:'▶ Play My Imitation',toGuess:'Make my guess',guessTitle:'What was the original phrase?',guessHint:'Say your guess aloud. Writing it is optional. After the reveal, the speaker judges your answer.',guessLabel:'Your guess (optional)',guessPlaceholder:'I think the phrase was…',reveal:'Reveal Original',revealTitle:'Time to hear the original!',revealHint:'Speaker: compare the original with the guess, then judge it.',playOriginal:'▶ Play Original',judge:'We’ve heard it; score this round',scoringTitle:'Was the guess correct?',scoringHint:'The speaker decides. A correct answer gives the guesser one point.',correct:'Correct (+1)',incorrect:'Incorrect (0)',point:'One point for',noPoint:'No point this round',nextTitle:'Switch roles',next:'Next round',winner:'Match winner',final:'Final score',again:'Play Again',reset:'Reset match',resetTitle:'Reset this match?',resetText:'Scores and recordings will be cleared. Names and settings will stay.',resetYes:'Yes, reset',cancel:'Cancel',stopPlay:'■ Stop playback',privacy:'Audio is processed only in this device’s memory.',helpTitle:'How to run & privacy',help:'Once loaded, this page needs no internet. Keep it open and active while recording. Each channel is reversed sample by sample, preserving duration and speed. Reloading or closing the page deletes audio. Use Safari or Chrome over HTTPS; a phone’s file preview may block the microphone.',secure:'Microphone access is unavailable here. Open the file in a full browser over HTTPS; localhost also works on a computer. File previews and in-app browsers may block recording.',denied:'Microphone permission was not granted. Enable it in browser/site settings, then try recording again. For in-app browsers or file previews, use Safari or Chrome over HTTPS.',missing:'No microphone found. Check your microphone connection and settings.',busyMic:'The microphone is unavailable. Another app may be using it.',timeout:'The microphone did not respond. Check browser permissions and try again.',audioError:'Recording or audio processing failed. Keep the page active and try again.',playError:'Playback failed. Check device volume and tap play again.',short:'That recording was too short. Speak for at least half a second.',hidden:'Recording was cancelled when you left the page. Keep it open and active to record again.',storage:'The browser blocked score storage. You can still play in this page.',unsupported:'This browser lacks the required audio features. Use a current Safari or Chrome.',savedLabel:'Scores saved on this device',listenFirst:'Listen to the audio through to the end first.',reloaded:'Scores restored. Record the phrase for this round again.'}
+};
+let lang='fa', saved=null, storageFailed=false;
+try{saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved?.lang==='en')lang='en';}catch(_){storageFailed=true;}
+const t=k=>TEXT[lang][k]||k;
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const num=n=>new Intl.NumberFormat(lang==='fa'?'fa-IR':'en-US').format(n);
+const name=i=>`<bdi>${esc(match.names[i])}</bdi>`;
+const validSaved=s=>s&&Array.isArray(s.names)&&s.names.length===2&&s.names.every(n=>typeof n==='string'&&n.length<=40)&&Array.isArray(s.scores)&&s.scores.length===2&&s.scores.every(n=>Number.isInteger(n)&&n>=0&&n<=999)&&Number.isInteger(s.target)&&s.target>=1&&s.target<=999&&[0,1].includes(s.speaker)&&Number.isInteger(s.round)&&s.round>=1&&s.round<1000000000;
+let match=validSaved(saved)?{names:saved.names,scores:saved.scores,target:saved.target,speaker:saved.speaker,round:saved.round,active:!!saved.active}: {names:['',''],scores:[0,0],target:5,speaker:0,round:1,active:false};
+let state='SETUP',phase='idle',operation=0,original=null,reversed=null,imitation=null,result=null;
+let heard=false,resultHeard=false,originalHeard=false,guess='',message='',lastCorrect=false;
+const EDGES={SETUP:['PLAYER1_RECORD','GAME_OVER'],PLAYER1_RECORD:['HANDOFF'],HANDOFF:['PLAYER2_LISTEN'],PLAYER2_LISTEN:['PLAYER2_IMITATE'],PLAYER2_IMITATE:['PLAYER2_LISTEN_RESULT'],PLAYER2_LISTEN_RESULT:['PLAYER2_IMITATE','GUESS'],GUESS:['REVEAL'],REVEAL:['SCORING'],SCORING:['NEXT_ROUND','GAME_OVER'],NEXT_ROUND:['PLAYER1_RECORD'],GAME_OVER:['PLAYER1_RECORD']};
+
+// Pure sample reversal: preserve N, channel count and sample rate exactly.
+function reverseBuffer(context,input){
+ const output=context.createBuffer(input.numberOfChannels,input.length,input.sampleRate);
+ for(let c=0;c<input.numberOfChannels;c++){
+  const x=input.getChannelData(c),y=output.getChannelData(c);
+  for(let n=0;n<x.length;n++)y[n]=x[x.length-1-n];
+ }
+ return output;
+}
+const fault=code=>Object.assign(new Error(code),{code});
+function deadline(p,ms){let timer;return Promise.race([p,new Promise((_,reject)=>{timer=setTimeout(()=>reject(fault('timeout')),ms);})]).finally(()=>clearTimeout(timer));}
+
+class AudioEngine{
+ constructor(){this.context=null;this.rec=null;this.source=null;this.analyser=null;this.epoch=0;this.moduleContext=null;this.startedAt=0;}
+ async ensure(){
+  const C=window.AudioContext||window.webkitAudioContext;
+  if(!C)throw fault('unsupported');
+  if(!this.context||this.context.state==='closed')this.context=new C();
+  const context=this.context;
+  if(context.state!=='running')await deadline(context.resume(),5000);
+  if(context.state!=='running')throw fault('playError');
+  return context;
+ }
+ async record(onReady,onProcessing){
+  const epoch=++this.epoch;
+  const context=await this.ensure();
+  if(epoch!==this.epoch)throw fault('aborted');
+  if(!window.isSecureContext||!navigator.mediaDevices?.getUserMedia)throw fault('secure');
+  let expired=false,stream;
+  const request=navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false},video:false});
+  request.then(s=>{if(expired)s.getTracks().forEach(track=>track.stop());},()=>{});
+  try{stream=await deadline(request,25000);}catch(e){expired=true;throw e;}
+  if(epoch!==this.epoch){stream.getTracks().forEach(track=>track.stop());throw fault('aborted');}
+  try{if(context.state!=='running')await deadline(context.resume(),5000);if(context.state!=='running'||epoch!==this.epoch)throw fault('aborted');}
+  catch(error){stream.getTracks().forEach(track=>track.stop());throw error;}
+  const input=context.createMediaStreamSource(stream),analyser=context.createAnalyser(),mute=context.createGain();
+  analyser.fftSize=1024;mute.gain.value=0;input.connect(analyser);this.analyser=analyser;
+  let node=null,timer=null,settled=false,stopTimer=null;
+  let resolveCapture,rejectCapture;
+  const captured=new Promise((resolve,reject)=>{resolveCapture=resolve;rejectCapture=reject;});
+  // Attach rejection immediately, including failures during module initialization.
+  captured.catch(()=>{});
+  const cleanup=()=>{
+   clearTimeout(timer);clearTimeout(stopTimer);
+   stream.getTracks().forEach(track=>{track.onended=null;track.stop();});
+   for(const n of [input,analyser,node,mute]){try{n?.disconnect();}catch(_){}}
+   if(node?.port){node.port.onmessage=null;node.port.close();}
+   if(this.analyser===analyser)this.analyser=null;
+   if(this.rec===rec)this.rec=null;
+  };
+  const finish=(buffer,error)=>{if(settled)return;settled=true;cleanup();if(error)rejectCapture(error);else resolveCapture(buffer);};
+  const rec={stop:()=>{},abort:()=>finish(null,fault('aborted'))};this.rec=rec;
+  stream.getAudioTracks().forEach(track=>track.onended=()=>finish(null,fault('busyMic')));
+  try{
+   let worklet=false;
+   if(context.audioWorklet&&window.AudioWorkletNode){
+    try{
+     if(this.moduleContext!==context){
+      // Inline Blob keeps the entire implementation in this HTML file.
+      const code=`class Capture extends AudioWorkletProcessor{
+       constructor(){super();this.parts=[];this.count=0;this.done=false;this.max=Math.floor(sampleRate*10);this.port.onmessage=e=>{if(e.data==='stop')this.flush();};}
+       flush(){if(this.done)return;this.done=true;const channels=this.parts.map(parts=>{const a=new Float32Array(this.count);let offset=0;for(const p of parts){a.set(p,offset);offset+=p.length;}return a;});this.port.postMessage({channels},channels.map(a=>a.buffer));this.parts=[];}
+       process(inputs){if(this.done)return false;const input=inputs[0];if(!input||!input.length||!input[0].length)return true;if(!this.parts.length)this.parts=input.map(()=>[]);const n=Math.min(input[0].length,this.max-this.count);for(let c=0;c<this.parts.length;c++)this.parts[c].push(new Float32Array((input[c]||input[0]).subarray(0,n)));this.count+=n;if(this.count>=this.max)this.flush();return !this.done;}
+      }registerProcessor('rvc-capture',Capture);`;
+      const url=URL.createObjectURL(new Blob([code],{type:'text/javascript'}));
+      try{await deadline(context.audioWorklet.addModule(url),5000);this.moduleContext=context;}finally{URL.revokeObjectURL(url);}
+     }
+     if(epoch!==this.epoch||settled)throw fault('aborted');
+     node=new AudioWorkletNode(context,'rvc-capture',{numberOfInputs:1,numberOfOutputs:1,outputChannelCount:[1]});
+     node.port.onmessage=e=>{
+      try{const channels=e.data.channels;if(!channels?.length||!channels[0].length)throw fault('short');
+       onProcessing();const b=context.createBuffer(channels.length,channels[0].length,context.sampleRate);
+       channels.forEach((a,c)=>b.getChannelData(c).set(a));finish(b);
+      }catch(error){finish(null,error);}
+     };
+     node.onprocessorerror=()=>finish(null,fault('audioError'));
+     rec.stop=()=>{if(settled)return;onProcessing();node.port.postMessage('stop');clearTimeout(stopTimer);stopTimer=setTimeout(()=>finish(null,fault('timeout')),2000);};
+     analyser.connect(node);node.connect(mute);mute.connect(context.destination);worklet=true;
+    }catch(error){if(epoch!==this.epoch||settled)throw error;if(node){try{node.disconnect();}catch(_){}node=null;}}
+   }
+   if(!worklet){
+    if(!window.MediaRecorder)throw fault('unsupported');
+    const types=['audio/webm;codecs=opus','audio/mp4','audio/webm'];
+    const mime=types.find(type=>MediaRecorder.isTypeSupported?.(type));
+    const recorder=mime?new MediaRecorder(stream,{mimeType:mime}):new MediaRecorder(stream);
+    const chunks=[];
+    recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data);};
+    recorder.onerror=()=>finish(null,fault('audioError'));
+    recorder.onstop=async()=>{
+     if(settled)return;onProcessing();
+     try{
+      const blob=new Blob(chunks,{type:recorder.mimeType||mime||''});
+      if(!blob.size)throw fault('short');
+      const decoded=await deadline(context.decodeAudioData(await blob.arrayBuffer()),10000);
+      if(settled||epoch!==this.epoch)return;
+      const length=Math.min(decoded.length,Math.floor(MAX_SECONDS*decoded.sampleRate));
+      const buffer=context.createBuffer(decoded.numberOfChannels,length,decoded.sampleRate);
+      for(let c=0;c<decoded.numberOfChannels;c++)buffer.getChannelData(c).set(decoded.getChannelData(c).subarray(0,length));
+      finish(buffer);
+     }catch(error){finish(null,error);}
+    };
+    rec.stop=()=>{if(settled||recorder.state==='inactive')return;onProcessing();recorder.stop();clearTimeout(stopTimer);stopTimer=setTimeout(()=>finish(null,fault('timeout')),15000);};
+    const abort=rec.abort;rec.abort=()=>{abort();if(recorder.state!=='inactive'){try{recorder.stop();}catch(_){}}};
+    recorder.start();
+   }
+   if(epoch!==this.epoch||settled)throw fault('aborted');
+   this.startedAt=performance.now();onReady();timer=setTimeout(()=>rec.stop(),MAX_SECONDS*1000);
+  }catch(error){finish(null,error);}
+  return captured;
+ }
+ stop(){this.rec?.stop();}
+ stopPlayback(){const source=this.source;this.source=null;if(source){source.onended=null;try{source.stop();source.disconnect();}catch(_){}}if(!this.rec&&this.analyser){try{this.analyser.disconnect();}catch(_){}this.analyser=null;}}
+ async play(buffer,onEnded){
+  this.stopPlayback();const epoch=this.epoch,context=await this.ensure();
+  if(epoch!==this.epoch)throw fault('aborted');
+  const source=context.createBufferSource(),analyser=context.createAnalyser();analyser.fftSize=1024;
+  source.buffer=buffer;source.playbackRate.value=1;source.connect(analyser);analyser.connect(context.destination);
+  this.source=source;this.analyser=analyser;this.startedAt=performance.now();
+  source.onended=()=>{if(this.source!==source)return;this.stopPlayback();onEnded();};
+  try{source.start();}catch(error){this.stopPlayback();throw error;}
+ }
+ dispose(){this.epoch++;this.rec?.abort();this.stopPlayback();const context=this.context;this.context=null;this.moduleContext=null;if(context&&context.state!=='closed')context.close().catch(()=>{});}
+}
+const audio=new AudioEngine();
+function save(){try{const checkpoint={...match,lang};if(state==='NEXT_ROUND'){checkpoint.speaker=1-match.speaker;checkpoint.round=match.round+1;}localStorage.setItem(KEY,JSON.stringify(checkpoint));}catch(_){storageFailed=true;}}
+function errorText(error){const code=error?.code;if(code&&TEXT[lang][code])return t(code);return t(({NotAllowedError:'denied',SecurityError:'denied',NotFoundError:'missing',NotReadableError:'busyMic',AbortError:'audioError'})[error?.name]||'audioError');}
+function showError(s){message=s;$('error').textContent=s;}
+function toast(s){document.querySelector('.toast')?.remove();const el=document.createElement('div');el.className='toast';el.textContent=s;el.setAttribute('role','status');document.body.append(el);setTimeout(()=>el.remove(),3500);}
+function freeRound(){operation++;phase='idle';audio.dispose();original=reversed=imitation=result=null;heard=resultHeard=originalHeard=false;guess='';}
+function go(next){if(!EDGES[state]?.includes(next))return false;audio.stopPlayback();state=next;phase='idle';message='';render();$('announcer').textContent=$('stageTitle')?.textContent||t('title');return true;}
+function button(action,label,style='primary',disabled=false){return `<button type="button" data-action="${action}" class="${style}" ${disabled?'disabled':''}>${label}</button>`;}
+function busy(){return phase!=='idle';}
+function wave(){const status=t(phase==='recording'?'recording':phase==='playing'?'playing':phase==='preparing'?'preparing':phase==='processing'?'processing':'idle');return `<div class="audio-panel"><canvas id="wave" width="600" height="100" aria-label="${esc(status)}"></canvas><div class="audio-meta ${phase==='recording'?'active':''}"><span id="micStatus" role="status">${status}</span><span id="clock" class="clock">${phase==='recording'?'10.0 / 10 s':'PCM · ↶'}</span></div></div>`;}
+function controls(playAction,playLabel){return phase==='playing'?button('stopPlay',t('stopPlay'),'secondary'):button(playAction,t(playLabel),'secondary',busy());}
+function recordControls(action,label){if(phase==='recording')return button('stopRecord',t('stopRecord'),'danger big');if(phase==='preparing'||phase==='processing')return button('cancelAudio',t('cancel'),'ghost');return button(action,t(label),'primary big',busy());}
+function scoreboard(){return `<div class="scoreboard">${match.names.map((_,i)=>`<div class="score ${i===1-match.speaker?'active':''}"><div class="name">${name(i)}</div><div class="points">${num(match.scores[i])} <small>/ ${num(match.target)}</small></div></div>`).join('')}</div><div class="meta"><span>${t('round')} ${num(match.round)}</span><span>${t('goal')}: ${num(match.target)}</span></div>`;}
+function stage(title,hint,content,icon='↶'){return `<section class="card"><p class="eyebrow">${t(state==='PLAYER1_RECORD'?'speaker':'guesser')} · ${name(state==='PLAYER1_RECORD'?match.speaker:1-match.speaker)}</p><h2 id="stageTitle">${title}</h2><p class="sub">${hint}</p>${content}</section>`;}
+function render(){
+ document.documentElement.lang=lang;document.documentElement.dir=lang==='fa'?'rtl':'ltr';$('language').value=lang;$('language').disabled=busy();$('privacy').textContent=t('privacy');$('error').textContent=message;
+ let html='';
+ if(state==='SETUP'){
+  html=`<section class="hero"><p class="eyebrow">${t('tag')}</p><h1>${t('title')}</h1><p class="sub">${t('intro')}</p></section><section class="card"><form id="setup"><div class="row"><div><label for="name1">${t('p1')}</label><input id="name1" maxlength="40" value="${esc(match.names[0])}" placeholder="${t('default1')}" autocomplete="off"></div><div><label for="name2">${t('p2')}</label><input id="name2" maxlength="40" value="${esc(match.names[1])}" placeholder="${t('default2')}" autocomplete="off"></div></div><label for="target">${t('target')}</label><select id="target">${[3,5,10].map(n=>`<option value="${n}" ${match.target===n?'selected':''}>${num(n)}</option>`).join('')}<option value="custom" ${![3,5,10].includes(match.target)?'selected':''}>${t('custom')}</option></select><div id="customWrap" ${[3,5,10].includes(match.target)?'hidden':''}><label for="customTarget">${t('customLabel')}</label><input id="customTarget" type="number" inputmode="numeric" min="1" max="999" step="1" value="${match.target}"></div><div class="actions"><button class="primary big" type="submit">${t('start')}</button></div></form>${match.active?`<div class="actions">${button('resume',t('resume'),'ghost')}<p class="hint">${t('resumeHint')}</p></div>`:''}<p class="hint">${storageFailed?t('storage'):t('savedLabel')}</p></section><details><summary>${t('helpTitle')}</summary><p>${t('help')}</p></details>`;
+ }else{
+  html=scoreboard();const index=['PLAYER1_RECORD','HANDOFF','PLAYER2_LISTEN','PLAYER2_IMITATE','PLAYER2_LISTEN_RESULT','GUESS','REVEAL','SCORING','NEXT_ROUND','GAME_OVER'].indexOf(state);
+  html+=`<div class="steps" aria-hidden="true">${Array.from({length:5},(_,i)=>`<i class="${i<=Math.floor(index/2)?'on':''}"></i>`).join('')}</div>`;
+  const locked=busy();
+  if(state==='PLAYER1_RECORD')html+=stage(t('recordTitle'),t('recordHint'),wave()+`<div class="actions">${recordControls('recordOriginal',original?'rerecord':'record')}${original?`<span class="pill">${t('originalReady')} · ${num(Number(original.duration.toFixed(1)))} ${t('seconds')}</span>${button('handoff',t('handoff'),'secondary',locked)}`:''}</div>`);
+  if(state==='HANDOFF')html+=`<section class="card center"><div class="orb">⇄</div><p class="eyebrow">${t('handoffTitle')}</p><h2 id="stageTitle">${name(1-match.speaker)}</h2><p class="sub">${t('handoffHint')}</p><div class="actions">${button('ready',t('imReady'),'primary big')}</div></section>`;
+  if(state==='PLAYER2_LISTEN')html+=stage(t('listenTitle'),t('listenHint'),wave()+`<div class="actions">${controls('playClue','playClue')}${button('imitate',t('toImitate'),'primary',locked||!heard)}</div>`);
+  if(state==='PLAYER2_IMITATE')html+=stage(t('imitateTitle'),t('imitateHint'),wave()+`<div class="actions">${phase==='idle'||phase==='playing'?controls('playClue','playClue'):''}${recordControls('recordImitation','recordImitation')}</div>`);
+  if(state==='PLAYER2_LISTEN_RESULT')html+=stage(t('resultTitle'),t('resultHint'),wave()+`<div class="actions">${controls('playResult','playResult')}${button('playRaw',t('playRaw'),'ghost',locked)}${button('retry',t('rerecord'),'ghost',locked)}${button('guess',t('toGuess'),'primary',locked||!resultHeard)}</div>`);
+  if(state==='GUESS')html+=stage(t('guessTitle'),t('guessHint'),`<label for="guess">${t('guessLabel')}</label><input id="guess" maxlength="250" value="${esc(guess)}" placeholder="${t('guessPlaceholder')}" autocomplete="off"><div class="actions">${button('reveal',t('reveal'),'primary big')}</div>`);
+  if(state==='REVEAL')html+=stage(t('revealTitle'),t('revealHint'),(guess?`<div class="guess">${esc(guess)}</div>`:'')+wave()+`<div class="actions">${controls('playOriginal','playOriginal')}${button('judge',t('judge'),'primary',locked||!originalHeard)}</div>`);
+  if(state==='SCORING')html+=stage(t('scoringTitle'),t('scoringHint'),(guess?`<div class="guess">${esc(guess)}</div>`:'')+wave()+`<div class="actions">${controls('playOriginal','playOriginal')}${button('correct',t('correct'),'primary big',locked)}${button('incorrect',t('incorrect'),'ghost',locked)}</div>`);
+  if(state==='NEXT_ROUND')html+=`<section class="card center"><div class="orb celebrate">${lastCorrect?'✦':'⇄'}</div><h2 id="stageTitle">${lastCorrect?t('point')+' '+name(1-match.speaker):t('noPoint')}</h2><p class="sub">${t('nextTitle')}</p><p class="hint">${t('speaker')}: ${name(1-match.speaker)} · ${t('guesser')}: ${name(match.speaker)}</p><div class="actions">${button('next',t('next'),'primary big')}</div></section>`;
+  if(state==='GAME_OVER'){const winner=match.scores[0]>=match.target?0:1;html+=`<section class="card center celebrate"><div class="orb">♛</div><p class="eyebrow">${t('winner')}</p><h2 id="stageTitle">${name(winner)}</h2><p class="sub">${t('final')}: <bdi>${num(match.scores[0])} — ${num(match.scores[1])}</bdi></p><div class="actions">${button('again',t('again'),'primary big')}</div></section>`;}
+ }
+ $('app').innerHTML=html;$('tools').innerHTML=state==='SETUP'?'':button('reset',t('reset'),'ghost');
+ $('confirmTitle').textContent=t('resetTitle');$('confirmText').textContent=t('resetText');$('confirmYes').textContent=t('resetYes');$('confirmNo').textContent=t('cancel');
+ if($('customTarget'))$('customTarget').required=$('target').value==='custom';
+}
+function rememberSetup(){if(state!=='SETUP')return;match.names=[$('name1').value.trim().slice(0,40),$('name2').value.trim().slice(0,40)];const target=Number($('target').value==='custom'?$('customTarget').value:$('target').value);if(Number.isInteger(target)&&target>=1&&target<=999)match.target=target;}
+function begin(resume=false){
+ if(state!=='SETUP'&&state!=='GAME_OVER')return;
+ if(!resume){rememberSetup();match.names=match.names.map((n,i)=>n||t('default'+(i+1)));match.scores=[0,0];match.speaker=0;match.round=1;}
+ match.active=true;freeRound();save();
+ const won=match.scores.some(s=>s>=match.target);go(won?'GAME_OVER':'PLAYER1_RECORD');if(won)celebrate();else if(resume)toast(t('reloaded'));
+}
+async function record(which){
+ const expected=which==='original'?'PLAYER1_RECORD':'PLAYER2_IMITATE';if(state!==expected||busy())return;
+ const op=++operation;phase='preparing';showError('');render();
+ try{
+  const buffer=await audio.record(()=>{if(op===operation){phase='recording';render();}},()=>{if(op===operation){phase='processing';render();}});
+  if(op!==operation||state!==expected)return;
+  if(buffer.duration<.5)throw fault('short');
+  const rev=reverseBuffer(audio.context,buffer);phase='idle';
+  if(which==='original'){original=buffer;reversed=rev;render();}else{imitation=buffer;result=rev;resultHeard=false;go('PLAYER2_LISTEN_RESULT');}
+ }catch(error){if(op!==operation)return;phase='idle';audio.dispose();render();if(error.code!=='aborted')showError(errorText(error));}
+}
+async function play(kind){
+ if(busy())return;
+ const allowed={clue:['PLAYER2_LISTEN','PLAYER2_IMITATE'],result:['PLAYER2_LISTEN_RESULT'],raw:['PLAYER2_LISTEN_RESULT'],original:['REVEAL','SCORING']};
+ if(!allowed[kind]?.includes(state))return;
+ const buffer={clue:reversed,result,raw:imitation,original}[kind];if(!buffer)return;
+ const op=++operation;phase='playing';showError('');render();
+ try{await audio.play(buffer,()=>{if(op!==operation)return;phase='idle';if(kind==='clue')heard=true;if(kind==='result')resultHeard=true;if(kind==='original')originalHeard=true;render();});}
+ catch(error){if(op!==operation)return;phase='idle';audio.stopPlayback();render();if(error.code!=='aborted')showError(error.code==='unsupported'?t('unsupported'):t('playError'));}
+}
+function score(correct){
+ if(state!=='SCORING'||busy())return;
+ const player=1-match.speaker;lastCorrect=correct;if(correct)match.scores[player]++;
+ const won=match.scores[player]>=match.target;match.active=true;
+ // Persist the next round checkpoint: reload cannot score a finished round twice.
+ freeRound();go(won?'GAME_OVER':'NEXT_ROUND');save();
+ if(won)celebrate();else if(correct)toast(t('point')+' '+match.names[player]);
+}
+function celebrate(){if(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches)return;$('party').replaceChildren();for(let i=0;i<45;i++){const el=document.createElement('i');el.style.left=Math.random()*100+'%';el.style.background=['#9bf0ce','#aa8aff','#ff86ad','#ffda8a'][i%4];el.style.animationDelay=Math.random()*.7+'s';$('party').append(el);}setTimeout(()=>$('party').replaceChildren(),4000);}
+function reset(){freeRound();match.scores=[0,0];match.speaker=0;match.round=1;match.active=false;state='SETUP';message='';save();render();}
+function cancelAudio(){operation++;audio.dispose();phase='idle';render();}
+const actions={
+ resume:()=>begin(true),recordOriginal:()=>record('original'),recordImitation:()=>record('imitation'),
+ stopRecord:()=>{if(phase!=='recording')return;phase='processing';render();audio.stop();},cancelAudio,
+ handoff:()=>{if(original&&reversed&&!busy())go('HANDOFF');},ready:()=>go('PLAYER2_LISTEN'),
+ playClue:()=>play('clue'),playResult:()=>play('result'),playRaw:()=>play('raw'),playOriginal:()=>play('original'),
+ stopPlay:()=>{operation++;audio.stopPlayback();phase='idle';render();},
+ imitate:()=>{if(heard&&!busy())go('PLAYER2_IMITATE');},retry:()=>{if(!busy())go('PLAYER2_IMITATE');},
+ guess:()=>{if(resultHeard&&!busy())go('GUESS');},reveal:()=>{guess=$('guess')?.value.trim().slice(0,250)||'';go('REVEAL');},judge:()=>{if(originalHeard&&!busy())go('SCORING');},
+ correct:()=>score(true),incorrect:()=>score(false),next:()=>{if(state!=='NEXT_ROUND')return;match.speaker=1-match.speaker;match.round++;save();go('PLAYER1_RECORD');},again:()=>begin(false),
+ reset:()=>{if(!$('confirm').open)$('confirm').showModal();}
+};
+document.addEventListener('click',event=>{const b=event.target.closest('button[data-action]');if(!b||b.disabled)return;const handler=actions[b.dataset.action];if(handler)Promise.resolve().then(handler).catch(e=>showError(errorText(e)));});
+document.addEventListener('submit',event=>{if(event.target.id==='setup'){event.preventDefault();if(event.target.reportValidity())begin();}});
+document.addEventListener('change',event=>{if(event.target.id==='target'){$('customWrap').hidden=event.target.value!=='custom';$('customTarget').required=event.target.value==='custom';}if(state==='SETUP'&&event.target.id!=='language'&&!match.active){rememberSetup();save();}});
+$('language').addEventListener('change',()=>{if(busy())return;if(state==='SETUP'&&!match.active)rememberSetup();if(state==='GUESS')guess=$('guess').value;lang=$('language').value==='en'?'en':'fa';message='';save();render();});
+$('confirmNo').onclick=()=>$('confirm').close();$('confirmYes').onclick=()=>{$('confirm').close();reset();};
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)return;if(['recording','preparing','processing'].includes(phase)){cancelAudio();showError(t('hidden'));}else if(phase==='playing'){operation++;audio.stopPlayback();phase='idle';render();}});
+window.addEventListener('pagehide',()=>{operation++;audio.dispose();phase='idle';});
+window.addEventListener('pageshow',event=>{if(event.persisted){phase='idle';render();}});
+// One animation loop, independent of UI redraws. No synthetic recording waveform.
+function draw(){
+ const canvas=$('wave');if(canvas){const ctx=canvas.getContext('2d');if(ctx){const w=canvas.width,h=canvas.height;ctx.clearRect(0,0,w,h);ctx.lineWidth=2.5;ctx.strokeStyle=phase==='recording'?'#ff86ad':'#9bf0ce';ctx.beginPath();const analyser=audio.analyser,values=analyser?new Uint8Array(analyser.fftSize):null;if(analyser)analyser.getByteTimeDomainData(values);for(let i=0;i<w;i++){const y=values?(values[Math.floor(i/w*values.length)]/128-1)*h*.43+h/2:h/2;if(i===0)ctx.moveTo(i,y);else ctx.lineTo(i,y);}ctx.stroke();}
+  if($('clock')&&phase==='recording')$('clock').textContent=Math.max(0,MAX_SECONDS-(performance.now()-audio.startedAt)/1000).toFixed(1)+' / 10 s';
+ }
+ requestAnimationFrame(draw);
+}
+render();requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>
